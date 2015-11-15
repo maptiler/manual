@@ -1,0 +1,2 @@
+# manual
+MapTiler Manual

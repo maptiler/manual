@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# MapTiler Manual documentation build configuration file, created by
+# MapTiler Manual build configuration file, created by
 # sphinx-quickstart on Sun Nov 15 18:30:52 2015.
 #
 # This file is execfile()d with the current directory set to its

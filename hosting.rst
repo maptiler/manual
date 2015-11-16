@@ -9,7 +9,7 @@ On a standard hosting (such as an ordinary company web server) you can very simp
 
 Once uploaded, the produced maps can be opened in any viewer supporting OGC WMTS standard.
 
-For hosting of MBTiles, you can use an open-souce TileServer (available at: https://github.com/ klokantech/tileserver-php/), that can be used with any standard hosting that supports PHP. Upload the created maps and get dozens of popular web viewers with interactivity, including Google Maps API, Leaflet, OpenLayers, WebGL Earth and MapBox JS.
+For hosting of MBTiles, you can use an open-souce TileServer (available at: https://github.com/klokantech/tileserver-php/), that can be used with any standard hosting that supports PHP. Upload the created maps and get dozens of popular web viewers with interactivity, including Google Maps API, Leaflet, OpenLayers, WebGL Earth and MapBox JS.
 
 Cloud hosting
 =========

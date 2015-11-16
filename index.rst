@@ -13,6 +13,7 @@ Contents:
 
    welcome
    installation
+   usage
 
 
 

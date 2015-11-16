@@ -3,7 +3,10 @@ Usage
 ======
 
 Getting started
----------------
+========
+
+Getting started
+--------------
 
 The main purpose of the software is to generate tiles in a defined tiling system, given some options and inputs. The only mandatory option is -o for the output directory. This directory must not exist yet when you run MapTiler, to avoid overwriting existing data by mistake. As input, you can just provide the source dataset filename(s) [#]_. ::
 
@@ -183,7 +186,7 @@ Example of the rendering of a seamless map out of file map1.tif and map2.tif int
  It is possible to place your own watermark over rendered tiles to protect the online maps. The file should be smaller then a size of tiles. It is placed on a random position and burned into tiles.
 
 A nice watermark file can be easily generated online by calling the Google Chart API:   
-http://chart.apis.google.com/chart?chst=d_text_outline&chld=FFFFFF|11|h|000000|b|%C2%A9%20ABC/
+http://chart.apis.google.com/chart?chst=d_text_outline&chld=FFFFFF|11|h|000000|b|%C2%A9%20ABC
 
 By replacing ABC in the end of this url a custom text phrase can be specified. We recommend to set the transparency of such watermark file by using a Photoshop or similar tool before applying it with MapTiler.
 

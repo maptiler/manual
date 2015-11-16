@@ -4,10 +4,6 @@ Usage
 
 Getting started
 ========
-
-Getting started
---------------
-
 The main purpose of the software is to generate tiles in a defined tiling system, given some options and inputs. The only mandatory option is -o for the output directory. This directory must not exist yet when you run MapTiler, to avoid overwriting existing data by mistake. As input, you can just provide the source dataset filename(s) [#]_. ::
 
  ￼maptiler -o output_directory input_file.ext
@@ -25,7 +21,7 @@ If you start the maptiler without arguments or with -help option, it will print 
  maptiler -help
  
 Output
-------
+======
 
 The default behaviour of MapTiler is to write tiles each into its own file, under the directory structure:
 
@@ -40,7 +36,7 @@ The produced directory structure contains also a simple HTML viewer and descript
 MapTiler supports direct output of the rendered map tiles into an SQLite database (MBTiles format). This simplifies transfer and management of the tilesets and is practical for mobile applications.
 
 MapTiler Command Structure
-------
+=======
 .. image:: /images/maptiler_command_structure.jpg
 
 The global options apply to all input files, in other words:
@@ -50,10 +46,10 @@ The global options apply to all input files, in other words:
 Arguments which should be applied only to a single file are specified AFTER the name of such file (for example zoom level range specific only to that file) and has higher priority then the global options.
 
 Available output options
-------
+======
 
-**Tiling profile / Tile Matrix Set**
-
+Tiling profile / Tile Matrix Set
+-------
 A global option defining the output system of tiles - the target coordinate system, tile pixel size, etc. MapTiler comes with three predefined most popular systems and possibility to specify a custom profile.
 
 `-mercator`

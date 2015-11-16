@@ -25,7 +25,7 @@ Output
 ------
 
 The default behaviour of MapTiler is to write tiles each into its own file, under the directory structure:
-output_directory/z/x/y.ext
+``output_directory/z/x/y.ext``
 
 
 

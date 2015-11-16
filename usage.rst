@@ -256,7 +256,9 @@ From an OGR file, MapTiler will load all polygons and multi-polygons from all fe
 The CSV format with pixel coordinates of nodes of a triangle, more lines will create polygon:
 
 X1,Y1
+
 X2,Y2
+
 X3,Y3
 
 Example of use of such a pixel-based cutline: ::

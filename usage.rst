@@ -184,6 +184,12 @@ There are some options to specify parameters of the conversion into image format
 `-quant_colors`
  The number of colors in the PNG palette. Number between 1 and 256. Default is 256.
 
+`-webp_quality`
+ The quality of WebP compression. Number between 1 and 100. Default is 90. Level 100 means lossless compression.
+
+`-webp_alpha_quality`
+ The quality of WebP alpha channel compression. Number between 1 and 100. Default is 90.
+
 Example of the rendering of a seamless map out of file map1.tif and map2.tif into tiles with internal palette with optimal colors with higher visual : ::
 
  ￼maptiler -o tiles -f png8a -quant_quality 90 -quant_speed 4 map1.tif map2.tif

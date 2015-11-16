@@ -298,7 +298,7 @@ Options in the optfile
 
 In case you have a large number of arguments to pass to maptiler, such as many input files (total amount is unlimited for maptiler), you can prepare a text file with all the arguments and call it with -- optfile myarguments.txt. List of files can be easily created with ls or dir commands.
 
-Any arguments normally passed on the command line could be part of the --optfile text file.  Maptiler can combine arguments on the command line with arguments in the text file, such as: ::
+Any arguments normally passed on the command line could be part of the --optfile text file. Maptiler can combine arguments on the command line with arguments in the text file, such as: ::
 
  ￼maptiler -o output_directory --optfile myarguments.txt
  

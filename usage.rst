@@ -107,11 +107,14 @@ The produced tiles can be saved in one of several image format. MapTiler include
 Formats with support for transparency are:
 
 `-f png8a`
- DEFAULT. Paletted RGBA PNG image. 
+ DEFAULT. Paletted RGBA PNG image.
  
 `-f png or -f png32`
  RGBA PNG image 
- 
+
+`-f webp or -f webp32`
+ RGBA WebP image
+
 Non-transparent formats are: 
 
 `-f jpg or -f jpeg`
@@ -122,6 +125,9 @@ Non-transparent formats are:
 
 `-f png24`
  RGB PNG image
+
+`-f webp24`
+ RGB WebP image
 
 Tile transparency or a background color
 ----------

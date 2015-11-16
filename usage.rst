@@ -79,7 +79,8 @@ Example: command for producing tiles for use with Google Earth: ::
 
  ￼maptiler -o tiles -gearth map.tif
 
-**Zoom levels**
+Zoom levels
+------
 
 `-zoom`
  This option determines which layers of the tile pyramid will be generated. Default is the "native" level as calculated from image resolution. In case you need to add additional zoom levels, you can either define them as absolute numeric values or as relative numbers to the “native” levels with prefix + and -.
@@ -98,7 +99,8 @@ Example: zoom levels are set to be 1 - 6 with relative value to native zoomlevel
 
  maptiler -o tiles map.tif -zoom +0 +1
 
-**Tile formats**
+Tile formats
+--------
 
 The produced tiles can be saved in one of several image format. MapTiler includes optimization of the final filesize and used number of colors (quantization), to minimize the disk size occupied by the rendered maps as well as the time necessary to transfer the maps to clients once the tiles are online.
 
@@ -121,7 +123,8 @@ Non-transparent formats are:
 `-f png24`
  RGB PNG image
 
-**Tile transparency or a background color**
+Tile transparency or a background color
+----------
 
 No matter what input datasets you specify, after transforming them into the tiling profile projection, MapTiler will handle them as RGBA images. The transparency can come from the image itself as an alpha channel (with support for partly transparent areas), it can be derived from a selected color (so called NODATA color), or can be just a result of the transformation with the GDAL warping algorithm - for areas without available input data.
 
@@ -139,14 +142,16 @@ For example: ::
  ￼maptiler -f png8 -bg 0 128 0 ...
 
 
-**Tile store format**
+Tile store format
+-----------
 
 `-store dir|mbtiles`
  This option enforces the form of storage which is used for saving the rendered tiles. Possible options are the directory (dir) and the MBTiles (mbtiles). The default is the directory, but in case the -o parameter ends with .mbtiles then rendering into mbtiles is selected. This option specify the store form explicitely.
 
  Note: for more details on this subject read the section Output in the chapter Usage above.
  
-**Hybrid tile format**
+Hybrid tile format
+----------
 
 MapTiler allows rendering into a hybrid tile format, so that transparent tiles are using transparent format (such as PNG) and tiles without any transparency at all are saved into a different format (such as JPEG). For aerial photos overlays or other datasets this can mean significant saving of the storage, but the client application and hosting service must be able to handle this case.
 
@@ -154,7 +159,8 @@ Example of usage: ::
 
  ￼maptiler -f hybrid jpg png8a ...
 
-**Tile quality**
+Tile quality
+---------
 
 There are some options to specify parameters of the conversion into image formats, which can significantly reduce size of produced tiles by degrading the output.
 
@@ -176,7 +182,8 @@ Example of the rendering of a seamless map out of file map1.tif and map2.tif int
 
  ￼maptiler -o tiles -f png8a -quant_quality 90 -quant_speed 4 map1.tif map2.tif
  
-**Watermark**
+Watermark
+--------
 
 `-watermark [image_file.png]`
  It is possible to place your own watermark over rendered tiles to protect the online maps. The file should be smaller then a size of tiles. It is placed on a random position and burned into tiles.

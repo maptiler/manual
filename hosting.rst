@@ -60,7 +60,7 @@ Example for EU (Ireland) region: ::
 
  ./cloudpush -R eu-west-1 add s3://bucket_name - - filename.mbtiles
  
-List of S3 regions is provided by the utility or visible at http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region
+List of S3 regions is provided by the utility or visible at `http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region <http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region>`_
 
 For more information run the utility without parameters and it will print all available parameters.
 

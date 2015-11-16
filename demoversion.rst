@@ -52,4 +52,3 @@ If at any time you will want to deactivate MapTiler, eg. to move it to another m
 
  ￼maptiler -deactivate_request request.xml
  
-

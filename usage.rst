@@ -174,10 +174,10 @@ There are some options to specify parameters of the conversion into image format
  The quality of JPEG compression. Number between 10 and 95. Default is 85.
 
 `-quant_quality`
- The quality of quantization. Number between 1 and 100. Default is 85.
+ The quality of quantization. Number between 1 and 100. Default is 100.
 
 `-quant_speed`
- Higher speed levels disable expensive algorithms and reduce quantization precision. Speed 1 gives marginally better quality at significant CPU cost. Speed 10 has usually 5% lower quality, but is 8 times faster than the default. Default is 8.
+ Higher speed levels disable expensive algorithms and reduce quantization precision. Speed 1 gives marginally better quality at significant CPU cost. Speed 10 has usually 5% lower quality, but is 8 times faster than the default. Default is 10.
  
  *If you experience issues with the visual quality of generated tiles with quantization involved try to set -quant_speed to lower values.*
  

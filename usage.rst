@@ -188,8 +188,8 @@ Watermark
 `-watermark [image_file.png]`
  It is possible to place your own watermark over rendered tiles to protect the online maps. The file should be smaller then a size of tiles. It is placed on a random position and burned into tiles.
 
-A nice watermark file can be easily generated online by calling the Google Chart API:   
-http://chart.apis.google.com/chart?chst=d_text_outline&chld=FFFFFF|11|h|000000|b|%C2%A9%20ABC
+A nice watermark file can be easily generated online by calling the Google Chart API:
+`http://chart.apis.google.com/chart?chst=d_text_outline&chld=FFFFFF|11|h|000000|b|%C2%A9%20ABC <http://chart.apis.google.com/chart?chst=d_text_outline&chld=FFFFFF|11|h|000000|b|%C2%A9%20ABC>`_
 
 By replacing ABC in the end of this url a custom text phrase can be specified. We recommend to set the transparency of such watermark file by using a Photoshop or similar tool before applying it with MapTiler.
 
@@ -197,8 +197,81 @@ Example of usage of the watermark: ::
 
  ￼maptiler -o tiles -watermark watermark_image.png map.tif
 
+The input files and related options
+=========
 
+Supported input file formats
+--------
 
+MapTiler is able to open and process large number of raster geodata formats, including: GeoTIFF, Erdas Imagine, ECW, MrSID, JPEG2000, SDTS, DTED, NITF, HDF4/5, BSB/KAP, OziExplorer, etc.
+
+The complete list of supported formats is available online at: http://www.gdal.org/formats_list.html
+
+Spatial reference system
+---------
+
+Practically any modern existing georeferencing coordinate system (SRS - spatial reference system, e.g. geodetic datum + map projection with parameters) is supported, which means the software can process almost any geodata you may have available from all over the world.
+
+In case the input files contains already the definition of used coordinate system (SRS) then MapTiler is able to load it and directly use this information for transformation of the maps. In case this information is missing in the supplied file or it is incorrect (the maptiler place the maps on a wrong location, you can still assign the information about the spatial reference system with an option:
+
+`-srs [definition]`
+ Dataset projection. Can be WKT, EPSG code in the form of 'epsg:XXXX', PROJ.4 string. Beware of escaping. To search for identifiers or definitions use http://www.spatialreference.org/.
+ 
+Example of assigning the United Kingdom spatial reference OSGB to a GeoTIFF file before rendering: ::
+
+ ￼maptiler -o tiles -srs EPSG:27700 map_in_osgb.tif
+
+Transparency from a color
+--------
+
+`-nodata [r] [g] [b]`
+ This command is typically used to eliminate borders of multiple map sheets that are stitched together. You can set a specific color of the map to be considered fully transparent during rendering.
+ 
+Example for removing fully black border around a map: ::
+
+ ￼maptiler -o tiles map.tif -nodata 0 0 0
+ 
+Georeference / calibration
+---------
+
+For proper rendering of the maps the location of supplied input files in the known coordinate system (SRS) must be available. MapTiler is loading the geolocation automatically from the internal headers of the input files (such as GeoTIFF) or from external supportive files (such as ESRI WorldFile) if they are avaialble.
+
+To enforce a custom selected georeference information or loading from external files these options are available:
+
+`-bbox minx miny maxx maxy`
+ To manually set bounds of a file in the specified spatial reference system.
+
+`-geotransform p1 p2 p3 p4 p5 p6`
+ To assign affine transformation directly. This option can be also used with its short name -gt.
+
+`-georeference [path_to_file]`
+ An option to load external georeference from World File, Tab File, OziExplorer Map File or .prj file.
+
+Cutline (Crop)
+--------
+There are two command line options for cutline: -cutline and -cutline_proj. They specify the cutline (a clipping path) for an input image in pixels or in projected coordinates. They both expect a file name. The file can be either CSV or an OGR dataset (such as ESRI ShapeFile .shp).
+
+From an OGR file, MapTiler will load all polygons and multi-polygons from all features of the first layer. 
+
+The CSV format with pixel coordinates of nodes of a triangle, more lines will create polygon:
+
+X1,Y1
+X2,Y2
+X3,Y3
+
+Example of use of such a pixel-based cutline: ::
+
+ maptiler -o outputdir input.tif -cutline polygon.csv
+ 
+Another example of cutline with geocoordinates stored in a .shp file (may require accompanying .prj file with coordinate system): ::
+
+ maptiler -o outputdir input.tif -cutline_proj shape.shp
+ 
+A cutline can be applied for the whole dataset by putting it in front of all the file names. A cutline specific for each input file can be applied, if the parameter is used after a filename (see section MapTiler Command Structure).
+ 
+ 
+ 
+ 
 
 
 

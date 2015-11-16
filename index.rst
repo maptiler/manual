@@ -14,6 +14,7 @@ Contents:
    welcome
    installation
    usage
+   hosting
 
 
 

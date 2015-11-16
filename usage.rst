@@ -271,9 +271,116 @@ Another example of cutline with geocoordinates stored in a .shp file (may requir
  
 A cutline can be applied for the whole dataset by putting it in front of all the file names. A cutline specific for each input file can be applied, if the parameter is used after a filename (see section MapTiler Command Structure).
  
+Multiple files into multiple MBTiles or Folders 
+-------
+
+MapTiler is designed to produce a single merged layer from multiple input files. If you need to process multiple files and for each produce separate tileset then a batch processing is recommended.
+
+Example:
+
+This command processes every .tif file in a local directory and creates .mbtiles from each in the output directory. If .mbtiles is removed from the command, it produces separate directories instead. The command differs on operating systems:
+
+Windows ::
+
+ for %f in *tif; do echo $f; maptiler -o output/`basename $f .tif`.mbtiles $f; done;
  
+When used in a batch file the %f must be %%f.
+
+Linux / Mac OS X ::
+
+ for %f in (*.tif) do ( echo %f; maptiler -o output/%f.mbtiles %f )
  
+Advanced options
+========
+
+Options in the optfile
+-------
+
+In case you have a large number of arguments to pass to maptiler, such as many input files (total amount is unlimited for maptiler), you can prepare a text file with all the arguments and call it with -- optfile myarguments.txt. List of files can be easily created with ls or dir commands.
+
+Any arguments normally passed on the command line could be part of the --optfile text file.  Maptiler can combine arguments on the command line with arguments in the text file, such as: ::
+
+ ￼maptiler -o output_directory --optfile myarguments.txt
  
+Temporary directory location
+-------
+During rendering, MapTiler also writes a substantial amount of data to a temporary directory. Not as much as will be in the output directory, but still. Please make sure there is enough space in the filesystem for it.
+
+By default, the temporary directory will be created in the current working directory when you run MapTiler. You can override this with the option:
+
+`-work_dir [directory]`
+ The location where to store temporary data during rendering. By default the current working directory.
+
+Example: ::
+
+ ￼maptiler -work_dir /tmp -o /mnt/data/tiles /mnt/maps/*.tif
+ 
+Resampling methods
+-------
+The visual quality of the output tiles is also defined by the resampling method. Selected method is used for interpolation of the values of individual pixels and it affects the sharpness vs smoothness of the produced maps.
+
+`-resampling near`
+ Nearest neighbor resampling. Rarely makes sense for production data. Can be useful for quick testing, since it is much faster the the others.
+
+`-resampling bilinear`
+ DEFAULT. Bilinear resampling (2x2 pixel kernel).
+
+`-resampling cubic`
+ Cubic convolution approximation (4x4 pixel kernel).
+
+`-resampling cubic_spline`
+ Cubic B-Spline Approximation (4x4 pixel kernel).
+
+`-resampling average`
+ Average resampling, computes the average of all non-NODATA contributing pixels. (GDAL >= 1.10.0)
+
+`-resampling mode`
+ Mode resampling, selects the value which appears most often of all the sampled points. (GDAL >= 1.10.0)
+
+Defining a custom tiling profile for a specified coordinate system
+--------
+MapTiler allows to define a custom system of tiles which should be rendered. Such tiling scheme, or in the terminology of OGC WMTS service the TileMatrixSet is for the maptiler defined with parameters which must follow the tile profile option: -custom.
+
+`-tiling_srs [definition]`
+ The spatial reference system, e.g. the coordinate system in which the tiles are created. Follows the definitions known from -srs.
+ 
+`-tiling_bbox [minx] [miny] [maxx] [maxy]`
+ The area which should be split into tiles defined in the tiling_srs coordinates.
+
+`-tiling_resolution [zoomlevel] [resolution]`
+ Resolution in units of the tiling spatial reference system per pixel on the given zoom level. MapTiler will automatically compute values for all other zoom levels, each having half the resolution of the previous one.
+
+`-tile_size [width] [height]`
+ The pixel dimmensions of one tile.
+ 
+Advanced warping arguments
+----------
+The advanced warping algorithms parameters can be specified with the option:
+
+`-wo “NAME=VALUE”`
+ The warp options. See the papszWarpOptions field at http://gdal.org/ structGDALWarpOptions.html.
+ 
+Example: ::
+
+ ￼maptiler -o tiles -wo "SAMPLE_GRID=YES" t.tif -wo "SOURCE_EXTRA=16"
+
+Usage on a computer cluster
+--------
+
+MapTiler can run on an MPI cluster if a cluster specific binary has been requested. If you have the MPI version, a shell wrapper to run it on a cluster is delivered as well.
+
+A version of MapTiler utilizing Map Reduce approach and Hadoop is under development, this will replace the older MPI.
+
+More details are provided on request. 
+
+
+
+
+
+
+
+
+
 
 
 

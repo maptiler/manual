@@ -281,7 +281,7 @@ Another example of cutline with geocoordinates stored in a .shp file (may requir
 
  maptiler -o outputdir input.tif -cutline_proj shape.shp
  
-A cutline is specific for each input file, the parameter has to be used after a filename (see section MapTiler Command Structure).
+A cutline is specific for each input file - so the parameter should be used after a filename (see section MapTiler Command Structure).
  
 Multiple files into multiple MBTiles or Folders 
 -------

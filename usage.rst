@@ -349,6 +349,14 @@ The visual quality of the output tiles is also defined by the resampling method.
 `-resampling mode`
  Mode resampling, selects the value which appears most often of all the sampled points. (GDAL >= 1.10.0)
 
+Resampling overviews produced by MapTiler is using average method, by default. Another possible method is Nearest neighbor.
+
+`-overviews_resampling near`
+ Nearest neighbor overviews resampling. Mostly used for elevation maps or similar.
+
+`-overviews_resampling average`
+ Average overviews resampling, computes the averate of all non-NODATA contributing pixels.
+
 Defining a custom tiling profile for a specified coordinate system
 --------
 MapTiler allows to define a custom system of tiles which should be rendered. Such tiling scheme, or in the terminology of OGC WMTS service the TileMatrixSet is for the maptiler defined with parameters which must follow the tile profile option: -custom.

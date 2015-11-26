@@ -392,8 +392,18 @@ A version of MapTiler utilizing Map Reduce approach and Hadoop is under developm
 More details are provided on request. 
 
 
+Merge MBTiles utility
+--------
 
+The utility allows to update a previously rendered dataset and replace a small existing area with a different newly rendered raster data. Typical use-case is fixing of a small geographic area in a large seamed dataset previously rendered by MapTiler from many input files.
+The utility does not extent the bounding box of the tiles - it is not usable for merging two just partly overlapping maps into one bigger map covering larger extent. For such case the rendering with MapTiler Pro is required.
 
+The typical usage:
+1) render large dataset with MapTiler Pro - from several input files and produce large MBTiles (with JPEG or PNG tiles internally): `large.mbtiles`
+2) if you want to update one of the previously rendered input files in the existing dataset render just this file into MBTiles - with the PNG32 format and zoom-levels on which you want it to appear in the large dataset. Save the new small MBTiles with just one file to `patch.mbtiles`
+3) run:
+$ `merge_mbtiles large.mbtiles patch.mbtiles`
+and the existing tiles available in both `large.mbtiles` and the `patch.mbtiles` are going to be merged and will replace the original tiles - so the `large.mbtiles` will be updated in-place.
 
 
 
@@ -405,4 +415,4 @@ More details are provided on request. 
 
 .. [#] Depending on your operating system you may need to call the command differently then just maptiler, typically on Linux and Mac in actual directory as ./maptiler and on Windows as maptiler.exe.
 
-.. [#] MapTiler uses Google XYZ naming of tiles, while older open-source MapTiler and GDAL2Tiles used the TMS nam- ing (with flipped Y axis). In case you need the older TMS naming there is an option -tms for back compatibility.
+.. [#] MapTiler uses Google XYZ naming of tiles, while older open-source MapTiler and GDAL2Tiles used the TMS naming (with flipped Y axis). In case you need the older TMS naming there is an option -tms for back compatibility.

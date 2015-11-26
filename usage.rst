@@ -159,7 +159,7 @@ Tile store format
 Hybrid tile format
 ----------
 
-MapTiler allows rendering into a hybrid tile format, so that transparent tiles are using transparent format (such as PNG) and tiles without any transparency at all are saved into a different format (such as JPEG). For aerial photos overlays or other datasets this can mean significant saving of the storage, but the client application and hosting service must be able to handle this case.
+MapTiler allows rendering into a hybrid tile format, so that transparent tiles are using transparent format (such as PNG) and tiles without any transparency at all are saved into a different format (such as JPEG). For aerial photos overlays or other datasets this can mean significant saving of the storage. Generated files are without file extensions, which simplify generated OpenLayers viewer.
 
 Example of usage: ::
 

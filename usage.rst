@@ -370,7 +370,10 @@ MapTiler allows to define a custom system of tiles which should be rendered. Suc
 
 `-tile_size [width] [height]`
  The pixel dimmensions of one tile.
- 
+
+`-tiling_centered`
+ Tile (0, 0) is in the center of the world.
+
 Advanced warping arguments
 ----------
 The advanced warping algorithms parameters can be specified with the option:

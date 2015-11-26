@@ -181,9 +181,6 @@ There are some options to specify parameters of the conversion into image format
  
  *If you experience issues with the visual quality of generated tiles with quantization involved try to set -quant_speed to lower values.*
  
-`-quant_colors`
- The number of colors in the PNG palette. Number between 1 and 256. Default is 256.
-
 `-webp_quality`
  The quality of WebP compression. Number between 1 and 100. Default is 90. Level 100 means lossless compression.
 

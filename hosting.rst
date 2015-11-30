@@ -55,6 +55,27 @@ and call the utility without these arguments: ::
  cloudpush s3://bucket_name list
  cloudpush s3://bucket_name add filename.mbtiles
  
+It is possible to use further options such as: 
+
+  --create-bucket         automatically creates bucket, if not existing
+  --no-index-json         not handling metadata in CloudPush instance index.json
+  --raw                   same as --no-index-json
+  --basename <path>       sets custom basename (default: basename of MBTiles file)
+  --private               uploaded objects are private (default: public)
+
+List of available parameters can be displayed by running ./cloudpush without any parameter
+
+Example for using custom basename: ::
+
+ ./cloudpush --basename myfile s3://bucket_name add filename.mbtiles
+
+uploads tiles with URL format: `myfile/z/x/y.ext`. Custom basename contains directory separators (slash), for example: ::
+
+ ./cloudpush --basename year/month/myfile s3://bucket_name add filename.mbtiles
+
+result will have URL in format: `year/month/myfile/z/x/y.ext`.
+
+ 
 Region-specific hosting can be set up via environment variable AWS_BUCKET_REGION=[value] or with parameter -R [value].
 
 Example for EU (Ireland) region: ::
@@ -63,25 +84,8 @@ Example for EU (Ireland) region: ::
  
 List of S3 regions is provided by the utility with `--more-help` argument or visible at http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region
 
-CloudPush utlity contains also these options: ::
 
-  --create-bucket         automatically create bucket, if not existing
-  --no-index-json         do not handle metadata in CloudPush instance index.json
-  --raw                   same as --no-index-json
-  --basename <path>       set custom basename (default: basename of MBTiles file)
-  --private               uploaded objects are private (default: public)
 
-Example for using custom basename: ::
-
- ./cloudpush --basename myfile s3://bucket_name add filename.mbtiles
-
-uploads tiles with URL format: `myfile/z/x/y.ext`. Custom basename can contains directory separators (slash), for example: ::
-
- ./cloudpush --basename year/month/myfile s3://bucket_name add filename.mbtiles
-
-resulting tiles have URL like `year/month/myfile/z/x/y.ext`.
-
-For more information run the utility without parameters and it will print all available parameters.
 
 
 

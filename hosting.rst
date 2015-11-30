@@ -20,8 +20,7 @@ Amazon access and secure key is available via IAM service administration interfa
 
 The credentials for the Google Cloud Storage are under "Enable interoperable access” in the menu of the service.
 
-Cloud Push instance is automatically initialized with the first map uploaded via this command utility,
-creating empty `index.json`, TileServer in `index.html` and setting WebSite configuration for this bucket.
+Cloud Push instance is initialized with the first uploaded map via this command line utility. It automatically creates empty `index.json`, TileServer in `index.html` and sets WebSite configuration for this bucket.
 
 Upload tiles from an MBTiles file to S3 ::
 

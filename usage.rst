@@ -159,7 +159,7 @@ Tile store format
 Hybrid tile format
 ----------
 
-MapTiler allows rendering into a hybrid tile format, so that transparent tiles are using transparent format (such as PNG) and tiles without any transparency at all are saved into a different format (such as JPEG). For aerial photos overlays or other datasets this can mean significant saving of the storage. Generated files are without file extensions, which simplify generated OpenLayers viewer.
+MapTiler allows rendering into a hybrid tile format, so that transparent tiles are using transparent format (such as PNG) and tiles without any transparency at all are saved into a different format (such as JPEG). For aerial photos overlays or other datasets this can mean significant saving of the storage. Generated files are without extensions. This is done to simplify the generated OpenLayers viewer.
 
 Example of usage: ::
 
@@ -346,7 +346,7 @@ The visual quality of the output tiles is also defined by the resampling method.
 `-resampling mode`
  Mode resampling, selects the value which appears most often of all the sampled points. (GDAL >= 1.10.0)
 
-Resampling overviews produced by MapTiler is using average method, by default. Another possible method is Nearest neighbor.
+Resampling overviews produced by MapTiler are using average method, by default. Another possible method is Nearest neighbor.
 
 `-overviews_resampling near`
  Nearest neighbor overviews resampling. Mostly used for elevation maps or similar.
@@ -368,10 +368,11 @@ MapTiler allows to define a custom system of tiles which should be rendered. Suc
  Resolution in units of the tiling spatial reference system per pixel on the given zoom level. MapTiler will automatically compute values for all other zoom levels, each having half the resolution of the previous one.
 
 `-tiling_resolution from_output`
- Resolution is calculated the way that native zoomlevel has one of the width/height modulo tilesize = 0.
+ Resolution is calculated from native zoomlevel, where `width/height modulo tilesize = 0`.
 
 `-tiling_resolution from_input`
- Resolution is calculated for the specific file the way that native zoomlevel has one of the width/height modulo tilesize = 0. This is default behavior if resolution is not specified.
+ Default behaviour if resolution is not specified. Resolution is then calculated for the specific file from native zoomlevel,
+ where `width/height modulo tilesize = 0`
 
 `-tile_size [width] [height]`
  The pixel dimmensions of one tile.
@@ -404,7 +405,7 @@ Merge MBTiles utility
 --------
 
 The utility allows to update a previously rendered dataset and replace a small existing area with a different newly rendered raster data. Typical use-case is fixing of a small geographic area in a large seamed dataset previously rendered by MapTiler from many input files.
-The utility does not extent the bounding box of the tiles - it is not usable for merging two just partly overlapping maps into one bigger map covering larger extent. For such case the rendering with MapTiler Pro is required.
+The utility does not extent the bounding box of the tiles - it is not usable for merging two just partly overlapping maps into one bigger map covering larger extent. In such cases, new rendering with MapTiler Pro is required.
 
 The typical usage:
 1) render large dataset with MapTiler Pro - from several input files and produce large MBTiles (with JPEG or PNG tiles internally): `large.mbtiles`

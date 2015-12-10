@@ -107,11 +107,14 @@ The produced tiles can be saved in one of several image format. MapTiler include
 Formats with support for transparency are:
 
 `-f png8a`
- DEFAULT. Paletted RGBA PNG image. 
+ DEFAULT. Paletted RGBA PNG image.
  
 `-f png or -f png32`
  RGBA PNG image 
- 
+
+`-f webp or -f webp32`
+ RGBA WebP image
+
 Non-transparent formats are: 
 
 `-f jpg or -f jpeg`
@@ -122,6 +125,9 @@ Non-transparent formats are:
 
 `-f png24`
  RGB PNG image
+
+`-f webp24`
+ RGB WebP image
 
 Tile transparency or a background color
 ----------
@@ -153,7 +159,7 @@ Tile store format
 Hybrid tile format
 ----------
 
-MapTiler allows rendering into a hybrid tile format, so that transparent tiles are using transparent format (such as PNG) and tiles without any transparency at all are saved into a different format (such as JPEG). For aerial photos overlays or other datasets this can mean significant saving of the storage, but the client application and hosting service must be able to handle this case.
+MapTiler allows rendering into a hybrid tile format, so that transparent tiles are using transparent format (such as PNG) and tiles without any transparency at all are saved into a different format (such as JPEG). For aerial photos overlays or other datasets this can mean significant saving of the storage. Generated files are without extensions. This is done to simplify the generated OpenLayers viewer.
 
 Example of usage: ::
 
@@ -168,15 +174,18 @@ There are some options to specify parameters of the conversion into image format
  The quality of JPEG compression. Number between 10 and 95. Default is 85.
 
 `-quant_quality`
- The quality of quantization. Number between 1 and 100. Default is 85.
+ The quality of quantization. Number between 1 and 100. Default is 100.
 
 `-quant_speed`
- Higher speed levels disable expensive algorithms and reduce quantization precision. Speed 1 gives marginally better quality at significant CPU cost. Speed 10 has usually 5% lower quality, but is 8 times faster than the default. Default is 8.
+ Higher speed levels disable expensive algorithms and reduce quantization precision. Speed 1 gives marginally better quality at significant CPU cost. Speed 10 has usually 5% lower quality, but is 8 times faster than the default. Default is 10.
  
  *If you experience issues with the visual quality of generated tiles with quantization involved try to set -quant_speed to lower values.*
  
-`-quant_colors`
- The number of colors in the PNG palette. Number between 1 and 256. Default is 256.
+`-webp_quality`
+ The quality of WebP compression. Number between 1 and 100. Default is 90. Level 100 means lossless compression.
+
+`-webp_alpha_quality`
+ The quality of WebP alpha channel compression. Number between 1 and 100. Default is 90.
 
 Example of the rendering of a seamless map out of file map1.tif and map2.tif into tiles with internal palette with optimal colors with higher visual : ::
 
@@ -337,6 +346,14 @@ The visual quality of the output tiles is also defined by the resampling method.
 `-resampling mode`
  Mode resampling, selects the value which appears most often of all the sampled points. (GDAL >= 1.10.0)
 
+Resampling overviews produced by MapTiler are using average method, by default. Another possible method is Nearest neighbor.
+
+`-overviews_resampling near`
+ Nearest neighbor overviews resampling. Mostly used for elevation maps or similar.
+
+`-overviews_resampling average`
+ Average overviews resampling, computes the averate of all non-NODATA contributing pixels.
+
 Defining a custom tiling profile for a specified coordinate system
 --------
 MapTiler allows to define a custom system of tiles which should be rendered. Such tiling scheme, or in the terminology of OGC WMTS service the TileMatrixSet is for the maptiler defined with parameters which must follow the tile profile option: -custom.
@@ -350,9 +367,19 @@ MapTiler allows to define a custom system of tiles which should be rendered. Suc
 `-tiling_resolution [zoomlevel] [resolution]`
  Resolution in units of the tiling spatial reference system per pixel on the given zoom level. MapTiler will automatically compute values for all other zoom levels, each having half the resolution of the previous one.
 
+`-tiling_resolution from_output`
+ Resolution is calculated from native zoomlevel, where `width/height modulo tilesize = 0`.
+
+`-tiling_resolution from_input`
+ Default behaviour if resolution is not specified. Resolution is then calculated for the specific file from native zoomlevel,
+ where `width/height modulo tilesize = 0`
+
 `-tile_size [width] [height]`
  The pixel dimmensions of one tile.
- 
+
+`-tiling_centered`
+ Tile (0, 0) is in the center of the world.
+
 Advanced warping arguments
 ----------
 The advanced warping algorithms parameters can be specified with the option:
@@ -374,8 +401,18 @@ A version of MapTiler utilizing Map Reduce approach and Hadoop is under developm
 More details are provided on request. 
 
 
+Merge MBTiles utility
+--------
 
+The utility allows to update a previously rendered dataset and replace a small existing area with a different newly rendered raster data. Typical use-case is fixing of a small geographic area in a large seamed dataset previously rendered by MapTiler from many input files.
+The utility does not extent the bounding box of the tiles - it is not usable for merging two just partly overlapping maps into one bigger map covering larger extent. In such cases, new rendering with MapTiler Pro is required.
 
+The typical usage:
+1) render large dataset with MapTiler Pro - from several input files and produce large MBTiles (with JPEG or PNG tiles internally): `large.mbtiles`
+2) if you want to update one of the previously rendered input files in the existing dataset render just this file into MBTiles - with the PNG32 format and zoom-levels on which you want it to appear in the large dataset. Save the new small MBTiles with just one file to `patch.mbtiles`
+3) run:
+$ `merge_mbtiles large.mbtiles patch.mbtiles`
+and the existing tiles available in both `large.mbtiles` and the `patch.mbtiles` are going to be merged and will replace the original tiles - so the `large.mbtiles` will be updated in-place.
 
 
 
@@ -387,4 +424,4 @@ More details are provided on request. 
 
 .. [#] Depending on your operating system you may need to call the command differently then just maptiler, typically on Linux and Mac in actual directory as ./maptiler and on Windows as maptiler.exe.
 
-.. [#] MapTiler uses Google XYZ naming of tiles, while older open-source MapTiler and GDAL2Tiles used the TMS nam- ing (with flipped Y axis). In case you need the older TMS naming there is an option -tms for back compatibility.
+.. [#] MapTiler uses Google XYZ naming of tiles, while older open-source MapTiler and GDAL2Tiles used the TMS naming (with flipped Y axis). In case you need the older TMS naming there is an option -tms for back compatibility.

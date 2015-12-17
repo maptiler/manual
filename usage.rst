@@ -368,11 +368,10 @@ MapTiler allows to define a custom system of tiles which should be rendered. Suc
  Resolution in units of the tiling spatial reference system per pixel on the given zoom level. MapTiler will automatically compute values for all other zoom levels, each having half the resolution of the previous one.
 
 `-tiling_resolution from_output`
- Resolution is calculated from native zoomlevel, where `width/height modulo tilesize = 0`.
+ Resolution is calculated so as to fit whole input mapset into one tile on zoom level 0 with respect to bbox, srs and tile size.
 
 `-tiling_resolution from_input`
- Default behaviour if resolution is not specified. Resolution is then calculated for the specific file from native zoomlevel,
- where `width/height modulo tilesize = 0`
+ Default behaviour if resolution is not specified. Resolution is calculated so as to not supersample the largest input map with respect to bbox, srs and tile size.
 
 `-tile_size [width] [height]`
  The pixel dimmensions of one tile.

@@ -291,13 +291,13 @@ This command processes every .tif file in a local directory and creates .mbtiles
 
 Windows ::
 
- for %f in *tif; do echo $f; maptiler -o output/`basename $f .tif`.mbtiles $f; done;
+ for %f in (*.tif) do ( echo %f && maptiler -o output/%f.mbtiles %f )
  
 When used in a batch file the %f must be %%f.
 
 Linux / Mac OS X ::
 
- for %f in (*.tif) do ( echo %f; maptiler -o output/%f.mbtiles %f )
+ for %f in *tif; do echo $f; maptiler -o output/`basename $f .tif`.mbtiles $f; done;
  
 Advanced options
 ========

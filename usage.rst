@@ -277,6 +277,10 @@ Example of use of such a pixel-based cutline: ::
 Another example of cutline with geocoordinates stored in a .shp file (may require accompanying .prj file with coordinate system): ::
 
  maptiler -o outputdir input.tif -cutline_proj shape.shp
+
+Embedded cutline can be ignored using option -cutline IGNORE
+
+ maptiler -o outputdir input_with_cutline.tif -cutline IGNORE
  
 A cutline is specific for each input file - so the parameter should be used after a filename (see section MapTiler Command Structure).
  

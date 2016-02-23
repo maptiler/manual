@@ -427,6 +427,11 @@ and the existing tiles available in both `large.mbtiles` and the `patch.mbtiles`
 
 The utility also extent the bounding box of the tiles - it is usable for merging two just partly overlapping maps into one bigger map covering larger extent.
 
+Options:
+
+`-P n`
+ Set limit on defined number of cores.
+
 `-no_sparse`
  Generates missing empty tiles to fit in united bounding box. This option may decrease speed, but generates correct MBTiles.
 

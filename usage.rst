@@ -406,12 +406,29 @@ Merge MBTiles utility
 The utility allows to update a previously rendered dataset and replace a small existing area with a different newly rendered raster data. Typical use-case is fixing of a small geographic area in a large seamed dataset previously rendered by MapTiler from many input files.
 The utility does not extent the bounding box of the tiles - it is not usable for merging two just partly overlapping maps into one bigger map covering larger extent. In such cases, new rendering with MapTiler Pro is required.
 
-The typical usage:
+Typical usage:
 1) render large dataset with MapTiler Pro - from several input files and produce large MBTiles (with JPEG or PNG tiles internally): `large.mbtiles`
+
 2) if you want to update one of the previously rendered input files in the existing dataset render just this file into MBTiles - with the PNG32 format and zoom-levels on which you want it to appear in the large dataset. Save the new small MBTiles with just one file to `patch.mbtiles`
-3) run:
-$ `merge_mbtiles large.mbtiles patch.mbtiles`
-and the existing tiles available in both `large.mbtiles` and the `patch.mbtiles` are going to be merged and will replace the original tiles - so the `large.mbtiles` will be updated in-place.
+
+Example: ::
+ $ `merge_mbtiles large.mbtiles patch.mbtiles`
+
+Existing tiles available in both `large.mbtiles` and the `patch.mbtiles` are going to be merged. On same zoomlevels, patch.mbtiles will replace the original large.mbtiles - so the `large.mbtiles` will be updated in-place.
+
+Futher options:
+`-sparse` 
+Default. Does not fill the empty space between separate maps.
+
+`-nosparse`
+Fills the empty space between separate maps (if there is some) with empty tiles in background colour. This option can take longer to render, if there are huge areas between maps, as these have to be created. In case the maps overlap each other, there is no extra action involved.
+
+`-reencode`
+This option is useful, when the 2 merged maps have different format (e.g. jpeg and png). By default, the result is a hybrid format (combination of both of them). If reencode option is used, the chosen file is encoded to the actual format (which can slow down the process).
+
+
+
+
 
 
 

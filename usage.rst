@@ -418,7 +418,7 @@ The utility allows to update a previously rendered dataset and replace a small e
 The utility also extent the bounding box of the tiles - it is usable for merging two just partly overlapping maps into one bigger map covering larger extent.
 
 Usage:
- `merge_mbtiles [OPTION] BASE.mbtiles DETAIL.mbtiles [DETAIL_2.mbtiles]...
+ `merge_mbtiles [OPTION] BASE.mbtiles DETAIL.mbtiles [DETAIL_2.mbtiles]...`
 
 Typical usage:
 

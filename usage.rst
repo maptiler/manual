@@ -147,6 +147,12 @@ For example: ::
 
  ￼maptiler -f png8 -bg 0 128 0 ...
 
+If your dataset contains four channels, but the forth channel is not alpha channel, you can use option -ignore_alpha for ignore this channel.
+
+For example: ::
+
+  maptiler -f png32 -ignore_alpha input_4bands.tif ...
+
 
 Tile store format
 -----------
@@ -182,10 +188,10 @@ There are some options to specify parameters of the conversion into image format
  *If you experience issues with the visual quality of generated tiles with quantization involved try to set -quant_speed to lower values.*
  
 `-webp_quality`
- The quality of WebP compression. Number between 1 and 100. Default is 90. Level 100 means lossless compression.
+ The quality of WebP compression. Number between 1 and 100. Level 100 means lossless compression. Default is 75.
 
 `-webp_alpha_quality`
- The quality of WebP alpha channel compression. Number between 1 and 100. Default is 90.
+ The quality of WebP alpha channel compression. Number between 1 and 100. Level 100 means lossless compression. Default is 100.
 
 Example of the rendering of a seamless map out of file map1.tif and map2.tif into tiles with internal palette with optimal colors with higher visual : ::
 
@@ -277,6 +283,10 @@ Example of use of such a pixel-based cutline: ::
 Another example of cutline with geocoordinates stored in a .shp file (may require accompanying .prj file with coordinate system): ::
 
  maptiler -o outputdir input.tif -cutline_proj shape.shp
+
+Embedded cutline can be ignored using option -cutline IGNORE
+
+ maptiler -o outputdir input_with_cutline.tif -cutline IGNORE
  
 A cutline is specific for each input file - so the parameter should be used after a filename (see section MapTiler Command Structure).
  
@@ -405,7 +415,10 @@ Merge MBTiles utility
 
 The utility allows to update a previously rendered dataset and replace a small existing area with a different newly rendered raster data. Typical use-case is fixing of a small geographic area in a large seamed dataset previously rendered by MapTiler from many input files.
 
-The utility does not extent the bounding box of the tiles - it is not usable for merging two just partly overlapping maps into one bigger map covering larger extent. In such cases, new rendering with MapTiler Pro is required.
+The utility also extent the bounding box of the tiles - it is usable for merging two just partly overlapping maps into one bigger map covering larger extent.
+
+Usage:
+ `merge_mbtiles [OPTION] BASE.mbtiles DETAIL.mbtiles [DETAIL_2.mbtiles]...
 
 Typical usage:
 
@@ -420,20 +433,15 @@ Example: ::
 Existing tiles available in both `large.mbtiles` and the `patch.mbtiles` are going to be merged. On same zoomlevels, patch.mbtiles will replace the original large.mbtiles - so the `large.mbtiles` will be updated in-place.
 
 Futher options:
-`-sparse` 
-Default. Does not fill the empty space between separate maps.
 
-`-nosparse`
-Fills the empty space between separate maps (if there is some) with empty tiles in background colour. This option can take longer to render, if there are huge areas between maps, as these have to be created. In case the maps overlap each other, there is no extra action involved.
+`-P n`
+ Set limit on defined number of cores.
+
+`-no_sparse`
+ Fills the empty space between separate maps (if there is some) with empty tiles in background colour. This option can take longer to render, if there are huge areas between maps, as these have to be created. In case the maps overlap each other, there is no extra action involved. Default behaviour without this option does not fill the empty space between separate maps.
 
 `-reencode`
-This option is useful, when the 2 merged maps have different format (e.g. jpeg and png). By default, the result is a hybrid format (combination of both of them). If reencode option is used, the chosen file is encoded to the actual format (which can slow down the process).
-
-
-
-
-
-
+ This option is useful, when the 2 merged maps have different format (e.g. jpeg and png). By default, the result is a hybrid format (combination of both of them). If reencode option is used, the chosen file is encoded to the actual format (which can slow down the process).
 
 
 

@@ -5,7 +5,7 @@ Demo version
 Setting CPU limits
 =======
 
-MapTiler is a multi-threaded program. By default it will use all the CPUs you have and print the informa- tion about the cores. You can also set limit on defined number of cores yourself with the -P option. ::
+MapTiler is a multi-threaded program. By default it will use all the CPUs you have and print the information about the cores. You can also set limit on defined number of cores yourself with the -P option. ::
 
  ￼maptiler -P 4 ...
 

@@ -404,15 +404,18 @@ Merge MBTiles utility
 --------
 
 The utility allows to update a previously rendered dataset and replace a small existing area with a different newly rendered raster data. Typical use-case is fixing of a small geographic area in a large seamed dataset previously rendered by MapTiler from many input files.
+
 The utility does not extent the bounding box of the tiles - it is not usable for merging two just partly overlapping maps into one bigger map covering larger extent. In such cases, new rendering with MapTiler Pro is required.
 
 Typical usage:
+
 1) render large dataset with MapTiler Pro - from several input files and produce large MBTiles (with JPEG or PNG tiles internally): `large.mbtiles`
 
 2) if you want to update one of the previously rendered input files in the existing dataset render just this file into MBTiles - with the PNG32 format and zoom-levels on which you want it to appear in the large dataset. Save the new small MBTiles with just one file to `patch.mbtiles`
 
 Example: ::
- $ `merge_mbtiles large.mbtiles patch.mbtiles`
+
+ merge_mbtiles large.mbtiles patch.mbtiles
 
 Existing tiles available in both `large.mbtiles` and the `patch.mbtiles` are going to be merged. On same zoomlevels, patch.mbtiles will replace the original large.mbtiles - so the `large.mbtiles` will be updated in-place.
 

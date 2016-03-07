@@ -36,6 +36,26 @@ Example: ::
  
 **In case you require to reinstall the computer, use** -deactivate **command to be able to re-activate the license later on.** 
 
+
+Software activation in virtual machine
+--------
+
+The activation process for MapTiler running in a virtual machine requires online activation only via environment variable `MAPTILER_LICENSE`.
+The software will be automatically deactivated in the end.
+
+Example on Windows OS ::
+
+ export MAPTILER_LICENSE=D2G-AA5-443-AC3-5T6
+ maptiler ...
+
+
+Example on Linux / Mac OS X ::
+
+ set MAPTILER_LICENSE=D2G-AA5-443-AC3-5T6
+ maptiler ...
+
+
+
 Software activation offline
 ========
 For computers which are not directly connected to the Internet or which are in security restricted installations, we have support for offline activation as well.

@@ -161,7 +161,11 @@ Tile store format
  This option enforces the form of storage which is used for saving the rendered tiles. Possible options are the directory (dir) and the MBTiles (mbtiles). The default is the directory, but in case the -o parameter ends with .mbtiles then rendering into mbtiles is selected. This option specify the store form explicitely.
 
  Note: for more details on this subject read the section Output in the chapter Usage above.
- 
+
+`-no_sparse`
+ Fills the empty space between separate maps (if there is some) with empty tiles in background colour. This option can take longer to render and take more disk space, if there are huge areas between maps, as these have to be created. This option is usable only for `-store dir`. Default option doesn't create empty tiles.
+
+
 Hybrid tile format
 ----------
 

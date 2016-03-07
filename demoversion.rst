@@ -45,13 +45,13 @@ The software will be automatically deactivated in the end.
 
 Example on Windows OS ::
 
- export MAPTILER_LICENSE=D2G-AA5-443-AC3-5T6
+ set MAPTILER_LICENSE=D2G-AA5-443-AC3-5T6
  maptiler ...
 
 
 Example on Linux / Mac OS X ::
 
- set MAPTILER_LICENSE=D2G-AA5-443-AC3-5T6
+ export MAPTILER_LICENSE=D2G-AA5-443-AC3-5T6
  maptiler ...
 
 

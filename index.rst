@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to MapTiler Manual 0.6.4!
+Welcome to MapTiler Manual 0.6.5!
 =================================
 
 Contents:

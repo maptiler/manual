@@ -28,16 +28,16 @@ After purchase of the software, when you receive your license key, it is necessa
 
 To do the online activation, use the following command:
 
-`-activate [KEY]`
+`-activate YOUR-OWN-LICENSE-KEY`
 
 Example: ::
 
- ￼maptiler -activate D2G-AA5-443-AC3-5T6
+ ￼maptiler -activate YOUR-OWN-LICENSE-KEY
  
 **In case you require to reinstall the computer, use** -deactivate **command to be able to re-activate the license later on.** 
 
 
-Software activation in virtual machine
+Software activation in a virtual machine
 --------
 
 The activation process for MapTiler running in a virtual machine requires online activation only via environment variable `MAPTILER_LICENSE`.
@@ -45,13 +45,13 @@ The software will be automatically deactivated in the end.
 
 Example on Windows OS ::
 
- set MAPTILER_LICENSE=D2G-AA5-443-AC3-5T6
+ set MAPTILER_LICENSE=YOUR-OWN-LICENSE-KEY
  maptiler ...
 
 
 Example on Linux / Mac OS X ::
 
- export MAPTILER_LICENSE=D2G-AA5-443-AC3-5T6
+ export MAPTILER_LICENSE=YOUR-OWN-LICENSE-KEY
  maptiler ...
 
 
@@ -62,7 +62,7 @@ For computers which are not directly connected to the Internet or which are in s
 
 To use the offline activation with the key we supply you after purchase you need to call: ::
 
- ￼maptiler -activate_request D2G-AA5-443-AC3-5T6 request.xml
+ ￼maptiler -activate_request YOUR-OWN-LICENSE-KEY request.xml
 
 This will generate a "request.xml" file, which you must send to us by email, and we will provide you with a "response.xml" file back. This can be used to activate the MapTiler by running: ::
 

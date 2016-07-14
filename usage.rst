@@ -55,9 +55,6 @@ A global option defining the output system of tiles - the target coordinate syst
 `-mercator`
  DEFAULT. The spherical mercator tile profile compatible with Google, Bing, Yahoo Maps, MapQuest, OpenStreetMap, and mobile maps on iOS and Android. This is the most commonly used profile. It uses coordinate system defined as EPSG:3857 or EPSG:900913. Details at: http://www.maptiler.org/google-maps-coordinates-tile-bounds-projection/ [#]_.
 
-`-mercator@2x`
- To create high-resolution Retina / HiDPI tiles with double pixel resolution.
-
 In case you wish to use other tiling system, you must specify it as the first command on the command line. These are the alternatives:
 
 `-geodetic`
@@ -78,6 +75,19 @@ In case you wish to use other tiling system, you must specify it as the first co
 Example: command for producing tiles for use with Google Earth: ::
 
  ￼maptiler -o tiles -gearth map.tif
+
+
+To create high-resolution Retina / HiDPI tiles with variable scale use a global option `-scale value`. Retina tiles are available for each profile listed above.
+
+Example: command for producing standard Retina tiles in mercator profile: ::
+
+  maptiler -mercator -o tiles@2x -scale 2.0 map.tif
+
+Example: command for producing Retina tiles at 1.5 scale in raster profile: ::
+
+  maptiler -raster -o tiles-retina -scale 1.5 map.tif
+
+
 
 Zoom levels
 ------

@@ -172,8 +172,11 @@ Tile store format
 
  Note: for more details on this subject read the section Output in the chapter Usage above.
 
+`-sparse`
+ Skip the empty space between separate maps and don't create empty tiles. This option can improve speed of rendering, if there are huge areas between maps. This is default option for `-store dir`.
+
 `-no_sparse`
- Fills the empty space between separate maps (if there is some) with empty tiles in background colour. This option can take longer to render and take more disk space, if there are huge areas between maps, as these have to be created. This option is usable only for `-store dir`. Default option doesn't create empty tiles.
+ Fills the empty space between separate maps (if there is some) with empty tiles in background colour. This option can take longer to render and take more disk space, if there are huge areas between maps, as these have to be created. This is default option for `-store mbtiles`.
 
 
 Hybrid tile format

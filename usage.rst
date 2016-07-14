@@ -74,18 +74,18 @@ In case you wish to use other tiling system, you must specify it as the first co
 
 Example: command for producing tiles for use with Google Earth: ::
 
- ￼maptiler -o tiles -gearth map.tif
+ ￼maptiler -gearth -o tiles map.tif
 
 
 To create high-resolution Retina / HiDPI tiles with variable scale use a global option `-scale value`. Retina tiles are available for each profile listed above.
 
 Example: command for producing standard Retina tiles in mercator profile: ::
 
-  maptiler -mercator -o tiles@2x -scale 2.0 map.tif
+  maptiler -mercator -scale 2.0 -o tiles@2x map.tif
 
 Example: command for producing Retina tiles at 1.5 scale in raster profile: ::
 
-  maptiler -raster -o tiles-retina -scale 1.5 map.tif
+  maptiler -raster -scale 1.5 -o tiles-retina map.tif
 
 
 

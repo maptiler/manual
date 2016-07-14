@@ -43,7 +43,7 @@ Instead of providing the access credentials in every command these can be set as
  set AWS_ACCESS_KEY_ID=[THE_ACCESS_KEY]
  set AWS_SECRET_ACCESS_KEY=[THE_SECRET_KEY]
 
-for Amazon S3, or
+for Amazon S3, or ::
 
  set GOOG_ACCESS_KEY_ID=[THE_ACCESS_KEY]
  set GOOG_SECRET_ACCESS_KEY=[THE_SECRET_KEY]

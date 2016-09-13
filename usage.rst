@@ -186,6 +186,7 @@ MapTiler allows rendering into a hybrid tile format, so that transparent tiles a
 
 Example of usage: ::
 
+ ￼maptiler -f hybrid <opaque> <transparent> ...
  ￼maptiler -f hybrid jpg png8a ...
 
 Tile quality

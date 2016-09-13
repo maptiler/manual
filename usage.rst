@@ -77,7 +77,7 @@ Example: command for producing tiles for use with Google Earth: ::
  ￼maptiler -gearth -o tiles map.tif
 
 `-scale value`
- To create high-resolution Retina / HiDPI tiles with variable scale use this global option. Retina tiles are available for each profile listed above.
+ To create high-resolution Retina / HiDPI tiles with variable scale. Retina tiles are available for each profile listed above.
 
 Example: command for producing standard Retina tiles in mercator profile: ::
 

@@ -348,10 +348,10 @@ Temporary directory location
 -------
 During rendering, MapTiler also writes a substantial amount of data to a temporary directory. Not as much as will be in the output directory, but still. Please make sure there is enough space in the filesystem for it.
 
-By default, the temporary directory will be created in the current working directory when you run MapTiler. You can override this with the option:
+By default, the temporary directory will be created in the system default temporary location (`/tmp/` on Unix-like systems, path from the environment variable`%TEMP%` on Windows-like systems. You can override this with the option:
 
 `-work_dir [directory]`
- The location where to store temporary data during rendering. By default the current working directory.
+ The location where to store temporary data during rendering. By default the system temporary directory.
 
 Example: ::
 

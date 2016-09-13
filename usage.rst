@@ -273,7 +273,7 @@ To enforce a custom selected georeference information or loading from external f
 `-bbox minx miny maxx maxy`
  To manually set bounds of a file in the specified spatial reference system.
 
-`-geotransform p1 p2 p3 p4 p5 p6`
+`-geotransform posX scaleX rotX posY rotY scaleY`
  To assign affine transformation directly. This option can be also used with its short name -gt.
 
 `-georeference [path_to_file]`

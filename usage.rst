@@ -279,6 +279,10 @@ To enforce a custom selected georeference information or loading from external f
 `-georeference [path_to_file]`
  An option to load external georeference from World File, Tab File, OziExplorer Map File or .prj file.
 
+`-corners east1 north1 east2 north2 east3 north3`
+ To assign affine transformation with 3 corner points: [0, 0], [width, 0], [width, height]. This option can be used with WGS84 Coordinate System (EPSG:4326) as arguments `lng1 lat1 lng2 lat2 lng3 lat3`, which will set up -srs EPSG:4326 for files without specified Coordinate system.
+
+
 Cutline (Crop)
 --------
 There are two command line options for cutline: -cutline and -cutline_proj. They specify the cutline (a clipping path) for an input image in pixels or in projected coordinates. They both expect a file name. The file can be either CSV or an OGR dataset (such as ESRI ShapeFile .shp).

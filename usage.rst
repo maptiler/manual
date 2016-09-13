@@ -157,7 +157,8 @@ For example: ::
 
  ￼maptiler -f png8 -bg 0 128 0 ...
 
-If your dataset contains four channels, but the forth channel is not alpha channel, you can use option -ignore_alpha for ignore this channel.
+`-ignore_alpha`
+ If your dataset contains four channels, but the forth channel is not alpha channel, you can use this option for ignore this channel.
 
 For example: ::
 

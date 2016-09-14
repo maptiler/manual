@@ -54,6 +54,7 @@ Example on Linux / Mac OS X ::
  export MAPTILER_LICENSE=YOUR-OWN-LICENSE-KEY
  maptiler ...
 
+**Notice:** This activation process via environment variable requires **not-activated MapTiler Pro** instance on that computer! Starting MapTiler application without setting this environment variable `MAPTILER_LICENSE`, you should see either **MapTiler Pro Demo**, or **Your trial period has expired** error message.
 
 
 Software activation offline

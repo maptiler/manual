@@ -6,12 +6,12 @@ Windows
 ======
 Download the appropriate setup.exe file and start the installation wizard. After it is finished a new section is added to Start -> All Programs and it is possible to use the command "maptiler" from the standard Command Prompt application in Windows.
 
-Mac OS X
+macOS
 =======
 
-Download the installation disk image (DMG) and after opening the disk image in Mac OS X you should drag the "MapTiler Pro" icon into your "Application" folder. The command line interface can be started from Terminal application as: `/Applications/MapTiler\ Pro.app/Contents/MacOS/maptiler`.
+Download the installation disk image (DMG) and after opening the disk image in macOS you should drag the "MapTiler Pro" icon into your "Application" folder. The command line interface can be started from Terminal application as: `/Applications/MapTiler\ Pro.app/Contents/MacOS/maptiler`.
 
-All version of Mac OS X higher then 10.7 are supported. 
+All version of macOS higher than 10.7 are supported.
 
 Linux
 ======

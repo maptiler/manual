@@ -328,7 +328,7 @@ Windows ::
  
 When used in a batch file the %f must be %%f.
 
-Linux / Mac OS X ::
+Linux / macOS ::
 
  for %f in *tif; do echo $f; maptiler -o output/`basename $f .tif`.mbtiles $f; done;
  

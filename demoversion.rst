@@ -49,7 +49,7 @@ Example on Windows OS ::
  maptiler ...
 
 
-Example on Linux / Mac OS X ::
+Example on Linux / maxOS ::
 
  export MAPTILER_LICENSE=YOUR-OWN-LICENSE-KEY
  maptiler ...

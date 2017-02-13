@@ -41,6 +41,7 @@ Delete whole cloudpush storage ::
 Instead of providing the access credentials in every command these can be set as system environment variables.
 
 Example on Windows OS: ::
+
  REM for Amazon S3
  set AWS_ACCESS_KEY_ID=[THE_ACCESS_KEY]
  set AWS_SECRET_ACCESS_KEY=[THE_SECRET_KEY]
@@ -49,6 +50,7 @@ Example on Windows OS: ::
  set GOOG_SECRET_ACCESS_KEY=[THE_SECRET_KEY]
 
 Example on Linux / macOS: ::
+
  # for Amazon S3
  export AWS_ACCESS_KEY_ID=[THE_ACCESS_KEY]
  export AWS_SECRET_ACCESS_KEY=[THE_SECRET_KEY]

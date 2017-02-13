@@ -38,17 +38,23 @@ Delete whole cloudpush storage ::
 
  cloudpush --acces_key ACCESS_KEY --secret_key SECRET_KEY s3://bucket_name destroy
  
-Instead of providing the access credentials in every command these can be set as system environment variables: ::
+Instead of providing the access credentials in every command these can be set as system environment variables.
 
+Example on Windows OS: ::
+ REM for Amazon S3
  set AWS_ACCESS_KEY_ID=[THE_ACCESS_KEY]
  set AWS_SECRET_ACCESS_KEY=[THE_SECRET_KEY]
-
-for Amazon S3, or ::
-
+ REM or for Google Cloud Storage
  set GOOG_ACCESS_KEY_ID=[THE_ACCESS_KEY]
  set GOOG_SECRET_ACCESS_KEY=[THE_SECRET_KEY]
 
-for Google Cloud Storage,
+Example on Linux / macOS: ::
+ # for Amazon S3
+ export AWS_ACCESS_KEY_ID=[THE_ACCESS_KEY]
+ export AWS_SECRET_ACCESS_KEY=[THE_SECRET_KEY]
+ # or for Google Cloud Storage
+ export GOOG_ACCESS_KEY_ID=[THE_ACCESS_KEY]
+ export GOOG_SECRET_ACCESS_KEY=[THE_SECRET_KEY]
 
 and call the utility without these arguments: ::
 
@@ -67,11 +73,11 @@ List of available parameters can be displayed by running ./cloudpush without any
 
 Example for using custom basename: ::
 
- ./cloudpush --basename myfile s3://bucket_name add filename.mbtiles
+ cloudpush --basename myfile s3://bucket_name add filename.mbtiles
 
 uploads tiles with URL format: `myfile/z/x/y.ext`. Custom basename contains directory separators (slash), for example: ::
 
- ./cloudpush --basename year/month/myfile s3://bucket_name add filename.mbtiles
+ cloudpush --basename year/month/myfile s3://bucket_name add filename.mbtiles
 
 result will have URL in format: `year/month/myfile/z/x/y.ext`.
 
@@ -80,7 +86,7 @@ Region-specific hosting can be set up via environment variable AWS_BUCKET_REGION
 
 Example for EU (Ireland) region: ::
 
- ./cloudpush -R eu-west-1 s3://bucket_name add filename.mbtiles
+ cloudpush -R eu-west-1 s3://bucket_name add filename.mbtiles
  
 List of S3 regions is provided by the utility with `--more-help` argument or visible at http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region
 

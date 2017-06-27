@@ -286,6 +286,23 @@ To enforce a custom selected georeference information or loading from external f
  To assign affine transformation with 3 corner points: [0, 0], [width, 0], [width, height]. This option can be used with WGS84 Coordinate System (EPSG:4326) as arguments `lng1 lat1 lng2 lat2 lng3 lat3`, which will set up -srs EPSG:4326 for files without specified Coordinate system.
 
 
+The geolocation can be specified using three or more control points - GCP (Ground Control Point). Each GCP is defined by the position on the raster (pixel_x and pixel_y), which is associated with georeferenced location (easting northing [elevation]). The last element (elevation) is mostly zero.
+
+`-gcp x_pixel y_pixel easting northing [elevation]`
+ To assign a ground control point. At least three control points are required.
+
+`-order value`
+ An option to set the polynomial order for transformation method of assigned GCPs. Supported orders are 0 (auto), 1 (affine) and 2 (polynomial of second order). By default, automatic order is selected based on number of GCP points.
+
+`-tps`
+ Force the use of Thin Plate Spline transformer based on assigned GCP points. This option cannot be used with `-order`. This option is recommended for more than 10 assigned GCPs.
+
+
+Example for using TPS transformation with assigned GCPs: ::
+
+  maptiler -o tiles map.tif -srs EPSG:26712 -tps -gcp 0 0 386638.171 3999090.834 -gcp 5400 0 399627.528 3999090.834 -gcp 5400 6800 399627.528 3982553.605
+
+
 Cutline (Crop)
 --------
 There are two command line options for cutline: -cutline and -cutline_proj. They specify the cutline (a clipping path) for an input image in pixels or in projected coordinates. They both expect a file name. The file can be either CSV or an OGR dataset (such as ESRI ShapeFile .shp).

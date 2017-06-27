@@ -215,7 +215,8 @@ There are some options to specify parameters of the conversion into image format
 Example of the rendering of a seamless map out of file map1.tif and map2.tif into tiles with internal palette with optimal colors with higher visual : ::
 
  ￼maptiler -o tiles -f png8a -quant_quality 90 -quant_speed 4 map1.tif map2.tif
- 
+
+
 Watermark
 --------
 
@@ -249,7 +250,7 @@ Practically any modern existing georeferencing coordinate system (SRS - spatial 
 In case the input files contains already the definition of used coordinate system (SRS) then MapTiler is able to load it and directly use this information for transformation of the maps. In case this information is missing in the supplied file or it is incorrect (the maptiler place the maps on a wrong location, you can still assign the information about the spatial reference system with an option:
 
 `-srs [definition]`
- Dataset projection. Can be WKT, EPSG code in the form of 'epsg:XXXX', PROJ.4 string. Beware of escaping. To search for identifiers or definitions use http://www.spatialreference.org/.
+ Dataset projection. Can be WKT, EPSG code in the form of 'epsg:XXXX', PROJ.4 string. Beware of escaping. To search for identifiers or definitions use http://www.spatialreference.org/ or http://epsg.io/.
  
 Example of assigning the United Kingdom spatial reference OSGB to a GeoTIFF file before rendering: ::
 

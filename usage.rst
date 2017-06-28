@@ -430,6 +430,18 @@ MapTiler allows to define a custom system of tiles which should be rendered. Suc
 `-tiling_centered`
  Tile (0, 0) is in the center of the world.
 
+Interrupt and resume long-time rendering
+----------
+
+The long-time rendering job can be interrupted by the end-user or a system failure (power-failure, no free space on the disk). MapTiler Pro supports only simple resume mode - render process can be continued on the same computer with the same options.
+
+`-keep_unfinished`
+ To prevent deleting the existing output tiles and temporary files created by the application.
+
+`-resume`
+ To continue in the unfinished or interrupted rendering process. Requires the same arguments on the same computer. It skips encoding of the existing tiles. This option can be used also for the startup of the rendering process, it will automatically keep unfinished tiles.
+
+
 Advanced warping arguments
 ----------
 The advanced warping algorithms parameters can be specified with the option:

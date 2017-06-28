@@ -441,6 +441,32 @@ Example: ::
 
  ￼maptiler -o tiles -wo "SAMPLE_GRID=YES" t.tif -wo "SOURCE_EXTRA=16"
 
+
+Watch progress in a frontend
+--------
+
+MapTiler can produce progress easily parsed in a frontend application. Simply use the first argument `-progress` and application output the progress on the standard output in the TSV (tabulator separated values) format: Stage \t Percentage \t Iteration \t Total.
+
+Example: ::
+
+  maptiler -progress -o tiles map1.tif map2.tif map3.tif
+
+  Opening    16 %    1    6
+  Opening    33 %    2    6
+  Opening    50 %    3    6
+  Opening    66 %    4    6
+  Opening    83 %    5    6
+  Opening   100 %    6    6
+  Warping     0 %    0    4
+  Warping    25 %    1    4
+  Warping    50 %    2    4
+  Warping    75 %    3    4
+  Warping   100 %    4    4
+  Rendering   0 %    0    512
+  ...
+  Rendering   100 %    512    512
+
+
 Usage on a computer cluster
 --------
 

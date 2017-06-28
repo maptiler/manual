@@ -445,7 +445,7 @@ Example: ::
 Watch progress in a frontend
 --------
 
-MapTiler can produce progress easily parsed in a frontend application. Simply use the first argument `-progress` and application output the progress on the standard output in the TSV (tabulator separated values) format: Stage \t Percentage \t Iteration \t Total.
+MapTiler can produce progress easily parsed in a frontend application. Simply use the first argument `-progress` and application output the progress on the standard output in the TSV (tabulator separated values) format: Stage TAB Percentage TAB Iteration TAB Total
 
 Example: ::
 

@@ -33,7 +33,7 @@ The produced directory structure contains also a simple HTML viewer and descript
 
 .. _TileServer: https://github.com/klokantech/tileserver-php/
 
-MapTiler supports direct output of the rendered map tiles into an SQLite database (MBTiles format). This simplifies transfer and management of the tilesets and is practical for mobile applications.
+MapTiler supports direct output of the rendered map tiles into an SQLite database (MBTiles or GeoPackage format). This simplifies transfer and management of the tilesets and is practical for mobile applications.
 
 MapTiler Command Structure
 =======
@@ -168,8 +168,8 @@ For example: ::
 Tile store format
 -----------
 
-`-store dir|mbtiles`
- This option enforces the form of storage which is used for saving the rendered tiles. Possible options are the directory (dir) and the MBTiles (mbtiles). The default is the directory, but in case the -o parameter ends with .mbtiles then rendering into mbtiles is selected. This option specify the store form explicitely.
+`-store dir|mbtiles|geopackage`
+ This option enforces the form of storage which is used for saving the rendered tiles. Possible options are the directory (dir), the MBTiles (mbtiles) and the GeoPackage (geopackage). The default is the directory, but in case the -o parameter ends with .mbtiles or .gpkg then rendering into MBTiles or GeoPackage is selected, respectively. This option specify the store form explicitely.
 
  Note: for more details on this subject read the section Output in the chapter Usage above.
 
@@ -177,7 +177,7 @@ Tile store format
  Skip the empty space between separate maps and don't create empty tiles. This option can improve speed of rendering, if there are huge areas between maps. This is default option for `-store dir`.
 
 `-no_sparse`
- Fills the empty space between separate maps (if there is some) with empty tiles in background colour. This option can take longer to render and take more disk space, if there are huge areas between maps, as these have to be created. This is default option for `-store mbtiles`.
+ Fills the empty space between separate maps (if there is some) with empty tiles in background colour. This option can take longer to render and take more disk space, if there are huge areas between maps, as these have to be created. This is default option for `-store mbtiles` and `-store geopackage`.
 
 
 Hybrid tile format

@@ -53,7 +53,7 @@ Tiling profile / Tile Matrix Set
 A global option defining the output system of tiles - the target coordinate system, tile pixel size, etc. MapTiler comes with three predefined most popular systems and possibility to specify a custom profile.
 
 `-mercator`
- DEFAULT. The spherical mercator tile profile compatible with Google, Bing, Yahoo Maps, MapQuest, OpenStreetMap, and mobile maps on iOS and Android. This is the most commonly used profile. It uses coordinate system defined as EPSG:3857 or EPSG:900913. Details at: http://www.maptiler.org/google-maps-coordinates-tile-bounds-projection/ [#]_.
+ DEFAULT. The spherical mercator tile profile compatible with Google, Bing, Yahoo Maps, MapQuest, OpenStreetMap, and mobile maps on iOS and Android. This is the most commonly used profile. It uses coordinate system defined as EPSG:3857 or EPSG:900913. Details at: http://www.maptiler.org/google-maps-coordinates-tile-bounds-projection/.
 
 In case you wish to use other tiling system, you must specify it as the first command on the command line. These are the alternatives:
 
@@ -430,6 +430,17 @@ MapTiler allows to define a custom system of tiles which should be rendered. Suc
 `-tiling_centered`
  Tile (0, 0) is in the center of the world.
 
+Tiling scheme - naming of tiles
+----------
+MapTiler uses Google XYZ naming of tiles, by default. It supports also the TMS naming (with flipped Y axis) and QuadKey naming (known by Microsoft Bing Maps). These tiling schemes are supported only for tile store into the directory (`-store dir`).
+
+`-tms`
+ OSGEO TMS (bottom-left origin), flipped Y axis as oppose to Google XYZ. This tiling scheme is defined as a standard for MBTiles.
+
+`-quadkey`
+ Microsoft Bing QuadKey (top-left origin). MapTiler generates files named as quadkey separated into directories named as zoom level. Details at https://msdn.microsoft.com/en-us/library/bb259689.aspx
+
+
 Interrupt and resume long-time rendering
 ----------
 
@@ -531,4 +542,3 @@ Futher options:
 
 .. [#] Depending on your operating system you may need to call the command differently then just maptiler, typically on Linux and Mac in actual directory as ./maptiler and on Windows as maptiler.exe.
 
-.. [#] MapTiler uses Google XYZ naming of tiles, while older open-source MapTiler and GDAL2Tiles used the TMS naming (with flipped Y axis). In case you need the older TMS naming there is an option -tms for back compatibility.

@@ -329,7 +329,8 @@ Embedded cutline can be ignored using option -cutline IGNORE ::
 
  maptiler -o outputdir input_with_cutline.tif -cutline IGNORE
  
-A cutline is specific for each input file - so the parameter should be used after a filename (see section MapTiler Command Structure).
+A pixel-based cutline (`-cutline`) is specific for each input file - so the parameter should be used after a filename (see section MapTiler Command Structure).
+A cutline with geocoordinates (`-cutline_proj`) can be used for multiple files, if it is specified before the first input file.
  
 Multiple files into multiple MBTiles or Folders 
 -------
@@ -438,7 +439,7 @@ MapTiler uses Google XYZ naming of tiles, by default. It supports also the TMS n
  OSGEO TMS (bottom-left origin), flipped Y axis as oppose to Google XYZ. This tiling scheme is defined as a standard for MBTiles.
 
 `-quadkey`
- Microsoft Bing QuadKey (top-left origin). MapTiler generates files named as quadkey separated into directories named as zoom level. Details at https://msdn.microsoft.com/en-us/library/bb259689.aspx
+ Microsoft Bing QuadKey (top-left origin). MapTiler generates files named as quadkey separated into directories named as zoom level (`output_directory/z/quadkey.ext`). Details at https://msdn.microsoft.com/en-us/library/bb259689.aspx
 
 
 Interrupt and resume long-time rendering

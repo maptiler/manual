@@ -9,12 +9,17 @@ On a standard hosting (such as an ordinary company web server) you can very simp
 
 Once uploaded, the produced maps can be opened in any viewer supporting OGC WMTS standard.
 
-For hosting of MBTiles, you can use an open-souce TileServer (available at: https://github.com/klokantech/tileserver-php/), that can be used with any standard hosting that supports PHP. Upload the created maps and get dozens of popular web viewers with interactivity, including Google Maps API, Leaflet, OpenLayers, WebGL Earth and MapBox JS.
+For hosting of MBTiles, you can use an open-souce TileServer_, that can be used with any standard hosting that supports PHP. Upload the created maps and get dozens of popular web viewers with interactivity, including Google Maps API, Leaflet, OpenLayers, WebGL Earth and MapBox JS. There is a `standalone how-to`_ describing the whole process of hosting with TileServer.
+
+.. _TileServer: https://github.com/klokantech/tileserver-php/
+.. _standalone how-to: http://www.maptiler.com/how-to/tileserver-php/
 
 Cloud hosting
 =========
 
-CloudPush command can be used for upload to Amazon S3 or Google Cloud Storage hosting. Examples are shown on the S3. If you need to use Google Cloud Storage, just change the “s3” to “google” or “gs”.
+CloudPush command can be used for upload to Amazon S3 or Google Cloud Storage hosting. Examples are shown on the S3. If you need to use Google Cloud Storage, just change the “s3” to “google” or “gs”. Full how-to with visual examples is available as a `how-to article`_.
+
+.. _how-to article: http://www.maptiler.com/how-to/hosting-on-amazon-s3/
 
 Amazon access and secure key is available via IAM service administration interface.
 
@@ -29,15 +34,15 @@ Upload tiles from an MBTiles file to S3 ::
 List all maps in the cloudpush tile storage ::
 
  cloudpush --acces_key ACCESS_KEY --secret_key SECRET_KEY s3://bucket_name list
- 
+
 Delete a map ::
 
  cloudpush --acces_key ACCESS_KEY --secret_key SECRET_KEY s3://bucket_name delete filename
- 
+
 Delete whole cloudpush storage ::
 
  cloudpush --acces_key ACCESS_KEY --secret_key SECRET_KEY s3://bucket_name destroy
- 
+
 Instead of providing the access credentials in every command these can be set as system environment variables.
 
 Example on Windows OS: ::
@@ -62,8 +67,8 @@ and call the utility without these arguments: ::
 
  cloudpush s3://bucket_name list
  cloudpush s3://bucket_name add filename.mbtiles
- 
-It is possible to use further options such as: 
+
+It is possible to use further options such as:
 
   --create-bucket         automatically creates bucket, if not existing
   --no-index-json         not handling metadata in CloudPush instance index.json
@@ -83,17 +88,11 @@ uploads tiles with URL format: `myfile/z/x/y.ext`. Custom basename contains dire
 
 result will have URL in format: `year/month/myfile/z/x/y.ext`.
 
- 
+
 Region-specific hosting can be set up via environment variable AWS_BUCKET_REGION=[value] or with parameter -R [value].
 
 Example for EU (Ireland) region: ::
 
  cloudpush -R eu-west-1 s3://bucket_name add filename.mbtiles
- 
+
 List of S3 regions is provided by the utility with `--more-help` argument or visible at http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region
-
-
-
-
-
-

@@ -110,4 +110,4 @@ If at any time you will want to deactivate MapTiler, eg. to move it to another m
 
  ￼maptiler -deactivate_request request.xml
 
-The offline activation is not available in a virtual machines. For more information see Software activation in a virtual machine above.
+The offline activation is not available on virtual machines. For more information see Software activation in a virtual machine above.

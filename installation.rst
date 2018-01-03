@@ -11,7 +11,7 @@ macOS
 
 Download the installation disk image (DMG) and after opening the disk image in macOS you should drag the "MapTiler Pro" icon into your "Application" folder. The command line interface can be started from Terminal application as: `/Applications/MapTiler\ Pro.app/Contents/MacOS/maptiler`.
 
-All version of macOS higher than 10.7 are supported.
+All versions of macOS higher than 10.7 are supported.
 
 Linux
 ======
@@ -19,5 +19,5 @@ Download the installation package (.deb or .rpm) for your Linux distribution. Th
 
 In case a different version of the GDAL library is required for your project, we can provide you with binaries compiled for such a version on request.
 
-Supported linux distributions are: Debian, Ubuntu, Redhat and Fedora (the rpms are dependent on GDAL from EPEL repository).
+Supported Linux distributions are: Debian, Ubuntu, Redhat and Fedora (the rpms are dependent on GDAL from EPEL repository).
 Another option for running the latest MapTiler with the latest GDAL on any Linux distribution is via the Docker container.

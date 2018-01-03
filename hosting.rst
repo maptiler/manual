@@ -9,7 +9,7 @@ On a standard hosting (such as an ordinary company web server) you can very simp
 
 Once uploaded, the produced maps can be opened in any viewer supporting OGC WMTS standard.
 
-For hosting of MBTiles, you can use an open-souce TileServer_, that can be used with any standard hosting that supports PHP. Upload the created maps and get dozens of popular web viewers with interactivity, including Google Maps API, Leaflet, OpenLayers, WebGL Earth and MapBox JS. There is a `standalone how-to`_ describing the whole process of hosting with TileServer.
+For hosting of MBTiles, you can use an open-source TileServer_, that can be used with any standard hosting that supports PHP. Upload the created maps and get dozens of popular web viewers with interactivity, including Google Maps API, Leaflet, OpenLayers, WebGL Earth and MapBox JS. There is a `standalone how-to`_ describing the whole process of hosting with TileServer.
 
 .. _TileServer: https://github.com/klokantech/tileserver-php/
 .. _standalone how-to: http://www.maptiler.com/how-to/tileserver-php/
@@ -17,15 +17,15 @@ For hosting of MBTiles, you can use an open-souce TileServer_, that can be used 
 Cloud hosting
 =========
 
-CloudPush command can be used for upload to Amazon S3 or Google Cloud Storage hosting. Examples are shown on the S3. If you need to use Google Cloud Storage, just change the “s3” to “google” or “gs”. Full how-to with visual examples is available as a `how-to article`_.
+The CloudPush command can be used for upload to Amazon S3 or Google Cloud Storage hosting. Examples are shown on the S3. If you need to use Google Cloud Storage, just change the “s3” to “google” or “gs”. Full how-to with visual examples is available as a `how-to article`_.
 
 .. _how-to article: http://www.maptiler.com/how-to/hosting-on-amazon-s3/
 
-Amazon access and secure key is available via IAM service administration interface.
+Amazon access and the secure key are available via IAM service administration interface.
 
 The credentials for the Google Cloud Storage are under "Enable interoperable access” in the menu of the service.
 
-Cloud Push instance is initialized with the first uploaded map via this command line utility. It automatically creates empty `index.json`, TileServer in `index.html` and sets WebSite configuration for this bucket.
+Cloud Push instance is initialized with the first uploaded map via this command line utility. It automatically creates an empty `index.json`, TileServer in `index.html` and sets WebSite configuration for this bucket.
 
 Upload tiles from an MBTiles file to S3 ::
 

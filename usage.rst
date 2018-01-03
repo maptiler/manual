@@ -53,7 +53,7 @@ Tiling profile / Tile Matrix Set
 A global option defining the output system of tiles - the target coordinate system, tile pixel size, etc. MapTiler comes with three predefined most popular systems and possibility to specify a custom profile.
 
 `-mercator`
- DEFAULT. The spherical mercator tile profile compatible with Google, Bing, Yahoo Maps, MapQuest, OpenStreetMap, and mobile maps on iOS and Android. This is the most commonly used profile. It uses coordinate system defined as EPSG:3857 or EPSG:900913. Details at: http://www.maptiler.org/google-maps-coordinates-tile-bounds-projection/.
+ DEFAULT. The spherical Mercator tile profile compatible with Google, Bing, Yahoo Maps, MapQuest, OpenStreetMap, and mobile maps on iOS and Android. This is the most commonly used profile. It uses coordinate system defined as EPSG:3857 or EPSG:900913. Details at: http://www.maptiler.org/google-maps-coordinates-tile-bounds-projection/.
 
 In case you wish to use different tiling system, you must specify it as the first command on the command line. These are the alternatives:
 
@@ -70,7 +70,7 @@ In case you wish to use different tiling system, you must specify it as the firs
  Rendering raster files without a need of georeferencing is also possible.
 
 `-garmin`
- To produce format for Garmin GPS devices, with a size 1024x1024 pixels and output to .kml file. Afterwards, pack the tiles and the .kml tiles into a .zip archive, change its extension to .kmz and save it into the device.
+ To produce the format for Garmin GPS devices, with a size 1024x1024 pixels and output to .kml file. Afterwards, pack the tiles and the .kml tiles into a .zip archive, change its extension to .kmz and save it into the device.
 
 Example: command for producing tiles for use with Google Earth: ::
 
@@ -105,7 +105,7 @@ Example: zoom levels are explicitly set to be 3 - 5 ::
 
  maptiler -o tiles map.tif -zoom 3 5
 
-Example: zoom levels are set to be 1 - 6 with relative value to native zoomlevels ::
+Example: zoom levels are set to be 1 - 6 with relative value to native zoom levels ::
 
  maptiler -o tiles map.tif -zoom +0 +1
 
@@ -146,7 +146,7 @@ No matter what input datasets you specify, after transforming them into the tili
 
 If the tile is completely transparent it is never saved to the disk to save the storage space.
 
-If all of the pixels are fully visible (eg. opaque, maximum alpha is 255), the alpha channel is discarded and the tile is marked as non-transparent / opaque. Otherwise the tile is marked as partly transparent with alpha.
+If all of the pixels are fully visible (eg. opaque, maximum alpha is 255), the alpha channel is discarded and the tile is marked as non-transparent / opaque. Otherwise, the tile is marked as partly transparent with alpha.
 
 If partly transparent tiles are saved in a tile format without support for transparency (such as JPEG specified with -f jpg option) then the background color is applied. Default background color is white (255,255,255), but you can specify your own with the option:￼
 
@@ -169,7 +169,7 @@ Tile store format
 -----------
 
 `-store dir|mbtiles|geopackage`
- This option enforces the form of storage which is used for saving the rendered tiles. Possible options are the directory (dir), the MBTiles (mbtiles) and the GeoPackage (geopackage). The default is the directory, but in case the -o parameter ends with .mbtiles or .gpkg then rendering into MBTiles or GeoPackage is selected, respectively. This option specify the store form explicitely.
+ This option enforces the form of storage which is used for saving the rendered tiles. Possible options are the directory (dir), the MBTiles (mbtiles) and the GeoPackage (geopackage). The default is the directory, but in case the -o parameter ends with .mbtiles or .gpkg then rendering into MBTiles or GeoPackage is selected, respectively. This option specifies the store form explicitly.
 
  Note: for more details on this subject read the section Output in the chapter Usage above.
 
@@ -177,13 +177,13 @@ Tile store format
  Skip the empty space between separate maps and don't create empty tiles. This option can improve the speed of rendering if there are huge areas between maps. This is the default option for `-store dir`.
 
 `-no_sparse`
- Fills the empty space between separate maps (if there is some) with empty tiles in background colour. This option can take longer to render and take more disk space, if there are huge areas between maps, as these have to be created. This is default option for `-store mbtiles` and `-store geopackage`.
+ Fills the empty space between separate maps (if there is some) with empty tiles in the background colour. This option can take longer to render and take more disk space, if there are huge areas between maps, as these have to be created. This is a default option for `-store mbtiles` and `-store geopackage`.
 
 
 Hybrid tile format
 ----------
 
-MapTiler allows rendering into a hybrid tile format which allowes transparent tiles using transparent format (such as PNG) and tiles without any transparency at all are saved into a different format (such as JPEG). For aerial photos overlays or other datasets, this can mean a significant saving of the storage. Generated files are without extensions. This is done to simplify the generated OpenLayers viewer.
+MapTiler allows rendering into a hybrid tile format which allows transparent tiles using transparent format (such as PNG) and tiles without any transparency at all are saved in a different format (such as JPEG). For aerial photos overlays or other datasets, this can mean a significant saving of the storage. Generated files are without extensions. This is done to simplify the generated OpenLayers viewer.
 
 Example of usage: ::
 
@@ -199,7 +199,7 @@ There are some options to specify parameters of the conversion into image format
  The quality of JPEG compression. A number between 10 and 95. The default is 85.
 
 `-quant_quality`
- The quality of quantization. Number between 1 and 100. Default is 100.
+ The quality of quantization. A number between 1 and 100. The default is 100.
 
 `-quant_speed`
  Higher speed levels disable expensive algorithms and reduce quantization precision. Speed 1 gives marginally better quality at significant CPU cost. Speed 10 has usually 5% lower quality but is 8 times faster than speed 8. The default is 10.
@@ -240,7 +240,7 @@ Supported input file formats
 
 MapTiler is able to open and process a large number of raster geodata formats, including: GeoTIFF, Erdas Imagine, ECW, MrSID, JPEG2000, SDTS, DTED, NITF, HDF4/5, BSB/KAP, OziExplorer, etc.
 
-The complete list of supported formats is available online at: http://www.gdal.org/formats_list.html
+The complete list of supported formats is available online at http://www.gdal.org/formats_list.html
 
 Spatial reference system
 ---------
@@ -270,10 +270,10 @@ Example for removing fully black border around a map: ::
 Georeference / calibration
 ---------
 
-Georeferencing can be also done visually using GUI_ or `on-line tool`_.
+Georeferencing can also be done visually using GUI_ or `online tool`_.
 
 .. _GUI: http://www.maptiler.com/how-to/georeferencing/
-.. _on-line tool: https://www.georeferencer.com/
+.. _online tool: https://www.georeferencer.com/
 
 For proper rendering of the maps the location of supplied input files in the known coordinate system (SRS) must be available. MapTiler is loading the geolocation automatically from the internal headers of the input files (such as GeoTIFF) or from external supportive files (such as ESRI WorldFile) if they are available.
 
@@ -292,13 +292,13 @@ To enforce a custom selected georeference information or loading from external f
  To assign affine transformation with 3 corner points: [0, 0], [width, 0], [width, height]. This option can be used with WGS84 Coordinate System (EPSG:4326) as arguments `lng1 lat1 lng2 lat2 lng3 lat3`, which will set up -srs EPSG:4326 for files without a specified Coordinate system.
 
 
-The geolocation can be specified using three or more control points - GCP (Ground Control Point). Each GCP is defined by the position on the raster (pixel_x and pixel_y), which is associated with georeferenced location (easting northing [elevation]). The last element (elevation) is mostly zero.
+The geolocation can be specified using three or more control points - GCP (Ground Control Point). Each GCP is defined by the position on the raster (pixel_x and pixel_y), which is associated with a georeferenced location (easting northing [elevation]). The last element (elevation) is mostly zero.
 
 `-gcp x_pixel y_pixel easting northing [elevation]`
  To assign a ground control point. At least three control points are required.
 
 `-order value`
- An option to set the polynomial order for transformation method of assigned GCPs. Supported orders are 0 (auto), 1 (affine) and 2 (polynomial of second order). By default, automatic order is selected based on number of GCP points.
+ An option to set the polynomial order for transformation method of assigned GCPs. Supported orders are 0 (auto), 1 (affine) and 2 (polynomial of second order). By default, the automatic order is selected based on a number of GCP points.
 
 `-tps`
  Force the use of Thin Plate Spline transformer based on assigned GCP points. This option cannot be used with `-order`. This option is recommended for more than 10 assigned GCPs.
@@ -327,7 +327,7 @@ Example of use of such a pixel-based cutline: ::
 
  maptiler -o outputdir input.tif -cutline polygon.csv
 
-Another example of cutline with geocoordinates stored in a .shp file (may require accompanying .prj file with coordinate system): ::
+Another example of cutline with geocoordinates stored in a .shp file (may require accompanying .prj file with a coordinate system): ::
 
  maptiler -o outputdir input.tif -cutline_proj shape.shp
 
@@ -336,7 +336,7 @@ Embedded cutline can be ignored using option -cutline IGNORE ::
  maptiler -o outputdir input_with_cutline.tif -cutline IGNORE
 
 A pixel-based cutline (`-cutline`) is specific for each input file - so the parameter should be used after a filename (see section MapTiler Command Structure).
-A cutline with geocoordinates (`-cutline_proj`) can be used for multiple files, if it is specified before the first input file.
+A cutline with geocoordinates (`-cutline_proj`) can be used for multiple files if it is specified before the first input file.
 
 Multiple files into multiple MBTiles or Folders
 -------
@@ -387,7 +387,7 @@ Resampling methods
 The visual quality of the output tiles is also defined by the resampling method. Selected method is used for interpolation of the values of individual pixels and it affects the sharpness vs smoothness of the produced maps.
 
 `-resampling near`
- Nearest neighbor resampling. Rarely makes sense for production data. Can be useful for quick testing, since it is much faster the the others.
+ Nearest neighbor resampling. Rarely makes sense for production data. Can be used for quick testing, since it is much faster than the others.
 
 `-resampling bilinear`
  DEFAULT. Bilinear resampling (2x2 pixel kernel).
@@ -404,7 +404,7 @@ The visual quality of the output tiles is also defined by the resampling method.
 `-resampling mode`
  Mode resampling, selects the value which appears most often of all the sampled points. (GDAL >= 1.10.0)
 
-Resampling overviews produced by MapTiler are using average method, by default. Another possible method is Nearest neighbor.
+Resampling overviews produced by MapTiler are using the average method, by default. Another possible method is Nearest neighbor.
 
 `-overviews_resampling near`
  Nearest neighbor overviews resampling. Mostly used for elevation maps or similar.
@@ -414,7 +414,7 @@ Resampling overviews produced by MapTiler are using average method, by default. 
 
 Defining a custom tiling profile for a specified coordinate system
 --------
-MapTiler allows to define a custom system of tiles which should be rendered. Such tiling scheme, or in the terminology of OGC WMTS service the TileMatrixSet is for the maptiler defined with parameters which must follow the tile profile option: -custom.
+MapTiler allows defining a custom system of tiles which should be rendered. Such tiling scheme, or in the terminology of OGC WMTS service the TileMatrixSet is for the maptiler defined with parameters which must follow the tile profile option: -custom.
 
 `-tiling_srs [definition]`
  The spatial reference system, e.g. the coordinate system in which the tiles are created. Follows the definitions known from -srs.
@@ -426,20 +426,20 @@ MapTiler allows to define a custom system of tiles which should be rendered. Suc
  Resolution in units of the tiling spatial reference system per pixel on the given zoom level. MapTiler will automatically compute values for all other zoom levels, each having half the resolution of the previous one.
 
 `-tiling_resolution from_output`
- Resolution is calculated so as to fit whole input mapset into one tile on zoom level 0 with respect to bbox, srs and tile size.
+ Resolution is calculated so as to fit whole input mapset into one tile on zoom level 0 with respect to bbox, srs, and tile size.
 
 `-tiling_resolution from_input`
- Default behavior if resolution is not specified. Resolution is calculated so as to not supersample the largest input map with respect to bbox, srs and tile size.
+ The default behavior if the resolution is not specified. Resolution is calculated so as to not supersample the largest input map with respect to bbox, srs and tile size.
 
 `-tile_size [width] [height]`
- The pixel dimmensions of one tile.
+ The pixel dimensions of one tile.
 
 `-tiling_centered`
  Tile (0, 0) is in the center of the world.
 
 Tiling scheme - naming of tiles
 ----------
-MapTiler uses Google XYZ naming of tiles, by default. It supports also the TMS naming (with flipped Y axis) and QuadKey naming (known by Microsoft Bing Maps). These tiling schemes are supported only for tile store into the directory (`-store dir`).
+MapTiler uses Google XYZ naming of tiles, by default. It supports also the TMS naming (with flipped Y axis) and QuadKey naming (known by Microsoft Bing Maps). These tiling schemes are supported only for tile store in the directory (`-store dir`).
 
 `-tms`
  OSGEO TMS (bottom-left origin), flipped Y axis as oppose to Google XYZ. This tiling scheme is defined as a standard for MBTiles.
@@ -500,7 +500,7 @@ Example: ::
 Usage on a computer cluster
 --------
 
-MapTiler can run on an MPI cluster if a cluster specific binary has been requested. If you have the MPI version, a shell wrapper to run it on a cluster is delivered as well.
+MapTiler can run on an MPI cluster if a cluster-specific binary has been requested. If you have the MPI version, a shell wrapper to run it on a cluster is delivered as well.
 
 A version of MapTiler utilizing Map Reduce approach and Hadoop is under development, this will replace the older MPI.
 
@@ -516,9 +516,9 @@ Merging MBTiles in GUI is described in `how-to section`_.
 
 .. _how-to section: http://www.maptiler.com/how-to/merge-mbtiles/
 
-The utility allows to update a previously rendered dataset and replace a small existing area with a different newly rendered raster data. Typical use-case is fixing of a small geographic area in a large seamed dataset previously rendered by MapTiler from many input files.
+The utility allows to update a previously rendered dataset and replace a small existing area with a different newly rendered raster data. The typical use-case is fixing of a small geographic area in a large seamed dataset previously rendered by MapTiler from many input files.
 
-The utility also extent the bounding box of the tiles - it is usable for merging two just partly overlapping maps into one bigger map covering larger extent.
+The utility also extend the bounding box of the tiles - it is usable for merging two just partly overlapping maps into one bigger map covering larger extent.
 
 Usage: ::
 
@@ -526,7 +526,7 @@ Usage: ::
 
 Typical usage:
 
-1) render large dataset with MapTiler Pro - from several input files and produce large MBTiles (with JPEG or PNG tiles internally): `large.mbtiles`
+1) render a large dataset with MapTiler Pro - from several input files and produce large MBTiles (with JPEG or PNG tiles internally): `large.mbtiles`
 
 2) if you want to update one of the previously rendered input files in the existing dataset render just this file into MBTiles - with the PNG32 format and zoom-levels on which you want it to appear in the large dataset. Save the new small MBTiles with just one file to `patch.mbtiles`
 
@@ -534,18 +534,18 @@ Example: ::
 
  merge_mbtiles large.mbtiles patch.mbtiles
 
-Existing tiles available in both `large.mbtiles` and the `patch.mbtiles` are going to be merged. On same zoomlevels, patch.mbtiles will replace the original large.mbtiles - so the `large.mbtiles` will be updated in-place.
+Existing tiles available in both `large.mbtiles` and the `patch.mbtiles` are going to be merged. On same zoom levels, patch.mbtiles will replace the original large.mbtiles - so the `large.mbtiles` will be updated in-place.
 
-Futher options:
+Further options:
 
 `-P n`
- Set limit on defined number of cores.
+ Set limit on the defined number of cores.
 
 `-no_sparse`
- Fills the empty space between separate maps (if there is some) with empty tiles in background colour. This option can take longer to render, if there are huge areas between maps, as these have to be created. In case the maps overlap each other, there is no extra action involved. Default behaviour without this option does not fill the empty space between separate maps.
+ Fills the empty space between separate maps (if there is some) with empty tiles in a background color. This option can take longer to render, if there are huge areas between maps, as these have to be created. In case the maps overlap each other, there is no extra action involved. Default behavior without this option does not fill the empty space between separate maps.
 
 `-reencode`
- This option is useful, when the 2 merged maps have different format (e.g. jpeg and png). By default, the result is a hybrid format (combination of both of them). If reencode option is used, the chosen file is encoded to the actual format (which can slow down the process).
+ This option is useful when the 2 merged maps have a different format (e.g. jpeg and png). By default, the result is a hybrid format (combination of both of them). If reencode option is used, the chosen file is encoded to the actual format (which can slow down the process).
 
 
 
@@ -553,5 +553,4 @@ Futher options:
 
 
 
-.. [#] Depending on your operating system you may need to call the command differently then just maptiler, typically on Linux and Mac in actual directory as ./maptiler and on Windows as maptiler.exe.
-
+.. [#] Depending on your operating system you may need to call the command differently than just maptiler, typically on Linux and Mac in the actual directory as ./maptiler and on Windows as maptiler.exe.

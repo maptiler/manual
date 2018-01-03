@@ -33,7 +33,7 @@ The produced directory structure contains also a simple HTML viewer and descript
 
 .. _TileServer: https://github.com/klokantech/tileserver-php/
 
-MapTiler supports direct output of the rendered map tiles into an SQLite database (MBTiles format). This simplifies transfer and management of the tilesets and is practical for mobile applications.
+MapTiler supports direct output of the rendered map tiles into an SQLite database (MBTiles or GeoPackage format). This simplifies transfer and management of the tilesets and is practical for mobile applications.
 
 MapTiler Command Structure
 =======
@@ -53,7 +53,7 @@ Tiling profile / Tile Matrix Set
 A global option defining the output system of tiles - the target coordinate system, tile pixel size, etc. MapTiler comes with three predefined most popular systems and possibility to specify a custom profile.
 
 `-mercator`
- DEFAULT. The spherical Mercator tile profile compatible with Google, Bing, Yahoo Maps, MapQuest, OpenStreetMap, and mobile maps on iOS and Android. This is the most commonly used profile. It uses coordinate system defined as EPSG:3857 or EPSG:900913. Details at: http://www.maptiler.org/google-maps-coordinates-tile-bounds-projection/ [#]_.
+ DEFAULT. The spherical mercator tile profile compatible with Google, Bing, Yahoo Maps, MapQuest, OpenStreetMap, and mobile maps on iOS and Android. This is the most commonly used profile. It uses coordinate system defined as EPSG:3857 or EPSG:900913. Details at: http://www.maptiler.org/google-maps-coordinates-tile-bounds-projection/.
 
 In case you wish to use different tiling system, you must specify it as the first command on the command line. These are the alternatives:
 
@@ -168,8 +168,8 @@ For example: ::
 Tile store format
 -----------
 
-`-store dir|mbtiles`
- This option enforces the form of storage which is used for saving the rendered tiles. Possible options are the directory (dir) and the MBTiles (mbtiles). The default is the directory, but in case the -o parameter ends with .mbtiles then rendering into mbtiles is selected. This option specifies the store form explicitly.
+`-store dir|mbtiles|geopackage`
+ This option enforces the form of storage which is used for saving the rendered tiles. Possible options are the directory (dir), the MBTiles (mbtiles) and the GeoPackage (geopackage). The default is the directory, but in case the -o parameter ends with .mbtiles or .gpkg then rendering into MBTiles or GeoPackage is selected, respectively. This option specify the store form explicitely.
 
  Note: for more details on this subject read the section Output in the chapter Usage above.
 
@@ -177,7 +177,7 @@ Tile store format
  Skip the empty space between separate maps and don't create empty tiles. This option can improve the speed of rendering if there are huge areas between maps. This is the default option for `-store dir`.
 
 `-no_sparse`
- Fills the empty space between separate maps (if there is some) with empty tiles in background colour. This option can take longer to render and take more disk space, if there are huge areas between maps, as these have to be created. This is default option for `-store mbtiles`.
+ Fills the empty space between separate maps (if there is some) with empty tiles in background colour. This option can take longer to render and take more disk space, if there are huge areas between maps, as these have to be created. This is default option for `-store mbtiles` and `-store geopackage`.
 
 
 Hybrid tile format
@@ -216,6 +216,7 @@ Example of the rendering of a seamless map out of file map1.tif and map2.tif int
 
  ￼maptiler -o tiles -f png8a -quant_quality 90 -quant_speed 4 map1.tif map2.tif
 
+
 Watermark
 --------
 
@@ -249,7 +250,8 @@ Practically any modern existing georeferencing coordinate system (SRS - spatial 
 In case the input files contain already the definition of a used coordinate system (SRS) then MapTiler is able to load it and directly use this information for the transformation of the maps. In case this information is missing in the supplied file or it is incorrect (the maptiler place the maps on a wrong location, you can still assign the information about the spatial reference system with an option:
 
 `-srs [definition]`
- Dataset projection. Can be WKT, EPSG code in the form of 'epsg:XXXX', PROJ.4 string. Beware of escaping. To search for identifiers or definitions use http://www.spatialreference.org/.
+ Dataset projection. Can be WKT, EPSG code in the form of 'epsg:XXXX', PROJ.4 string. Beware of escaping. To search for identifiers or definitions use http://www.spatialreference.org/ or http://epsg.io/.
+
 
 Example of assigning the United Kingdom spatial reference OSGB to a GeoTIFF file before rendering: ::
 
@@ -290,6 +292,23 @@ To enforce a custom selected georeference information or loading from external f
  To assign affine transformation with 3 corner points: [0, 0], [width, 0], [width, height]. This option can be used with WGS84 Coordinate System (EPSG:4326) as arguments `lng1 lat1 lng2 lat2 lng3 lat3`, which will set up -srs EPSG:4326 for files without a specified Coordinate system.
 
 
+The geolocation can be specified using three or more control points - GCP (Ground Control Point). Each GCP is defined by the position on the raster (pixel_x and pixel_y), which is associated with georeferenced location (easting northing [elevation]). The last element (elevation) is mostly zero.
+
+`-gcp x_pixel y_pixel easting northing [elevation]`
+ To assign a ground control point. At least three control points are required.
+
+`-order value`
+ An option to set the polynomial order for transformation method of assigned GCPs. Supported orders are 0 (auto), 1 (affine) and 2 (polynomial of second order). By default, automatic order is selected based on number of GCP points.
+
+`-tps`
+ Force the use of Thin Plate Spline transformer based on assigned GCP points. This option cannot be used with `-order`. This option is recommended for more than 10 assigned GCPs.
+
+
+Example for using TPS transformation with assigned GCPs: ::
+
+  maptiler -o tiles map.tif -srs EPSG:26712 -tps -gcp 0 0 386638.171 3999090.834 -gcp 5400 0 399627.528 3999090.834 -gcp 5400 6800 399627.528 3982553.605
+
+
 Cutline (Crop)
 --------
 There are two command line options for cutline: -cutline and -cutline_proj. They specify the cutline (a clipping path) for an input image in pixels or in projected coordinates. They both expect a file name. The file can be either CSV or an OGR dataset (such as ESRI ShapeFile .shp).
@@ -316,7 +335,8 @@ Embedded cutline can be ignored using option -cutline IGNORE ::
 
  maptiler -o outputdir input_with_cutline.tif -cutline IGNORE
 
-A cutline is specific for each input file - so the parameter should be used after a filename (see section MapTiler Command Structure).
+A pixel-based cutline (`-cutline`) is specific for each input file - so the parameter should be used after a filename (see section MapTiler Command Structure).
+A cutline with geocoordinates (`-cutline_proj`) can be used for multiple files, if it is specified before the first input file.
 
 Multiple files into multiple MBTiles or Folders
 -------
@@ -417,6 +437,29 @@ MapTiler allows to define a custom system of tiles which should be rendered. Suc
 `-tiling_centered`
  Tile (0, 0) is in the center of the world.
 
+Tiling scheme - naming of tiles
+----------
+MapTiler uses Google XYZ naming of tiles, by default. It supports also the TMS naming (with flipped Y axis) and QuadKey naming (known by Microsoft Bing Maps). These tiling schemes are supported only for tile store into the directory (`-store dir`).
+
+`-tms`
+ OSGEO TMS (bottom-left origin), flipped Y axis as oppose to Google XYZ. This tiling scheme is defined as a standard for MBTiles.
+
+`-quadkey`
+ Microsoft Bing QuadKey (top-left origin). MapTiler generates files named as quadkey separated into directories named as zoom level (`output_directory/z/quadkey.ext`). Details at https://msdn.microsoft.com/en-us/library/bb259689.aspx
+
+
+Interrupt and resume long-time rendering
+----------
+
+The long-time rendering job can be interrupted by the end-user or a system failure (power-failure, no free space on the disk). MapTiler Pro supports only simple resume mode - render process can be continued on the same computer with the same options.
+
+`-keep_unfinished`
+ To prevent deleting the existing output tiles and temporary files created by the application.
+
+`-resume`
+ To continue in the unfinished or interrupted rendering process. Requires the same arguments on the same computer. It skips encoding of the existing tiles. This option can be used also for the startup of the rendering process, it will automatically keep unfinished tiles.
+
+
 Advanced warping arguments
 ----------
 The advanced warping algorithms parameters can be specified with the option:
@@ -427,6 +470,32 @@ The advanced warping algorithms parameters can be specified with the option:
 Example: ::
 
  ￼maptiler -o tiles -wo "SAMPLE_GRID=YES" t.tif -wo "SOURCE_EXTRA=16"
+
+
+Watch progress in a frontend
+--------
+
+MapTiler can produce progress easily parsed in a frontend application. Simply use the first argument `-progress` and application output the progress on the standard output in the TSV (tabulator separated values) format: Stage TAB Percentage TAB Iteration TAB Total
+
+Example: ::
+
+  maptiler -progress -o tiles map1.tif map2.tif map3.tif
+
+  Opening    16 %    1    6
+  Opening    33 %    2    6
+  Opening    50 %    3    6
+  Opening    66 %    4    6
+  Opening    83 %    5    6
+  Opening   100 %    6    6
+  Warping     0 %    0    4
+  Warping    25 %    1    4
+  Warping    50 %    2    4
+  Warping    75 %    3    4
+  Warping   100 %    4    4
+  Rendering   0 %    0    512
+  ...
+  Rendering   100 %    512    512
+
 
 Usage on a computer cluster
 --------
@@ -486,4 +555,3 @@ Futher options:
 
 .. [#] Depending on your operating system you may need to call the command differently then just maptiler, typically on Linux and Mac in actual directory as ./maptiler and on Windows as maptiler.exe.
 
-.. [#] MapTiler uses Google XYZ naming of tiles, while older open-source MapTiler and GDAL2Tiles used the TMS naming (with flipped Y axis). In case you need the older TMS naming there is an option -tms for back compatibility.

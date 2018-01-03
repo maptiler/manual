@@ -7,13 +7,14 @@ Setting CPU limits
 
 MapTiler is a multi-threaded program. By default, it will use all the CPUs you have and print the information about the cores. You can also set a limit on the defined number of cores yourself with the -P option. ::
 
- ￼maptiler -P 4 ...
+  maptiler -P 4 ...
 
 This is especially practical to evaluate the demo application before purchasing a license for a particular number of cores.
 
 The modern CPUs has multiple cores and support of Hyperthreading - which provides multiple logical CPUs per core. This way MapTiler can provide higher performance with -P 4 even on a dual-core computer.
 
-Demo trial extension and software activation online
+
+Demo trial extension
 =======
 
 The demo version of MapTiler is fully usable for 30 days after the first start. In case this trial period for testing the software before purchase expires and you would like to continue to test the demo, it is necessary to contact Klokan Technologies and request a trial extension key.
@@ -23,6 +24,10 @@ Such key can be then used with the parameter:
 `-extend_trial KEY`
 
 And the demo can be then used during an extended time period.
+
+
+Software activation online
+========
 
 After a purchase of the software, when you receive your license key, it is necessary to activate MapTiler. After activation, the demo version no longer enforces the “MapTiler DEMO” overlays.
 
@@ -57,6 +62,38 @@ Example on Linux / macOS ::
 **Notice:** This activation process via environment variable requires **not-activated MapTiler Pro** instance on that computer! Starting MapTiler application without setting this environment variable `MAPTILER_LICENSE`, you should see either **MapTiler Pro Demo**, or **Your trial period has expired** error message.
 
 
+Software deactivation
+--------
+
+You can deactivate MapTiler Pro via command line, in order to transfer the application to another computer.
+Note that after the deactivation, MapTiler Pro will continue to run in DEMO mode, but the trial period of 30 days will **NOT** start again.
+
+To do the online deactivation, use the following command:
+
+`-deactivate`
+
+
+License information
+--------
+
+To check your license information, use the following command:
+
+`-license`
+
+Example ::
+
+  maptiler -license
+  Email: <your email>
+  License: <your license key>
+  Purchased CPU cores: 4
+  Maximum usable cores: 4
+
+
+  maptiler -license
+  Remaining 0 days on the trial.
+  Maximum usable cores: 4
+
+
 Software activation offline
 ========
 For computers which are not directly connected to the Internet or which are in security restricted installations, we have support for offline activation as well.
@@ -72,3 +109,5 @@ This will generate a "request.xml" file, which you must send to us by email, and
 If at any time you will want to deactivate MapTiler, eg. to move it to another machine, run the following command and you have to send us again the newly generated "request.xml" file. ::
 
  ￼maptiler -deactivate_request request.xml
+
+The offline activation is not available in a virtual machines. For more information see Software activation in a virtual machine above.

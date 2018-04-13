@@ -173,6 +173,10 @@ Tile store format
 
  Note: for more details on this subject read the section Output in the chapter Usage above.
 
+ Setting the sparse option in GUI is described in this `how-to section`_.
+
+ .. _how-to section: http://www.maptiler.com/how-to/advanced-image-settings/
+
 `-sparse`
  Skip the empty space between separate maps and don't create empty tiles. This option can improve the speed of rendering if there are huge areas between maps. This is the default option for `-store dir`.
 
@@ -552,7 +556,6 @@ Further options:
  Sending a bug report from GUI is described in the `how-to section`_.
 
  .. _how-to section: http://www.maptiler.com/how-to/submit-report/
-
 
  `-report`
  The argument -report generates the text report, which should be sent via the web form.

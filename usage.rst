@@ -547,7 +547,17 @@ Further options:
 `-reencode`
  This option is useful when the 2 merged maps have a different format (e.g. jpeg and png). By default, the result is a hybrid format (combination of both of them). If reencode option is used, the chosen file is encoded to the actual format (which can slow down the process).
 
+ Bug report
+ =======
+ Sending a bug report from GUI is described in the `how-to section`_.
 
+ .. _how-to section: http://www.maptiler.com/how-to/submit-report/
+
+
+ `-report`
+ The argument -report generates the text report, which should be sent via the web form.
+
+ Attaching this file if you are reporting a bug is very important becuase this information helps us to identify the problem and quickly come up with a solution
 
 
 

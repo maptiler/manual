@@ -342,6 +342,21 @@ Embedded cutline can be ignored using option -cutline IGNORE ::
 A pixel-based cutline (`-cutline`) is specific for each input file - so the parameter should be used after a filename (see section MapTiler Command Structure).
 A cutline with geocoordinates (`-cutline_proj`) can be used for multiple files if it is specified before the first input file.
 
+Color correction
+-------
+MapTiler allows you to specify several parameters in order to improve the colors of the output map. The MapTiler GUI is able to estimate these values interactively, but you can also use the following options to specify them manually:
+
+`-color_gamma r g b`
+Specify gamma correction of the individual channels, higher values result in brighter pixels (1 = unchanged).
+
+`-color_contrast contrast bias`
+Higher values of "contrast" result in bigger different between dark and light areas (0 = unchanged).
+Use "bias" if you want to keep more details in the dark/light areas (0.5 = equal, <0.5 = details in light areas, >0.5 = details in dark areas)
+
+`-color_saturation saturation`
+Modify saturation of the map (1 = unchanged, 0 = grayscale, >1 = colorful)
+
+
 Multiple files into multiple MBTiles or Folders
 -------
 

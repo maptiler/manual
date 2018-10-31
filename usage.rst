@@ -531,7 +531,7 @@ More details are available on `MapTiler Cluster page`_.
 Merge MBTiles utility
 --------
 
-Merging MBTiles in GUI is described in `how-to section`_.
+This feature is available in Desktop PRO and Engine versions only, not in Desktop PRO Demo. Merging MBTiles in GUI is described in `how-to section`_.
 
 .. _how-to section: http://www.maptiler.com/how-to/merge-mbtiles/
 

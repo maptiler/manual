@@ -1,7 +1,7 @@
-MapTiler Manual
-===============
+MapTiler Engine Manual
+======================
 
 Live at:
-http://manual.maptiler.com/
+https://manual.maptiler.com/
 
 Automatically generated into HTML, PDF and ePub.

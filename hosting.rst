@@ -12,14 +12,14 @@ Once uploaded, the produced maps can be opened in any viewer supporting OGC WMTS
 For hosting of MBTiles, you can use an open-source TileServer_, that can be used with any standard hosting that supports PHP. Upload the created maps and get dozens of popular web viewers with interactivity, including Google Maps API, Leaflet, OpenLayers, WebGL Earth and MapBox JS. There is a `standalone how-to`_ describing the whole process of hosting with TileServer.
 
 .. _TileServer: https://github.com/klokantech/tileserver-php/
-.. _standalone how-to: http://www.maptiler.com/how-to/tileserver-php/
+.. _standalone how-to: https://www.maptiler.com/how-to/tileserver-php/
 
 Cloud hosting
 =========
 
 The CloudPush command can be used for upload to Amazon S3 or Google Cloud Storage hosting. Examples are shown on the S3. If you need to use Google Cloud Storage, just change the “s3” to “google” or “gs”. Full how-to with visual examples is available as a `how-to article`_.
 
-.. _how-to article: http://www.maptiler.com/how-to/hosting-on-amazon-s3/
+.. _how-to article: https://www.maptiler.com/how-to/hosting-on-amazon-s3/
 
 Amazon access and the secure key are available via IAM service administration interface.
 
@@ -95,4 +95,4 @@ Example for EU (Ireland) region: ::
 
  cloudpush -R eu-west-1 s3://bucket_name add filename.mbtiles
 
-List of S3 regions is provided by the utility with `--more-help` argument or visible at http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region
+List of S3 regions is provided by the utility with `--more-help` argument or visible at https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region

@@ -5,19 +5,19 @@ Demo version
 Setting CPU limits
 =======
 
-MapTiler is a multi-threaded program. By default, it will use all the CPUs you have and print the information about the cores. You can also set a limit on the defined number of cores yourself with the -P option. ::
+MapTiler Engine is a multi-threaded program. By default, it will use all the CPUs you have and print the information about the cores. You can also set a limit on the defined number of cores yourself with the -P option. ::
 
   maptiler -P 4 ...
 
 This is especially practical to evaluate the demo application before purchasing a license for a particular number of cores.
 
-The modern CPUs has multiple cores and support of Hyperthreading - which provides multiple logical CPUs per core. This way MapTiler can provide higher performance with -P 4 even on a dual-core computer.
+The modern CPUs has multiple cores and support of Hyperthreading - which provides multiple logical CPUs per core. This way MapTiler Engine can provide higher performance with -P 4 even on a dual-core computer.
 
 
 Demo trial extension
 =======
 
-The demo version of MapTiler is fully usable for 30 days after the first start. In case this trial period for testing the software before purchase expires and you would like to continue to test the demo, it is necessary to contact Klokan Technologies and request a trial extension key.
+The demo version of MapTiler Engine is fully usable for 30 days after the first start. In case this trial period for testing the software before purchase expires and you would like to continue to test the demo, it is necessary to contact Klokan Technologies GmbH and request a trial extension key.
 
 Such key can be then used with the parameter:
 
@@ -29,7 +29,7 @@ And the demo can be then used during an extended time period.
 Software activation online
 ========
 
-After a purchase of the software, when you receive your license key, it is necessary to activate MapTiler. After activation, the demo version no longer enforces the “MapTiler DEMO” overlays.
+After a purchase of the software, when you receive your license key, it is necessary to activate MapTiler Engine. After activation, the demo version no longer enforces the “MapTiler DEMO” overlays.
 
 To do the online activation, use the following command:
 
@@ -45,7 +45,7 @@ Example: ::
 Software activation in a virtual machine
 --------
 
-The activation process for MapTiler running in a virtual machine requires online activation only via environment variable `MAPTILER_LICENSE`.
+The activation process for MapTiler Engine running in a virtual machine requires online activation only via environment variable `MAPTILER_LICENSE`.
 The software will be automatically deactivated in the end.
 
 Example on Windows OS ::

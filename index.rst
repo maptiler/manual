@@ -1,10 +1,10 @@
-.. MapTiler Manual master file, created by
+.. MapTiler Engine Manual master file, created by
    sphinx-quickstart on Sun Nov 15 18:30:52 2015.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to MapTiler Manual 8.0!
-=================================
+Welcome to MapTiler Engine Manual 9.1!
+======================================
 
 Contents:
 

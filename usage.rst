@@ -4,7 +4,7 @@ Usage
 
 Getting started
 ========
-The main purpose of the software is to generate tiles in a defined tiling system, given some options and inputs. The only mandatory option is -o for the output directory. This directory must not exist yet when you run MapTiler, to avoid overwriting existing data by mistake. As input, you can just provide the source dataset filename(s) [#]_. ::
+The main purpose of the software is to generate tiles in a defined tiling system, given some options and inputs. The only mandatory option is -o for the output directory. This directory must not exist yet when you run MapTiler Engine, to avoid overwriting existing data by mistake. As input, you can just provide the source dataset filename(s) [#]_. ::
 
  ￼maptiler -o output_directory input_file.ext
 
@@ -23,7 +23,7 @@ If you start the maptiler without arguments or with -help option, it will print 
 Output
 ======
 
-The default behaviour of MapTiler is to write tiles each into its own file, under the directory structure:
+The default behaviour of MapTiler Engine is to write tiles each into its own file, under the directory structure:
 
  `output_directory/z/x/y.ext`
 
@@ -33,9 +33,9 @@ The produced directory structure contains also a simple HTML viewer and descript
 
 .. _TileServer: https://github.com/klokantech/tileserver-php/
 
-MapTiler supports direct output of the rendered map tiles into an SQLite database (MBTiles or GeoPackage format). This simplifies transfer and management of the tilesets and is practical for mobile applications.
+MapTiler Engine supports direct output of the rendered map tiles into an SQLite database (MBTiles or GeoPackage format). This simplifies transfer and management of the tilesets and is practical for mobile applications.
 
-MapTiler Command Structure
+MapTiler Engine Command Structure
 =======
 .. image:: /images/maptiler_command_structure.jpg
 
@@ -50,7 +50,7 @@ Available output options
 
 Tiling profile / Tile Matrix Set
 -------
-A global option defining the output system of tiles - the target coordinate system, tile pixel size, etc. MapTiler comes with three predefined most popular systems and possibility to specify a custom profile.
+A global option defining the output system of tiles - the target coordinate system, tile pixel size, etc. MapTiler Engine comes with these predefined most popular systems and possibility to specify a custom profile.
 
 `-mercator`
  DEFAULT. The spherical Mercator tile profile compatible with Google, Bing, Yahoo Maps, MapQuest, OpenStreetMap, and mobile maps on iOS and Android. This is the most commonly used profile. It uses coordinate system defined as EPSG:3857 or EPSG:900913. Details at: http://www.maptiler.org/google-maps-coordinates-tile-bounds-projection/.
@@ -63,14 +63,15 @@ In case you wish to use different tiling system, you must specify it as the firs
 `-gearth`
  Tile profile specific for Google Earth according to the KML SuperOverlay definition.
 
-`-custom`
- You can specify your own tiling system. See the appropriate section under the Advanced options chapter for more information.
-
 `-raster`
  Rendering raster files without a need of georeferencing is also possible.
 
 `-garmin`
  To produce the format for Garmin GPS devices, with a size 1024x1024 pixels and output to .kml file. Afterwards, pack the tiles and the .kml tiles into a .zip archive, change its extension to .kmz and save it into the device.
+
+`-custom`
+ You can specify your own tiling system. See the appropriate section under the Advanced options chapter for more information.
+
 
 Example: command for producing tiles for use with Google Earth: ::
 
@@ -112,7 +113,7 @@ Example: zoom levels are set to be 1 - 6 with relative value to native zoom leve
 Tile formats
 --------
 
-The produced tiles can be saved in one of several image format. MapTiler includes optimization of the final filesize and used a number of colors (quantization), to minimize the disk size occupied by the rendered maps as well as the time necessary to transfer the maps to clients once the tiles are online.
+The produced tiles can be saved in one of several image format. MapTiler Engine includes optimization of the final filesize and used a number of colors (quantization), to minimize the disk size occupied by the rendered maps as well as the time necessary to transfer the maps to clients once the tiles are online.
 
 Formats with support for transparency are:
 
@@ -142,7 +143,7 @@ Non-transparent formats are:
 Tile transparency or a background color
 ----------
 
-No matter what input datasets you specify, after transforming them into the tiling profile projection, MapTiler will handle them as RGBA images. The transparency can come from the image itself as an alpha channel (with support for partly transparent areas), it can be derived from a selected color (so-called NODATA color), or can be just a result of the transformation with the GDAL warping algorithm - for areas without available input data.
+No matter what input datasets you specify, after transforming them into the tiling profile projection, MapTiler Engine will handle them as RGBA images. The transparency can come from the image itself as an alpha channel (with support for partly transparent areas), it can be derived from a selected color (so-called NODATA color), or can be just a result of the transformation with the GDAL warping algorithm - for areas without available input data.
 
 If the tile is completely transparent it is never saved to the disk to save the storage space.
 
@@ -175,7 +176,7 @@ Tile store format
 
  Setting the sparse option in GUI is described in this `how-to section`_.
 
- .. _how-to section: http://www.maptiler.com/how-to/advanced-image-settings/
+ .. _how-to section: https://www.maptiler.com/how-to/advanced-image-settings/
 
 `-sparse`
  Skip the empty space between separate maps and don't create empty tiles. This option can improve the speed of rendering if there are huge areas between maps. This is the default option for `-store dir`.
@@ -187,7 +188,7 @@ Tile store format
 Hybrid tile format
 ----------
 
-MapTiler allows rendering into a hybrid tile format which allows transparent tiles using transparent format (such as PNG) and tiles without any transparency at all are saved in a different format (such as JPEG). For aerial photos overlays or other datasets, this can mean a significant saving of the storage. Generated files are without extensions. This is done to simplify the generated OpenLayers viewer.
+MapTiler Engine allows rendering into a hybrid tile format which allows transparent tiles using transparent format (such as PNG) and tiles without any transparency at all are saved in a different format (such as JPEG). For aerial photos overlays or other datasets, this can mean a significant saving of the storage. Generated files are without extensions. This is done to simplify the generated OpenLayers viewer.
 
 Example of usage: ::
 
@@ -230,7 +231,7 @@ Watermark
 A nice watermark file can be easily generated online by calling the Google Chart API:
 `http://chart.apis.google.com/chart?chst=d_text_outline&chld=FFFFFF|11|h|000000|b|%C2%A9%20ABC <http://chart.apis.google.com/chart?chst=d_text_outline&chld=FFFFFF|11|h|000000|b|%C2%A9%20ABC>`_
 
-By replacing ABC at the end of this URL a custom text phrase can be specified. We recommend setting the transparency of such watermark file by using a Photoshop or similar tool before applying it with MapTiler.
+By replacing ABC at the end of this URL a custom text phrase can be specified. We recommend setting the transparency of such watermark file by using a Photoshop or similar tool before applying it with MapTiler Engine.
 
 Example of usage of the watermark: ::
 
@@ -242,19 +243,19 @@ The input files and related options
 Supported input file formats
 --------
 
-MapTiler is able to open and process a large number of raster geodata formats, including: GeoTIFF, Erdas Imagine, ECW, MrSID, JPEG2000, SDTS, DTED, NITF, HDF4/5, BSB/KAP, OziExplorer, etc.
+MapTiler Engine is able to open and process a large number of raster geodata formats, including: GeoTIFF, Erdas Imagine, ECW, MrSID, JPEG2000, SDTS, DTED, NITF, HDF4/5, BSB/KAP, OziExplorer, etc.
 
-The complete list of supported formats is available online at http://www.gdal.org/formats_list.html
+The complete list of supported formats is available online at https://www.gdal.org/formats_list.html
 
 Spatial reference system
 ---------
 
 Practically any modern existing georeferencing coordinate system (SRS - spatial reference system, e.g. geodetic datum + map projection with parameters) is supported, which means the software can process almost any geodata you may have available from all over the world.
 
-In case the input files contain already the definition of a used coordinate system (SRS) then MapTiler is able to load it and directly use this information for the transformation of the maps. In case this information is missing in the supplied file or it is incorrect (the maptiler place the maps on a wrong location, you can still assign the information about the spatial reference system with an option:
+In case the input files contain already the definition of a used coordinate system (SRS) then MapTiler Engine is able to load it and directly use this information for the transformation of the maps. In case this information is missing in the supplied file or it is incorrect (the maptiler place the maps on a wrong location, you can still assign the information about the spatial reference system with an option:
 
 `-srs [definition]`
- Dataset projection. Can be WKT, EPSG code in the form of 'epsg:XXXX', PROJ.4 string. Beware of escaping. To search for identifiers or definitions use http://www.spatialreference.org/ or http://epsg.io/.
+ Dataset projection. Can be WKT, EPSG code in the form of 'epsg:XXXX', PROJ.4 string. Beware of escaping. To search for identifiers or definitions use http://www.spatialreference.org/ or https://epsg.io/.
 
 
 Example of assigning the United Kingdom spatial reference OSGB to a GeoTIFF file before rendering: ::
@@ -276,10 +277,10 @@ Georeference / calibration
 
 Georeferencing can also be done visually using GUI_ or `online tool`_.
 
-.. _GUI: http://www.maptiler.com/how-to/georeferencing/
+.. _GUI: https://www.maptiler.com/how-to/georeferencing/
 .. _online tool: https://www.georeferencer.com/
 
-For proper rendering of the maps the location of supplied input files in the known coordinate system (SRS) must be available. MapTiler is loading the geolocation automatically from the internal headers of the input files (such as GeoTIFF) or from external supportive files (such as ESRI WorldFile) if they are available.
+For proper rendering of the maps the location of supplied input files in the known coordinate system (SRS) must be available. MapTiler Engine is loading the geolocation automatically from the internal headers of the input files (such as GeoTIFF) or from external supportive files (such as ESRI WorldFile) if they are available.
 
 To enforce a custom selected georeference information or loading from external files these options are available:
 
@@ -317,7 +318,7 @@ Cutline (Crop)
 --------
 There are two command line options for cutline: -cutline and -cutline_proj. They specify the cutline (a clipping path) for an input image in pixels or in projected coordinates. They both expect a file name. The file can be either CSV or an OGR dataset (such as ESRI ShapeFile .shp).
 
-From an OGR file, MapTiler will load all polygons and multi-polygons from all features of the first layer.
+From an OGR file, MapTiler Engine will load all polygons and multi-polygons from all features of the first layer.
 
 The CSV format with pixel coordinates of nodes of a triangle, more lines will create polygon:
 
@@ -339,12 +340,12 @@ Embedded cutline can be ignored using option -cutline IGNORE ::
 
  maptiler -o outputdir input_with_cutline.tif -cutline IGNORE
 
-A pixel-based cutline (`-cutline`) is specific for each input file - so the parameter should be used after a filename (see section MapTiler Command Structure).
+A pixel-based cutline (`-cutline`) is specific for each input file - so the parameter should be used after a filename (see section MapTiler Engine Command Structure).
 A cutline with geocoordinates (`-cutline_proj`) can be used for multiple files if it is specified before the first input file.
 
 Color correction
 -------
-MapTiler allows you to specify several parameters in order to improve the colors of the output map. The MapTiler GUI is able to estimate these values interactively, but you can also use the following options to specify them manually:
+MapTiler Engine allows you to specify several parameters in order to improve the colors of the output map. The MapTiler Desktop Pro (GUI) is able to estimate these values interactively, but you can also use the following options to specify them manually:
 
 `-color_gamma r g b`
 Specify gamma correction of the individual channels, higher values result in brighter pixels (1 = unchanged).
@@ -360,7 +361,7 @@ Modify saturation of the map (1 = unchanged, 0 = grayscale, >1 = colorful)
 Multiple files into multiple MBTiles or Folders
 -------
 
-MapTiler is designed to produce a single merged layer from multiple input files. If you need to process multiple files and for each produce separate tileset then a batch processing is recommended.
+MapTiler Engine is designed to produce a single merged layer from multiple input files. If you need to process multiple files and for each produce separate tileset then a batch processing is recommended.
 
 Example:
 
@@ -382,15 +383,15 @@ Advanced options
 Options in the optfile
 -------
 
-In case you have a large number of arguments to pass to maptiler, such as many input files (total amount is unlimited for maptiler), you can prepare a text file with all the arguments and call it with -- optfile myarguments.txt. List of files can be easily created with ls or dir commands.
+In case you have a large number of arguments to pass to MapTiler Engine, such as many input files (total amount is unlimited for MapTiler Engine or MapTiler Desktop Pro), you can prepare a text file with all the arguments and call it with -- optfile myarguments.txt. List of files can be easily created with ls or dir commands.
 
-Any arguments normally passed on the command line could be part of the --optfile text file. Maptiler can combine arguments on the command line with arguments in the text file, such as: ::
+Any arguments normally passed on the command line could be part of the --optfile text file. Maptiler Engine can combine arguments on the command line with arguments in the text file, such as: ::
 
  ￼maptiler -o output_directory --optfile myarguments.txt
 
 Temporary directory location
 -------
-During rendering, MapTiler also writes a substantial amount of data to a temporary directory. Not as much as will be in the output directory, but still. Please make sure there is enough space in the filesystem for it.
+During rendering, MapTiler Engine also writes a substantial amount of data to a temporary directory. Not as much as will be in the output directory, but still. Please make sure there is enough space in the filesystem for it.
 
 By default, the temporary directory will be created in the system default temporary location (`/tmp/` on Unix-like systems, or path from the environment variable%TEMP% on Windows-like systems). You can override this with the option:
 
@@ -423,7 +424,7 @@ The visual quality of the output tiles is also defined by the resampling method.
 `-resampling mode`
  Mode resampling, selects the value which appears most often of all the sampled points. (GDAL >= 1.10.0)
 
-Resampling overviews produced by MapTiler are using the average method, by default. Another possible method is Nearest neighbor.
+Resampling overviews produced by MapTiler Engine are using the average method, by default. Another possible method is Nearest neighbor.
 
 `-overviews_resampling near`
  Nearest neighbor overviews resampling. Mostly used for elevation maps or similar.
@@ -431,9 +432,10 @@ Resampling overviews produced by MapTiler are using the average method, by defau
 `-overviews_resampling average`
  Average overviews resampling, computes the averate of all non-NODATA contributing pixels.
 
+
 Defining a custom tiling profile for a specified coordinate system
 --------
-MapTiler allows defining a custom system of tiles which should be rendered. Such tiling scheme, or in the terminology of OGC WMTS service the TileMatrixSet is for the maptiler defined with parameters which must follow the tile profile option: -custom.
+MapTiler Engine allows defining a custom system of tiles which should be rendered. Such tiling scheme, or in the terminology of OGC WMTS service the TileMatrixSet is for the MapTiler Engine defined with parameters which must follow the tile profile option: -custom.
 
 `-tiling_srs [definition]`
  The spatial reference system, e.g. the coordinate system in which the tiles are created. Follows the definitions known from -srs.
@@ -442,7 +444,7 @@ MapTiler allows defining a custom system of tiles which should be rendered. Such
  The area which should be split into tiles defined in the tiling_srs coordinates.
 
 `-tiling_resolution [zoomlevel] [resolution]`
- Resolution in units of the tiling spatial reference system per pixel on the given zoom level. MapTiler will automatically compute values for all other zoom levels, each having half the resolution of the previous one.
+ Resolution in units of the tiling spatial reference system per pixel on the given zoom level. MapTiler Engine will automatically compute values for all other zoom levels, each having half the resolution of the previous one.
 
 `-tiling_resolution from_output`
  Resolution is calculated so as to fit whole input mapset into one tile on zoom level 0 with respect to bbox, srs, and tile size.
@@ -458,19 +460,19 @@ MapTiler allows defining a custom system of tiles which should be rendered. Such
 
 Tiling scheme - naming of tiles
 ----------
-MapTiler uses Google XYZ naming of tiles, by default. It supports also the TMS naming (with flipped Y axis) and QuadKey naming (known by Microsoft Bing Maps). These tiling schemes are supported only for tile store in the directory (`-store dir`).
+MapTiler Engine uses Google XYZ naming of tiles, by default. It supports also the TMS naming (with flipped Y axis) and QuadKey naming (known by Microsoft Bing Maps). These tiling schemes are supported only for tile store in the directory (`-store dir`).
 
 `-tms`
  OSGEO TMS (bottom-left origin), flipped Y axis as oppose to Google XYZ. This tiling scheme is defined as a standard for MBTiles.
 
 `-quadkey`
- Microsoft Bing QuadKey (top-left origin). MapTiler generates files named as quadkey separated into directories named as zoom level (`output_directory/z/quadkey.ext`). Details at https://msdn.microsoft.com/en-us/library/bb259689.aspx
+ Microsoft Bing QuadKey (top-left origin). MapTiler Engine generates files named as quadkey separated into directories named as zoom level (`output_directory/z/quadkey.ext`). Details at https://msdn.microsoft.com/en-us/library/bb259689.aspx
 
 
 Interrupt and resume long-time rendering
 ----------
 
-The long-time rendering job can be interrupted by the end-user or a system failure (power-failure, no free space on the disk). MapTiler Pro supports only simple resume mode - render process can be continued on the same computer with the same options.
+The long-time rendering job can be interrupted by the end-user or a system failure (power-failure, no free space on the disk). MapTiler Engine supports only simple resume mode - render process can be continued on the same computer with the same options.
 
 `-keep_unfinished`
  To prevent deleting the existing output tiles and temporary files created by the application.
@@ -484,7 +486,7 @@ Advanced warping arguments
 The advanced warping algorithms parameters can be specified with the option:
 
 `-wo “NAME=VALUE”`
- The warp options. See the papszWarpOptions field at http://gdal.org/structGDALWarpOptions.html.
+ The warp options. See the papszWarpOptions field at https://gdal.org/structGDALWarpOptions.html.
 
 Example: ::
 
@@ -494,7 +496,7 @@ Example: ::
 Watch progress in a frontend
 --------
 
-MapTiler can produce progress easily parsed in a frontend application. Simply use the first argument `-progress` and application output the progress on the standard output in the TSV (tabulator separated values) format: Stage TAB Percentage TAB Iteration TAB Total
+MapTiler Engine can produce progress easily parsed in a frontend application. Simply use the first argument `-progress` and application output the progress on the standard output in the TSV (tabulator separated values) format: Stage TAB Percentage TAB Iteration TAB Total
 
 Example: ::
 
@@ -519,23 +521,23 @@ Example: ::
 Usage on a computer cluster
 --------
 
-MapTiler can run on an MPI cluster if a cluster-specific binary has been requested. If you have the MPI version, a shell wrapper to run it on a cluster is delivered as well.
+MapTiler Engine can run on an MPI cluster if a cluster-specific binary has been requested. If you have the MPI version, a shell wrapper to run it on a cluster is delivered as well.
 
-A version of MapTiler utilizing Map Reduce approach and Hadoop is under development, this will replace the older MPI.
+A version of MapTiler Engine utilizing Map Reduce approach and Hadoop is under development, this will replace the older MPI.
 
 More details are available on `MapTiler Cluster page`_.
 
-.. _MapTiler Cluster page: http://www.maptiler.com/cluster/
+.. _MapTiler Cluster page: https://www.maptiler.com/cluster/
 
 
 Merge MBTiles utility
 --------
 
-This feature is available in Desktop PRO and Engine versions only, not in Desktop PRO Demo. Merging MBTiles in GUI is described in `how-to section`_.
+This feature is available in MapTiler Desktop PRO and MapTiler Engine editions with an activated license only, not in MapTiler Desktop PRO Demo. Merging MBTiles in GUI is described in `how-to section`_.
 
-.. _how-to section: http://www.maptiler.com/how-to/merge-mbtiles/
+.. _how-to section: https://www.maptiler.com/how-to/merge-mbtiles/
 
-The utility allows to update a previously rendered dataset and replace a small existing area with a different newly rendered raster data. The typical use-case is fixing of a small geographic area in a large seamed dataset previously rendered by MapTiler from many input files.
+The utility allows to update a previously rendered dataset and replace a small existing area with a different newly rendered raster data. The typical use-case is fixing of a small geographic area in a large seamed dataset previously rendered by MapTiler Engine from many input files.
 
 The utility also extend the bounding box of the tiles - it is usable for merging two just partly overlapping maps into one bigger map covering larger extent.
 
@@ -545,7 +547,7 @@ Usage: ::
 
 Typical usage:
 
-1) render a large dataset with MapTiler Pro - from several input files and produce large MBTiles (with JPEG or PNG tiles internally): `large.mbtiles`
+1) render a large dataset with MapTiler Engine - from several input files and produce large MBTiles (with JPEG or PNG tiles internally): `large.mbtiles`
 
 2) if you want to update one of the previously rendered input files in the existing dataset render just this file into MBTiles - with the PNG32 format and zoom-levels on which you want it to appear in the large dataset. Save the new small MBTiles with just one file to `patch.mbtiles`
 
@@ -570,7 +572,7 @@ Further options:
  =======
  Sending a bug report from GUI is described in the `how-to section`_.
 
- .. _how-to section: http://www.maptiler.com/how-to/submit-report/
+ .. _how-to section: https://www.maptiler.com/how-to/submit-report/
 
  `-report`
  The argument -report generates the text report, which should be sent via the web form.

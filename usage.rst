@@ -568,18 +568,80 @@ Further options:
 `-reencode`
  This option is useful when the 2 merged maps have a different format (e.g. jpeg and png). By default, the result is a hybrid format (combination of both of them). If reencode option is used, the chosen file is encoded to the actual format (which can slow down the process).
 
- Bug report
- =======
- Sending a bug report from GUI is described in the `how-to section`_.
 
- .. _how-to section: https://www.maptiler.com/how-to/submit-report/
+Bug report
+=======
+Sending a bug report from GUI is described in the `how-to section`_.
 
- `-report`
- The argument -report generates the text report, which should be sent via the web form.
+.. _how-to section: https://www.maptiler.com/how-to/submit-report/
 
- Attaching this file if you are reporting a bug is very important becuase this information helps us to identify the problem and quickly come up with a solution
+`-report`
+
+The argument -report generates the text report, which should be sent via the web form.
+
+Attaching this file if you are reporting a bug is very important becuase this information helps us to identify the problem and quickly come up with a solution
 
 
+Vector inputs
+========
+
+MapTiler Engine v10.0 and higher version supports rendering of Vector inputs into MVT_ (Mapbox Vector tile) format. Vector rendering support requires an underlying GDAL library version 2.3.0 or higher,
+which is limited on the native Linux distribution. Using a `docker image`_ with MapTiler Engine
+is recommended way for vector rendering on Linux OS. `MapTiler Desktop`_ offers GUI for Vector layers with a `practical sample`_ how-to article.
+
+.. _MVT: https://github.com/mapbox/vector-tile-spec
+.. _docker image: https://www.maptiler.com/engine/#docker
+.. _MapTiler Desktop: https://www.maptiler.com/desktop/
+.. _practical sample: https://www.maptiler.com/how-to/
+
+
+Vector input consist of one or more layers, which are rendered into the specific target layer
+in MVT format. Each feature of the source layer contains *key=value* attributes, that could be
+processed or renamed into the final attributes of the target layer.
+The following arguments are supported for the Vector input: *-srs*, *-zoom*, and *-bbox*, as they are described above. Other arguments are not respected for Vector rendering yet.
+
+`-layer src_name`
+  Select the **source layer** for the further processing of the vector input by the name.
+  This argument is required for the arguments below.
+
+`-target name`
+  Select (or create a new) **target layer** in the final tiles of MVT format.
+  This is the name of the layer, which could be styled.
+  This argument may be repeated more times to process features into a separate target layer
+  with a different list of fields.
+
+`-field output_name src_name`
+  Set the attribute field with the name **src_name** from the **source_layer** to be presented
+  in the final **target layer** as a attribute key **output_name**.
+  The attribute value for each features from **source layer** is copied.
+  This argument may be repeated more times to copy more attributes.
+
+
+Let assume, we have one Vector input with two **source layers**: *lines* and *polygons*.
+The source layer *lines* consists of the streets with these
+attributes keys *Name*, *Identifier* and *Main*.
+The source layer *polygons* contains geometry of some buildings with
+attributes keys *Ident*, *Num* and *Name*.
+We do want to create two **target layers** with renamed attributes.
+
+Example ::
+
+  maptiler -o mymap.mbtiles \
+  input.shp \
+  -layer lines \
+    -target streets \
+    -field id Identifier \
+    -field name Name \
+    -field is_main Main \
+  -layer polygons \
+    -target buildings \
+    -field id Ident \
+    -field name Name \
+    -field number Num
+
+The example above creates two new output layers:
+**streets** with attributes keys *id*, *name*, and *is_main*;
+and **buildings** layer with attributes keys *id*, *name*, and *number*.
 
 
 

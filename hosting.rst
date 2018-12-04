@@ -17,31 +17,39 @@ For hosting of MBTiles, you can use an open-source TileServer_, that can be used
 Cloud hosting
 =========
 
-The CloudPush command can be used for upload to Amazon S3 or Google Cloud Storage hosting. Examples are shown on the S3. If you need to use Google Cloud Storage, just change the “s3” to “google” or “gs”. Full how-to with visual examples is available as a `how-to article`_.
+The CloudPush command can be used for upload to Amazon S3, Google Cloud Storage or Microsoft Azure Blob hosting. Examples are shown on the S3. If you need to use Google Cloud Storage or Microsoft Azure Blob, just change the “s3” to “gs” or “az”, respectively. Full how-to with visual examples is available as a `how-to article`_.
 
 .. _how-to article: https://www.maptiler.com/how-to/hosting-on-amazon-s3/
 
-Amazon access and the secure key are available via IAM service administration interface.
-
-The credentials for the Google Cloud Storage are under "Enable interoperable access” in the menu of the service.
-
-Cloud Push instance is initialized with the first uploaded map via this command line utility. It automatically creates an empty `index.json`, TileServer in `index.html` and sets WebSite configuration for this bucket.
+Cloud Push instance is initialized with the first uploaded map via this command line utility. It automatically creates an empty `index.json`, TileServer in `index.html` and sets WebSite configuration for this bucket. To get the required credentials, see the section Access credentials below.
 
 Upload tiles from an MBTiles file to S3 ::
 
- cloudpush --acces_key ACCESS_KEY --secret_key SECRET_KEY s3://bucket_name add filename.mbtiles
+ cloudpush --access_key ACCESS_KEY --secret_key SECRET_KEY s3://bucket_name add filename.mbtiles
 
 List all maps in the cloudpush tile storage ::
 
- cloudpush --acces_key ACCESS_KEY --secret_key SECRET_KEY s3://bucket_name list
+ cloudpush --access_key ACCESS_KEY --secret_key SECRET_KEY s3://bucket_name list
 
 Delete a map ::
 
- cloudpush --acces_key ACCESS_KEY --secret_key SECRET_KEY s3://bucket_name delete filename
+ cloudpush --access_key ACCESS_KEY --secret_key SECRET_KEY s3://bucket_name delete filename
 
 Delete whole cloudpush storage ::
 
- cloudpush --acces_key ACCESS_KEY --secret_key SECRET_KEY s3://bucket_name destroy
+ cloudpush --access_key ACCESS_KEY --secret_key SECRET_KEY s3://bucket_name destroy
+
+
+Access credentials
+---------
+
+The Amazon access and the secure key are available via `IAM service administration`_ interface.
+The credentials for the Google Cloud Storage are under "`Enable interoperable access`_" in the menu of the service. The Azure Blob Storage requires the **Storage account name** as Access Key and the **Key** from the Microsoft `Azure Portal`_ - Storage Accounts - Access keys.
+
+.. _IAM service administration: https://portal.aws.amazon.com/gp/aws/developer/account/index.html?action=access-key
+.. _Enable interoperable access: https://storage.cloud.google.com/m
+.. _Azure Portal: https://portal.azure.com/
+
 
 Instead of providing the access credentials in every command these can be set as system environment variables.
 
@@ -53,6 +61,9 @@ Example on Windows OS: ::
  REM or for Google Cloud Storage
  set GOOG_ACCESS_KEY_ID=[THE_ACCESS_KEY]
  set GOOG_SECRET_ACCESS_KEY=[THE_SECRET_KEY]
+ REM or for Microsoft Azure Storage
+ set AZURE_STORAGE_ACCOUNT=[ACCOUNT NAME]
+ set AZURE_STORAGE_ACCESS_KEY=[KEY]
 
 Example on Linux / macOS: ::
 
@@ -62,11 +73,20 @@ Example on Linux / macOS: ::
  # or for Google Cloud Storage
  export GOOG_ACCESS_KEY_ID=[THE_ACCESS_KEY]
  export GOOG_SECRET_ACCESS_KEY=[THE_SECRET_KEY]
+ # or for Microsoft Azure Storage
+ export AZURE_STORAGE_ACCOUNT=[ACCOUNT NAME]
+ export AZURE_STORAGE_ACCESS_KEY=[KEY]
 
 and call the utility without these arguments: ::
 
  cloudpush s3://bucket_name list
  cloudpush s3://bucket_name add filename.mbtiles
+ cloudpush gs://bucket_name list
+ cloudpush az://bucket_name list
+
+
+Advanced options
+---------
 
 It is possible to use further options such as:
 
@@ -75,6 +95,7 @@ It is possible to use further options such as:
   --raw                   same as --no-index-json
   --basename <path>       sets custom basename (default: basename of MBTiles file)
   --private               uploaded objects are private (default: public)
+  --emulator              Enable Azure Storage Emulator API
 
 List of available parameters can be displayed by running ./cloudpush without any parameter
 
@@ -95,4 +116,16 @@ Example for EU (Ireland) region: ::
 
  cloudpush -R eu-west-1 s3://bucket_name add filename.mbtiles
 
-List of S3 regions is provided by the utility with `--more-help` argument or visible at https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region
+The list of S3 regions is provided by the utility with `--more-help` argument or visible at https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region
+
+
+To enable uploading tiles into `Azure Storage Emulator`_, you need to pass the parameter `--emulator` for each command: ::
+
+.. _Azure Storage Emulator: https://docs.microsoft.com/en-us/azure/storage/common/storage-use-emulator
+
+ cloudpush --emulator az://bucket_name add filename.mbtiles
+
+The Azure Storage uses the API of `the version 2015-02-21`_.
+
+.. _the version 2015-02-21: https://docs.microsoft.com/en-us/rest/api/storageservices/version-2015-02-21
+

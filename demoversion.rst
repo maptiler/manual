@@ -59,39 +59,18 @@ Example on Linux / macOS ::
  export MAPTILER_LICENSE=YOUR-OWN-LICENSE-KEY
  maptiler ...
 
-**Notice:** This activation process via environment variable requires **not-activated MapTiler Pro** instance on that computer! Starting MapTiler application without setting this environment variable `MAPTILER_LICENSE`, you should see either **MapTiler Pro Demo**, or **Your trial period has expired** error message.
+**Notice:** This activation process via environment variable requires **not-activated MapTiler Desktop Pro** (or **not-activated MapTiler Engine**) instance on that computer! Starting MapTiler Desktop application without setting this environment variable `MAPTILER_LICENSE`, you should see either **MapTiler Desktop Pro Demo**, or **Your trial period has expired** error message.
 
 
-Software deactivation
---------
+Software deactivation online
+========
 
-You can deactivate MapTiler Pro via command line, in order to transfer the application to another computer.
-Note that after the deactivation, MapTiler Pro will continue to run in DEMO mode, but the trial period of 30 days will **NOT** start again.
+You can deactivate MapTiler Engine via command line, in order to transfer the application to another computer.
+Note that after the deactivation, MapTiler Engine will continue to run in DEMO mode, but the trial period of 30 days will **NOT** start again.
 
 To do the online deactivation, use the following command:
 
 `-deactivate`
-
-
-License information
---------
-
-To check your license information, use the following command:
-
-`-license`
-
-Example ::
-
-  maptiler -license
-  Email: <your email>
-  License: <your license key>
-  Purchased CPU cores: 4
-  Maximum usable cores: 4
-
-
-  maptiler -license
-  Remaining 0 days on the trial.
-  Maximum usable cores: 4
 
 
 Software activation offline
@@ -111,3 +90,38 @@ If at any time you will want to deactivate MapTiler, eg. to move it to another m
  ￼maptiler -deactivate_request request.xml
 
 The offline activation is not available on virtual machines. For more information see Software activation in a virtual machine above.
+
+
+
+License information
+========
+
+To check your license information, use the following command:
+
+`-license`
+
+Example ::
+
+  maptiler -license
+  Email: <your email>
+  License: <your license key>
+  Purchased CPU cores: 4
+  Maximum usable cores: 4
+
+
+  maptiler -license
+  Remaining 0 days on the trial.
+  Maximum usable cores: 4
+
+
+This argument may print additional texts, depending on your License, for example
+
+  Time limited license!
+  X days remaining.
+
+  X days remaining in your maintenance period.
+
+  Your maintenance period has expired. You can't upgrade to newer versions - please contact support@maptiler.com.
+
+
+

@@ -120,7 +120,10 @@ The list of S3 regions is provided by the utility with `--more-help` argument or
 
 
 To enable uploading tiles into `Azure Storage Emulator`_, you need to pass the parameter `--emulator` for each command:
+
 .. _Azure Storage Emulator: https://docs.microsoft.com/en-us/azure/storage/common/storage-use-emulator
+
+Example for emulator, does not require credentials::
 
  cloudpush --emulator az://bucket_name add filename.mbtiles
 

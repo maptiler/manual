@@ -119,11 +119,11 @@ Example for EU (Ireland) region: ::
 The list of S3 regions is provided by the utility with `--more-help` argument or visible at https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region
 
 
-To enable uploading tiles into `Azure Storage Emulator`_, you need to pass the parameter `--emulator` for each command: ::
-
+To enable uploading tiles into `Azure Storage Emulator`_, you need to pass the parameter `--emulator` for each command:
 .. _Azure Storage Emulator: https://docs.microsoft.com/en-us/azure/storage/common/storage-use-emulator
 
  cloudpush --emulator az://bucket_name add filename.mbtiles
+
 
 The Azure Storage uses the API of `the version 2015-02-21`_.
 

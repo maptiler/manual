@@ -44,7 +44,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'MapTiler Manual'
-copyright = u'2017, Klokan Technologies GmbH'
+copyright = u'2017 - 2020, MapTiler Team, Klokan Technologies GmbH'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -261,10 +261,10 @@ texinfo_documents = [
 # -- Options for Epub output ----------------------------------------------
 
 # Bibliographic Dublin Core info.
-epub_title = u'MapTiler Manual'
+epub_title = u'MapTiler Engine Manual'
 epub_author = u'Klokan Technologies GmbH'
 epub_publisher = u'Klokan Technologies GmbH'
-epub_copyright = u'2015, Klokan Technologies GmbH'
+epub_copyright = u'2020, Klokan Technologies GmbH'
 
 # The basename for the epub file. It defaults to the project name.
 #epub_basename = u'MapTiler Manual'

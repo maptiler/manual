@@ -73,26 +73,6 @@ To do the online deactivation, use the following command:
 `-deactivate`
 
 
-Software activation offline
-========
-For computers which are not directly connected to the Internet or which are in security restricted installations, we have support for offline activation as well.
-
-To use the offline activation with the key we supply you after purchase you need to call: ::
-
- ￼maptiler -activate_request YOUR-OWN-LICENSE-KEY request.xml
-
-This will generate a "request.xml" file, which you must send to us by email, and we will provide you with a "response.xml" file back. This can be used to activate the MapTiler by running: ::
-
- ￼maptiler -activate_response response.xml
-
-If at any time you will want to deactivate MapTiler, eg. to move it to another machine, run the following command and you have to send us again the newly generated "request.xml" file. ::
-
- ￼maptiler -deactivate_request request.xml
-
-The offline activation is not available on virtual machines. For more information see Software activation in a virtual machine above.
-
-
-
 License information
 ========
 
@@ -122,6 +102,3 @@ This argument may print additional texts, depending on your License, for example
   X days remaining in your maintenance period.
 
   Your maintenance period has expired. You can't upgrade to newer versions - please contact support@maptiler.com.
-
-
-

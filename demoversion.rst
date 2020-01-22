@@ -37,7 +37,7 @@ To do the online activation, use the following command:
 
 Example: ::
 
- ￼maptiler -activate YOUR-OWN-LICENSE-KEY
+  maptiler -activate YOUR-OWN-LICENSE-KEY
 
 **In case you require to reinstall the computer, use** -deactivate **command to be able to re-activate the license later on.**
 
@@ -72,6 +72,10 @@ To do the online deactivation, use the following command:
 
 `-deactivate`
 
+Example: ::
+
+  maptiler -deactivate
+
 
 License information
 ========
@@ -82,7 +86,7 @@ To check your license information, use the following command:
 
 Example ::
 
-  maptiler -license
+  > maptiler -license
   Email: <your email>
   License: <your license key>
   Purchased CPU cores: 4

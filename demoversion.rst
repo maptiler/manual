@@ -98,7 +98,7 @@ Example ::
   Maximum usable cores: 4
 
 
-This argument may print additional texts, depending on your License, for example
+This argument may print additional texts, depending on your License, for example: ::
 
   Time limited license!
   X days remaining.

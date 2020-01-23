@@ -226,7 +226,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'maptilermanual', u'MapTiler Manual Documentation',
+    ('index', 'maptilermanual', u'MapTiler Engine Manual Documentation',
      [u'Klokan Technologies GmbH'], 1)
 ]
 
@@ -240,9 +240,14 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  ('index', 'MapTilerManual', u'MapTiler Manual Documentation',
-   u'Klokan Technologies GmbH', 'MapTilerManual', 'One line description of project.',
-   'Miscellaneous'),
+  (
+    'index',
+    'MapTilerManual',
+    u'MapTiler Engine Manual Documentation',
+    u'Klokan Technologies GmbH',
+    'MapTilerManual',
+    'Command line for automated processing of map data',
+    'Miscellaneous'),
 ]
 
 # Documents to append as an appendix to all manuals.

@@ -138,8 +138,14 @@ Example::
   maptiler -swiss_ch 3 -o ch-z3 map-zurich.tif -zoom 3 3
   maptiler -swiss_ch 4 -o ch-z4 map-zurich.tif -zoom 4 4
 
+Note that, `-zoom 3 3` is not required and it is automatically limited as defined for this zoom group.
+
 `-new_zealand zoom_group`
  New Zealand Geodetic Datum (NZGD2000), official geodetic datum for New Zealand and its offshore islands. This custom preset requires a specific zoom group, which limits output zoom levels of this grid. Supported values with zoom levels in the bracket are: `0` (z0-z7), `1` (z8-z10), `2` (z11-z13), `3` (z14-z16).
+
+Example::
+
+  maptiler -new_zealand 1 -o nz-z8 map-new-zealand.tif
 
 
 Retine / HiDPI tiles
@@ -528,14 +534,19 @@ MapTiler Engine allows defining a custom system of tiles which should be rendere
 
 Tiling scheme - naming of tiles
 ----------
-MapTiler Engine uses Google XYZ naming of tiles, by default. It supports also the TMS naming (with flipped Y axis) and QuadKey naming (known by Microsoft Bing Maps). These tiling schemes are supported only for tile store in the directory (`-store dir`).
+MapTiler Engine uses Google XYZ naming of tiles, by default. It supports also the OSGEO TMS naming (with flipped Y axis), QuadKey naming (known by Microsoft Bing Maps), and ZYX naming (known by Microsoft Bing Maps). These tiling schemes are supported only for tile store in the directory (`-store dir`).
+
+`-xyz` or `-zxy`
+ Google XYZ (top-left origin) naming of tiles. Folder path as `output_directory/{z}/{x}/{y}.{ext}`.
 
 `-tms`
  OSGEO TMS (bottom-left origin), flipped Y axis as oppose to Google XYZ. This tiling scheme is defined as a standard for MBTiles.
 
 `-quadkey`
- Microsoft Bing QuadKey (top-left origin). MapTiler Engine generates files named as quadkey separated into directories named as zoom level (`output_directory/z/quadkey.ext`). Details at https://msdn.microsoft.com/en-us/library/bb259689.aspx
+ Microsoft Bing QuadKey (top-left origin). MapTiler Engine generates files named as quadkey separated into directories named as zoom level (`output_directory/{z}/{quadkey}.{ext}`). Details at https://msdn.microsoft.com/en-us/library/bb259689.aspx
 
+`-zyx`
+ Microsoft Bing ZYX (top-left origin) naming of tiles. Folder path as `output_directory/{z}/{y}/{x}.{ext}`.
 
 Interrupt and resume long-time rendering
 ----------

@@ -674,7 +674,7 @@ Existing tiles available in both `large.mbtiles` and the `patch.mbtiles` are goi
 
 Further options:
 
-`-P n`
+`-P [n]`
  Set limit on the defined number of cores.
 
 `-no_sparse`
@@ -715,17 +715,17 @@ in MVT format. Each feature of the source layer contains *key=value* attributes,
 processed or renamed into the final attributes of the target layer.
 The following arguments are supported for the Vector input: *-srs*, *-zoom*, and *-bbox*, as they are described above. Other arguments are not respected for Vector rendering yet.
 
-`-layer src_name`
+`-layer [src_name]`
   Select the **source layer** for the further processing of the vector input by the name.
   This argument is required for the arguments below.
 
-`-target name`
+`-target [name]`
   Select (or create a new) **target layer** in the final tiles of MVT format.
   This is the name of the layer, which could be styled.
   This argument may be repeated more times to process features into a separate target layer
   with a different list of fields.
 
-`-field output_name src_name`
+`-field [output_name] [src_name]`
   Set the attribute field with the name **src_name** from the **source_layer** to be presented
   in the final **target layer** as a attribute key **output_name**.
   The attribute value for each features from **source layer** is copied.

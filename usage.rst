@@ -57,7 +57,7 @@ Tiling profile / Tile Matrix Set
 A global option defining the output system of tiles - the target coordinate system, tile pixel size, etc. MapTiler Engine comes with these predefined most popular systems and possibility to specify a custom profile.
 
 `-mercator`
- DEFAULT. The spherical Mercator tile profile compatible with Google, Bing, Yahoo Maps, MapQuest, OpenStreetMap, and mobile maps on iOS and Android. This is the most commonly used profile. It uses coordinate system defined as EPSG:3857 or EPSG:900913. Details at: http://www.maptiler.org/google-maps-coordinates-tile-bounds-projection/.
+ DEFAULT. The spherical Mercator tile profile compatible with Google, Bing, Yahoo Maps, MapQuest, OpenStreetMap, and mobile maps on iOS and Android. This is the most commonly used profile. It uses coordinate system defined as EPSG:3857 or EPSG:900913. Details `available here <https://www.maptiler.com/google-maps-coordinates-tile-bounds-projection/>`_.
 
 In case you wish to use different tiling system, you must specify it as the first command on the command line. These are the alternatives:
 
@@ -261,15 +261,13 @@ Tile store format
 
  Note: for more details on this subject read the section Output in the chapter Usage above.
 
- Setting the sparse option in GUI is described in this `tutorial section`_.
-
-.. _tutorial section: https://www.maptiler.com/how-to/advanced-image-settings/
-
 `-sparse`
  Skip the empty space between separate maps and don't create empty tiles. This option can improve the speed of rendering if there are huge areas between maps. This is the default option for `-store dir`.
 
 `-no_sparse`
  Fills the empty space between separate maps (if there is some) with empty tiles in the background colour. This option can take longer to render and take more disk space, if there are huge areas between maps, as these have to be created. This is a default option for `-store mbtiles` and `-store geopackage`.
+
+Setting the sparse option in GUI is in `Advanced options dialog <https://www.maptiler.com/how-to/advanced-image-settings/>`_.
 
 
 Hybrid tile format
@@ -335,7 +333,7 @@ Supported input file formats
 
 MapTiler Engine is able to open and process a large number of raster geodata formats, including: GeoTIFF, Erdas Imagine, ECW, MrSID, JPEG2000, SDTS, DTED, NITF, HDF4/5, BSB/KAP, OziExplorer, etc.
 
-The complete list of supported formats is available online at https://support.maptiler.com/i279-supported-formats
+The complete list of `supported formats is available online here <https://support.maptiler.com/i279-supported-formats>`_.
 
 
 Spatial reference system
@@ -346,7 +344,7 @@ Practically any modern existing georeferencing coordinate system (SRS - spatial 
 In case the input files contain already the definition of a used coordinate system (SRS) then MapTiler Engine is able to load it and directly use this information for the transformation of the maps. In case this information is missing in the supplied file or it is incorrect (the maptiler place the maps on a wrong location, you can still assign the information about the spatial reference system with an option:
 
 `-srs [definition]`
- Dataset projection. Can be WKT, EPSG code in the form of 'epsg:XXXX', PROJ.4 string. Beware of escaping. To search for identifiers or definitions use http://www.spatialreference.org/ or https://epsg.io/.
+ Dataset projection. Can be WKT, EPSG code in the form of 'epsg:XXXX', PROJ.4 string. Beware of escaping. To search for identifiers or definitions use `spatialreference.org <https://spatialreference.org/>`_ or `EPSG.io <https://epsg.io/>`_.
 
 
 Example of assigning the United Kingdom spatial reference OSGB to a GeoTIFF file before rendering: ::
@@ -491,9 +489,7 @@ In case you have a large number of arguments to pass to MapTiler Engine, such as
 
   maptiler -o output_directory --optfile myarguments.mtp
 
-Note that `.mtp` extension stands for MapTiler Project, which can be used in MapTiler Desktop Pro (GUI version of MapTiler engine), as described in `tutorial section`_.
-
-.. _tutorial section: https://www.maptiler.com/how-to/save-and-load-project/
+The `.mtp` extension is acronym for **MapTiler Project**, which can be used in MapTiler Desktop Pro GUI, `see our tutorial page <https://www.maptiler.com/how-to/save-and-load-project/>`_.
 
 
 Temporary directory location
@@ -578,7 +574,7 @@ MapTiler Engine uses Google XYZ naming of tiles, by default. It supports also th
  OSGEO TMS (bottom-left origin), flipped Y axis as oppose to Google XYZ. This tiling scheme is defined as a standard for MBTiles.
 
 `-quadkey`
- Microsoft Bing QuadKey (top-left origin). MapTiler Engine generates files named as quadkey separated into directories named as zoom level (`output_directory/{z}/{quadkey}.{ext}`). Details at https://msdn.microsoft.com/en-us/library/bb259689.aspx
+ Microsoft Bing QuadKey (top-left origin). MapTiler Engine generates files named as quadkey separated into directories named as zoom level (`output_directory/{z}/{quadkey}.{ext}`). Details at `this microsoft website <https://msdn.microsoft.com/en-us/library/bb259689.aspx>`_.
 
 `-zyx`
  Microsoft Bing ZYX (top-left origin) naming of tiles. Folder path as `output_directory/{z}/{y}/{x}.{ext}`.
@@ -601,7 +597,7 @@ Advanced warping arguments
 The advanced warping algorithms parameters can be specified with the option:
 
 `-wo “NAME=VALUE”`
- The warp options. See the papszWarpOptions field at https://gdal.org/structGDALWarpOptions.html.
+ The warp options. See the `papszWarpOptions field at GDAL <https://gdal.org/api/gdalwarp_cpp.html#_CPPv415GDALWarpOptions>`_.
 
 Example: ::
 
@@ -648,9 +644,7 @@ More details are available on `MapTiler Cluster page`_.
 Merge MBTiles utility
 --------
 
-This feature is available in MapTiler Desktop PRO and MapTiler Engine editions with an activated license only, not in MapTiler Desktop PRO Demo. Merging MBTiles in GUI is described in `tutorial section`_.
-
-.. _tutorial section: https://www.maptiler.com/how-to/merge-mbtiles/
+This feature is available in MapTiler Desktop PRO and MapTiler Engine editions with an activated license only, not in MapTiler Desktop PRO Demo. Merging MBTiles in GUI is described in `this tutorial article <https://www.maptiler.com/how-to/merge-mbtiles/>`_.
 
 The utility allows to update a previously rendered dataset and replace a small existing area with a different newly rendered raster data. The typical use-case is fixing of a small geographic area in a large seamed dataset previously rendered by MapTiler Engine from many input files.
 
@@ -687,14 +681,12 @@ Further options:
 Bug report
 =======
 
-Sending a bug report from GUI is described in the `tutorial section`_.
-
-.. _tutorial section: https://www.maptiler.com/how-to/submit-report/
-
 `-report`
  The argument `-report` generates the text report, which should be sent via the web form.
 
 Attaching this file if you are reporting a bug is very important becuase this information helps us to identify the problem and quickly come up with a solution
+
+Sending a bug report from MapTiler Desktop GUI application is `described here <https://www.maptiler.com/how-to/submit-report/>`_.
 
 
 Vector inputs

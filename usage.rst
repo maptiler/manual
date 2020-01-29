@@ -131,6 +131,13 @@ Example::
 
   maptiler -preset fr_rgf93 -o fr-tiles map-france.tif
 
+`-preset nl_rdnew`
+ National tiling grid for Netherlands - Rijksdriehoekstelsel New / Amersfoort.
+
+Example::
+
+  maptiler -preset nl_rdnew -o netherlands-map map-amsterdam.tif
+
 `-preset uk_osgb [zoom_group]`
  National tiling grid for the United Kingdom using Ordnance Survey projection. This custom preset requires a specific zoom_group, which limits output zoom levels of this grid. Supported values with zoom levels in the bracket are: `0` (z0), `1` (z1 - z2), `2` (z3 - z6), `3` (z7 - z8), `4` (z9 - z10).
 

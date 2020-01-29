@@ -394,46 +394,52 @@ Example for using TPS transformation with assigned GCPs: ::
 
 Cutline (Crop)
 --------
-There are two command line options for cutline: -cutline and -cutline_proj. They specify the cutline (a clipping path) for an input image in pixels or in projected coordinates. They both expect a file name. The file can be either CSV or an OGR dataset (such as ESRI ShapeFile .shp).
+There are two command line options for cutline: `-cutline` and `-cutline_proj`. They specify the cutline (a clipping path) for an input image in pixels or in projected coordinates. They both expect a file name. The file can be either CSV or an OGR dataset (such as ESRI ShapeFile .shp).
 
 From an OGR file, MapTiler Engine will load all polygons and multi-polygons from all features of the first layer.
 
-The CSV format with pixel coordinates of nodes of a triangle, more lines will create polygon:
+The CSV format with pixel coordinates of nodes of a triangle, more lines will create polygon: ::
 
-X1,Y1
+  X1,Y1
+  X2,Y2
+  X3,Y3
 
-X2,Y2
+`-cutline [path]`
+ A pixel-based cutline is specific for each input file - so the parameter should be used after a filename (see section MapTiler Engine Command Structure).
 
-X3,Y3
 
 Example of use of such a pixel-based cutline: ::
 
   maptiler -o outputdir input.tif -cutline polygon.csv
 
+`-cutline_proj [path]`
+ A cutline with geocoordinates can be used for multiple files if it is specified before the first input file.
+
 Another example of cutline with geocoordinates stored in a .shp file (may require accompanying .prj file with a coordinate system): ::
 
   maptiler -o outputdir input.tif -cutline_proj shape.shp
 
-Embedded cutline can be ignored using option -cutline IGNORE ::
+`-cutline IGNORE`
+ Ignore embedded cutline of the file.
+
+Example: ::
 
   maptiler -o outputdir input_with_cutline.tif -cutline IGNORE
 
-A pixel-based cutline (`-cutline`) is specific for each input file - so the parameter should be used after a filename (see section MapTiler Engine Command Structure).
-A cutline with geocoordinates (`-cutline_proj`) can be used for multiple files if it is specified before the first input file.
 
 Color correction
 -------
 MapTiler Engine allows you to specify several parameters in order to improve the colors of the output map. The MapTiler Desktop Pro (GUI) is able to estimate these values interactively, but you can also use the following options to specify them manually:
 
 `-color_gamma r g b`
-Specify gamma correction of the individual channels, higher values result in brighter pixels (1 = unchanged).
+ Specify gamma correction of the individual channels, higher values result in brighter pixels (1 = unchanged).
 
 `-color_contrast contrast bias`
-Higher values of "contrast" result in bigger different between dark and light areas (0 = unchanged).
+ Higher values of "contrast" result in bigger different between dark and light areas (0 = unchanged).
 Use "bias" if you want to keep more details in the dark/light areas (0.5 = equal, <0.5 = details in light areas, >0.5 = details in dark areas)
 
 `-color_saturation saturation`
-Modify saturation of the map (1 = unchanged, 0 = grayscale, >1 = colorful)
+ Modify saturation of the map (1 = unchanged, 0 = grayscale, >1 = colorful)
 
 
 Multiple files into multiple MBTiles or Folders
@@ -461,11 +467,16 @@ Advanced options
 Options in the optfile
 -------
 
-In case you have a large number of arguments to pass to MapTiler Engine, such as many input files (total amount is unlimited for MapTiler Engine or MapTiler Desktop Pro), you can prepare a text file with all the arguments and call it with -- optfile myarguments.txt. List of files can be easily created with ls or dir commands.
+In case you have a large number of arguments to pass to MapTiler Engine, such as many input files (total amount is unlimited for MapTiler Engine or MapTiler Desktop Pro), you can prepare a text file with all the arguments and call it with `--optfile myarguments.mtp`. List of files can be easily created with ls or dir commands.
 
-Any arguments normally passed on the command line could be part of the --optfile text file. Maptiler Engine can combine arguments on the command line with arguments in the text file, such as: ::
+`--optfile [myarguments.mtp]`
+ Any arguments normally passed on the command line could be part of the `--optfile` text file. MapTiler Engine can combine arguments on the command line with arguments in the text file, such as: ::
 
-  maptiler -o output_directory --optfile myarguments.txt
+  maptiler -o output_directory --optfile myarguments.mtp
+
+Note that `.mtp` extension stands for MapTiler Project, which can be used in MapTiler Desktop Pro (GUI version of MapTiler engine), as described in `how-to section`_.
+
+.. _how-to section: https://www.maptiler.com/how-to/save-and-load-project/
 
 Temporary directory location
 -------
@@ -659,8 +670,7 @@ Sending a bug report from GUI is described in the `how-to section`_.
 .. _how-to section: https://www.maptiler.com/how-to/submit-report/
 
 `-report`
-
-The argument -report generates the text report, which should be sent via the web form.
+ The argument `-report` generates the text report, which should be sent via the web form.
 
 Attaching this file if you are reporting a bug is very important becuase this information helps us to identify the problem and quickly come up with a solution
 

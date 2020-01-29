@@ -61,9 +61,6 @@ A global option defining the output system of tiles - the target coordinate syst
 
 In case you wish to use different tiling system, you must specify it as the first command on the command line. These are the alternatives:
 
-`-geodetic`
- WGS84 Plate Caree / Unprojected. Compatible with most existing WMS servers, OpenLayers base map.
-
 `-gearth`
  Tile profile specific for Google Earth according to the KML SuperOverlay definition.
 
@@ -83,7 +80,7 @@ Example: command for producing tiles for use with Google Earth: ::
 
 Example: command for producing tiles for use with Geodetic WGS84 Plate Caree: ::
 
-  maptiler -geodetic -o geotiles map.tif
+  maptiler -raster -o raster-tiles map.tif
 
 
 Custom tiling presets
@@ -91,65 +88,73 @@ Custom tiling presets
 
 MapTiler Engine offers predefined custom tiling presets (custom tile grids) for Advanced customers. Each custom tiling preset has its own area coverage, some are for World, other covers only specifical States or group of States.
 
-`-standard_grid`
+`-preset geodetic`
+ WGS84 Plate Caree / Unprojected. Compatible with most existing WMS servers, OpenLayers base map.
+
+Example::
+
+  maptiler -preset geodetic -o wgs84-tiles map.tif
+
+
+`-preset standard_grid`
  Standard global tilegrid with a selected Coordinate system. This tiling preset keeps the original coordinate system (SRS), and cuts the input map into tiles according to the spherical mercator tile profile. **Note** this is not compatible with Google Mercator profile `-mercator`!
 
 Example::
 
-  maptiler -standard_grid -o st-grid-tiles map.tif
+  maptiler -preset standard_grid -o st-grid-tiles map.tif
 
-`-baidu`
+`-preset baidu`
  Tilegrid defined for China customers. This preset cover only China region and is compatible with Baidu Maps service.
 
 Example::
 
-  maptiler -baidu -o tiles map-china.tif
+  maptiler -preset baidu -o tiles map-china.tif
 
-`-yandex`
+`-preset yandex`
  Custom tiling preset used in Russian web mapping service, compatible with Yandex.Maps. Coverage is limitted to Russia and Ukraine.
 
 Example::
 
-  maptiler -yandex -o tiles map-russia.tif
+  maptiler -preset yandex -o tiles map-russia.tif
 
-`-czech_jtsk`
+`-preset cz_jtsk`
  National tiling grid for Czechia and Slovakia with a precision up to 1 meter per pixel.
 
 Example::
 
-  maptiler -czech_jtsk -o cz-tiles map-czechia.tif
+  maptiler -preset cz_jtsk -o cz-tiles map-czechia.tif
 
-`-france_lambert`
+`-preset fr_rgf93`
  Tilegrid defined for precise overlay of maps in France, using Lambert 93 conic projection.
 
 Example::
 
-  maptiler -france_lambert -o fr-tiles map-france.tif
+  maptiler -preset fr_rgf93 -o fr-tiles map-france.tif
 
-`-uk_os [zoom_group]`
+`-preset uk_osgb [zoom_group]`
  National tiling grid for the United Kingdom using Ordnance Survey projection. This custom preset requires a specific zoom_group, which limits output zoom levels of this grid. Supported values with zoom levels in the bracket are: `0` (z0), `1` (z1 - z2), `2` (z3 - z6), `3` (z7 - z8), `4` (z9 - z10).
 
 Example::
 
-  maptiler -uk_os 1 -o gb-z1 map-london.tif -zoom 1 2
-  maptiler -uk_os 2 -o gb-z3 map-london.tif -zoom 3 6
+  maptiler -preset uk_osgb 1 -o gb-z1 map-london.tif -zoom 1 2
+  maptiler -preset uk_osgb 2 -o gb-z3 map-london.tif -zoom 3 6
 
-`-swiss_ch [zoom_group]`
+`-preset ch_lv03 [zoom_group]`
  Swiss national tiling grid used in Switzerland and Liechtenstein with high precision. This custom preset requires a specific zoom group, with values from 0 to 21. These values are mostly represented for the specific zoom level. Output tiles could be combined and are compatible with SwissTopo maps.
 
 Example::
 
-  maptiler -swiss_ch 3 -o ch-z3 map-zurich.tif -zoom 3 3
-  maptiler -swiss_ch 4 -o ch-z4 map-zurich.tif -zoom 4 4
+  maptiler -preset ch_lv03 3 -o ch-z3 map-zurich.tif -zoom 3 3
+  maptiler -preset ch_lv03 4 -o ch-z4 map-zurich.tif -zoom 4 4
 
 Note that, `-zoom 3 3` is not required and it is automatically limited as defined for this zoom group.
 
-`-new_zealand [zoom_group]`
+`-preset nz_nztm [zoom_group]`
  New Zealand Geodetic Datum (NZGD2000), official geodetic datum for New Zealand and its offshore islands. This custom preset requires a specific zoom group, which limits output zoom levels of this grid. Supported values with zoom levels in the bracket are: `0` (z0-z7), `1` (z8-z10), `2` (z11-z13), `3` (z14-z16).
 
 Example::
 
-  maptiler -new_zealand 1 -o nz-z8 map-new-zealand.tif
+  maptiler -preset nz_nztm 1 -o nz-z8 map-new-zealand.tif
 
 
 Retina / HiDPI tiles

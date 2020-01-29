@@ -261,9 +261,9 @@ Tile store format
 
  Note: for more details on this subject read the section Output in the chapter Usage above.
 
- Setting the sparse option in GUI is described in this `how-to section`_.
+ Setting the sparse option in GUI is described in this `tutorial section`_.
 
- .. _how-to section: https://www.maptiler.com/how-to/advanced-image-settings/
+.. _tutorial section: https://www.maptiler.com/how-to/advanced-image-settings/
 
 `-sparse`
  Skip the empty space between separate maps and don't create empty tiles. This option can improve the speed of rendering if there are huge areas between maps. This is the default option for `-store dir`.
@@ -288,21 +288,21 @@ Tile quality
 
 There are some options to specify parameters of the conversion into image formats, which can significantly reduce the size of produced tiles by degrading the output.
 
-`-jpg_quality`
+`-jpg_quality [value]`
  The quality of JPEG compression. A number between 10 and 95. The default is 85.
 
-`-quant_quality`
+`-quant_quality [value]`
  The quality of quantization. A number between 1 and 100. The default is 100.
 
-`-quant_speed`
+`-quant_speed [value]`
  Higher speed levels disable expensive algorithms and reduce quantization precision. Speed 1 gives marginally better quality at significant CPU cost. Speed 10 has usually 5% lower quality but is 8 times faster than speed 8. The default is 10.
 
  *If you experience issues with the visual quality of generated tiles with quantization involved try to set -quant_speed to lower values.*
 
-`-webp_quality`
+`-webp_quality [value]`
  The quality of WebP compression. A number between 1 and 100. Level 100 means lossless compression. The default is 75.
 
-`-webp_alpha_quality`
+`-webp_alpha_quality [value]`
  The quality of WebP alpha channel compression. A number between 1 and 100. Level 100 means lossless compression. The default is 100.
 
 Example of the rendering of a seamless map out of file map1.tif and map2.tif into tiles with an internal palette with optimal colors with higher visual : ::
@@ -335,7 +335,7 @@ Supported input file formats
 
 MapTiler Engine is able to open and process a large number of raster geodata formats, including: GeoTIFF, Erdas Imagine, ECW, MrSID, JPEG2000, SDTS, DTED, NITF, HDF4/5, BSB/KAP, OziExplorer, etc.
 
-The complete list of supported formats is available online at https://www.gdal.org/formats_list.html
+The complete list of supported formats is available online at https://support.maptiler.com/i279-supported-formats
 
 
 Spatial reference system
@@ -377,25 +377,25 @@ For proper rendering of the maps the location of supplied input files in the kno
 
 To enforce a custom selected georeference information or loading from external files these options are available:
 
-`-bbox minx miny maxx maxy`
+`-bbox [minx] [miny] [maxx] [maxy]`
  To manually set bounds of a file in the specified spatial reference system.
 
-`-geotransform posX scaleX rotX posY rotY scaleY`
- To assign affine transformation directly. This option can be also used with its short name -gt.
+`-geotransform [posX] [scaleX] [rotX] [posY] [rotY] [scaleY]`
+ To assign affine transformation directly. This option can be also used with its short name `-gt`.
 
 `-georeference [path_to_file]`
  An option to load external georeference from World File, Tab File, OziExplorer Map File or .prj file.
 
-`-corners east1 north1 east2 north2 east3 north3`
+`-corners [east1] [north1] [east2] [north2] [east3] [north3]`
  To assign affine transformation with 3 corner points: [0, 0], [width, 0], [width, height]. This option can be used with WGS84 Coordinate System (EPSG:4326) as arguments `lng1 lat1 lng2 lat2 lng3 lat3`, which will set up -srs EPSG:4326 for files without a specified Coordinate system.
 
 
 The geolocation can be specified using three or more control points - GCP (Ground Control Point). Each GCP is defined by the position on the raster (pixel_x and pixel_y), which is associated with a georeferenced location (easting northing [elevation]). The last element (elevation) is mostly zero.
 
-`-gcp x_pixel y_pixel easting northing [elevation]`
- To assign a ground control point. At least three control points are required.
+`-gcp [x_pixel] [y_pixel] [easting] [northing] [elevation]`
+ To assign a ground control point. At least three control points are required. The last elemet `[elevation]` is optional value.
 
-`-order value`
+`-order [value]`
  An option to set the polynomial order for transformation method of assigned GCPs. Supported orders are 0 (auto), 1 (affine) and 2 (polynomial of second order). By default, the automatic order is selected based on a number of GCP points.
 
 `-tps`
@@ -446,14 +446,14 @@ Color correction
 -------
 MapTiler Engine allows you to specify several parameters in order to improve the colors of the output map. The MapTiler Desktop Pro (GUI) is able to estimate these values interactively, but you can also use the following options to specify them manually.
 
-`-color_gamma r g b`
+`-color_gamma [r] [g] [b]`
  Specify gamma correction of the individual channels, higher values result in brighter pixels (1 = unchanged).
 
-`-color_contrast contrast bias`
+`-color_contrast [contrast] [bias]`
  Higher values of "contrast" result in bigger different between dark and light areas (0 = unchanged).
 Use "bias" if you want to keep more details in the dark/light areas (0.5 = equal, <0.5 = details in light areas, >0.5 = details in dark areas)
 
-`-color_saturation saturation`
+`-color_saturation [saturation]`
  Modify saturation of the map (1 = unchanged, 0 = grayscale, >1 = colorful)
 
 
@@ -491,9 +491,9 @@ In case you have a large number of arguments to pass to MapTiler Engine, such as
 
   maptiler -o output_directory --optfile myarguments.mtp
 
-Note that `.mtp` extension stands for MapTiler Project, which can be used in MapTiler Desktop Pro (GUI version of MapTiler engine), as described in `how-to section`_.
+Note that `.mtp` extension stands for MapTiler Project, which can be used in MapTiler Desktop Pro (GUI version of MapTiler engine), as described in `tutorial section`_.
 
-.. _how-to section: https://www.maptiler.com/how-to/save-and-load-project/
+.. _tutorial section: https://www.maptiler.com/how-to/save-and-load-project/
 
 
 Temporary directory location
@@ -648,9 +648,9 @@ More details are available on `MapTiler Cluster page`_.
 Merge MBTiles utility
 --------
 
-This feature is available in MapTiler Desktop PRO and MapTiler Engine editions with an activated license only, not in MapTiler Desktop PRO Demo. Merging MBTiles in GUI is described in `how-to section`_.
+This feature is available in MapTiler Desktop PRO and MapTiler Engine editions with an activated license only, not in MapTiler Desktop PRO Demo. Merging MBTiles in GUI is described in `tutorial section`_.
 
-.. _how-to section: https://www.maptiler.com/how-to/merge-mbtiles/
+.. _tutorial section: https://www.maptiler.com/how-to/merge-mbtiles/
 
 The utility allows to update a previously rendered dataset and replace a small existing area with a different newly rendered raster data. The typical use-case is fixing of a small geographic area in a large seamed dataset previously rendered by MapTiler Engine from many input files.
 
@@ -686,9 +686,10 @@ Further options:
 
 Bug report
 =======
-Sending a bug report from GUI is described in the `how-to section`_.
 
-.. _how-to section: https://www.maptiler.com/how-to/submit-report/
+Sending a bug report from GUI is described in the `tutorial section`_.
+
+.. _tutorial section: https://www.maptiler.com/how-to/submit-report/
 
 `-report`
  The argument `-report` generates the text report, which should be sent via the web form.

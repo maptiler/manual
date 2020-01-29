@@ -6,19 +6,19 @@ Getting started
 ========
 The main purpose of the software is to generate tiles in a defined tiling system, given some options and inputs. The only mandatory option is -o for the output directory. This directory must not exist yet when you run MapTiler Engine, to avoid overwriting existing data by mistake. As input, you can just provide the source dataset filename(s) [#]_. ::
 
- maptiler -o output_directory input_file.ext
+  maptiler -o output_directory input_file.ext
 
 an example: ::
 
- maptiler -o tiles map.tif
+  maptiler -o tiles map.tif
 
 To render more files at once, just specify them one after another: ::
 
- maptiler -o output_directory input1.tif input2.tif input3.tif
+  maptiler -o output_directory input1.tif input2.tif input3.tif
 
 If you start the maptiler without arguments or with -help option, it will print all available commands: ::
 
- maptiler -help
+  maptiler -help
 
 Output
 ======
@@ -174,15 +174,19 @@ Zoom levels
 
 Example: zoom levels are automatically calculated as eg. 1 - 5 ::
 
- maptiler -o tiles map.tif
+  maptiler -o tiles map.tif
 
 Example: zoom levels are explicitly set to be 3 - 5 ::
 
- maptiler -o tiles map.tif -zoom 3 5
+  maptiler -o tiles map.tif -zoom 3 5
 
 Example: zoom levels are set to be 1 - 6 with relative value to native zoom levels ::
 
- maptiler -o tiles map.tif -zoom +0 +1
+  maptiler -o tiles map.tif -zoom +0 +1
+
+Example: zoom levels are set to be 2 - 4 with relative value to native zoom levels ::
+
+  maptiler -o tiles map.tif -zoom +1 -1
 
 Tile formats
 --------
@@ -230,7 +234,7 @@ If partly transparent tiles are saved in a tile format without support for trans
 
 For example: ::
 
- ￼maptiler -f png8 -bg 0 128 0 ...
+  maptiler -f png8 -bg 0 128 0 ...
 
 `-ignore_alpha`
  If your dataset contains four channels, but the fourth channel is not alpha channel, you can use this option to ignore this channel.
@@ -266,8 +270,8 @@ MapTiler Engine allows rendering into a hybrid tile format which allows transpar
 
 Example of usage: ::
 
- ￼maptiler -f hybrid <opaque> <transparent> ...
- ￼maptiler -f hybrid jpg png8a ...
+  maptiler -f hybrid <opaque> <transparent> ...
+  maptiler -f hybrid jpg png8a ...
 
 Tile quality
 ---------
@@ -293,7 +297,7 @@ There are some options to specify parameters of the conversion into image format
 
 Example of the rendering of a seamless map out of file map1.tif and map2.tif into tiles with an internal palette with optimal colors with higher visual : ::
 
- ￼maptiler -o tiles -f png8a -quant_quality 90 -quant_speed 4 map1.tif map2.tif
+  maptiler -o tiles -f png8a -quant_quality 90 -quant_speed 4 map1.tif map2.tif
 
 
 Watermark
@@ -309,7 +313,7 @@ By replacing ABC at the end of this URL a custom text phrase can be specified. W
 
 Example of usage of the watermark: ::
 
- ￼maptiler -o tiles -watermark watermark_image.png map.tif
+  maptiler -o tiles -watermark watermark_image.png map.tif
 
 The input files and related options
 =========
@@ -334,7 +338,7 @@ In case the input files contain already the definition of a used coordinate syst
 
 Example of assigning the United Kingdom spatial reference OSGB to a GeoTIFF file before rendering: ::
 
- ￼maptiler -o tiles -srs EPSG:27700 map_in_osgb.tif
+  maptiler -o tiles -srs EPSG:27700 map_in_osgb.tif
 
 Transparency from a color
 --------
@@ -344,7 +348,7 @@ Transparency from a color
 
 Example for removing fully black border around a map: ::
 
- ￼maptiler -o tiles map.tif -nodata 0 0 0
+  maptiler -o tiles map.tif -nodata 0 0 0
 
 Georeference / calibration
 ---------
@@ -404,15 +408,15 @@ X3,Y3
 
 Example of use of such a pixel-based cutline: ::
 
- maptiler -o outputdir input.tif -cutline polygon.csv
+  maptiler -o outputdir input.tif -cutline polygon.csv
 
 Another example of cutline with geocoordinates stored in a .shp file (may require accompanying .prj file with a coordinate system): ::
 
- maptiler -o outputdir input.tif -cutline_proj shape.shp
+  maptiler -o outputdir input.tif -cutline_proj shape.shp
 
 Embedded cutline can be ignored using option -cutline IGNORE ::
 
- maptiler -o outputdir input_with_cutline.tif -cutline IGNORE
+  maptiler -o outputdir input_with_cutline.tif -cutline IGNORE
 
 A pixel-based cutline (`-cutline`) is specific for each input file - so the parameter should be used after a filename (see section MapTiler Engine Command Structure).
 A cutline with geocoordinates (`-cutline_proj`) can be used for multiple files if it is specified before the first input file.
@@ -443,13 +447,13 @@ This command processes every .tif file in a local directory and creates .mbtiles
 
 Windows ::
 
- for %f in (*.tif) do ( echo %f && maptiler -o output/%f.mbtiles %f )
+  for %f in (*.tif) do ( echo %f && maptiler -o output/%f.mbtiles %f )
 
 When used in a batch file the %f must be %%f.
 
 Linux / macOS ::
 
- for %f in *tif; do echo $f; maptiler -o output/`basename $f .tif`.mbtiles $f; done;
+  for %f in *tif; do echo $f; maptiler -o output/`basename $f .tif`.mbtiles $f; done;
 
 Advanced options
 ========
@@ -461,7 +465,7 @@ In case you have a large number of arguments to pass to MapTiler Engine, such as
 
 Any arguments normally passed on the command line could be part of the --optfile text file. Maptiler Engine can combine arguments on the command line with arguments in the text file, such as: ::
 
- ￼maptiler -o output_directory --optfile myarguments.txt
+  maptiler -o output_directory --optfile myarguments.txt
 
 Temporary directory location
 -------
@@ -474,7 +478,7 @@ By default, the temporary directory will be created in the system default tempor
 
 Example: ::
 
- ￼maptiler -work_dir /tmp -o /mnt/data/tiles /mnt/maps/*.tif
+  maptiler -work_dir /tmp -o /mnt/data/tiles /mnt/maps/*.tif
 
 Resampling methods
 -------
@@ -569,7 +573,7 @@ The advanced warping algorithms parameters can be specified with the option:
 
 Example: ::
 
- ￼maptiler -o tiles -wo "SAMPLE_GRID=YES" t.tif -wo "SOURCE_EXTRA=16"
+  maptiler -o tiles -wo "SAMPLE_GRID=YES" t.tif -wo "SOURCE_EXTRA=16"
 
 
 Watch progress in a frontend

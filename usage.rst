@@ -20,6 +20,7 @@ If you start the maptiler without arguments or with -help option, it will print 
 
   maptiler -help
 
+
 Output
 ======
 
@@ -35,6 +36,7 @@ The produced directory structure contains also a simple HTML viewer and descript
 
 MapTiler Engine supports direct output of the rendered map tiles into an SQLite database (MBTiles or GeoPackage format). This simplifies transfer and management of the tilesets and is practical for mobile applications.
 
+
 MapTiler Engine Command Structure
 =======
 .. image:: /images/maptiler_command_structure.jpg
@@ -45,8 +47,10 @@ The global options apply to all input files, in other words:
 
 Arguments which should be applied only to a single file are specified AFTER the name of such file (for example zoom level range specific only to that file) and has higher priority than the global options.
 
+
 Available output options
 ======
+
 
 Tiling profile / Tile Matrix Set
 -------
@@ -122,7 +126,7 @@ Example::
 
   maptiler -france_lambert -o fr-tiles map-france.tif
 
-`-uk_os zoom_group`
+`-uk_os [zoom_group]`
  National tiling grid for the United Kingdom using Ordnance Survey projection. This custom preset requires a specific zoom_group, which limits output zoom levels of this grid. Supported values with zoom levels in the bracket are: `0` (z0), `1` (z1 - z2), `2` (z3 - z6), `3` (z7 - z8), `4` (z9 - z10).
 
 Example::
@@ -130,7 +134,7 @@ Example::
   maptiler -uk_os 1 -o gb-z1 map-london.tif -zoom 1 2
   maptiler -uk_os 2 -o gb-z3 map-london.tif -zoom 3 6
 
-`-swiss_ch zoom_group`
+`-swiss_ch [zoom_group]`
  Swiss national tiling grid used in Switzerland and Liechtenstein with high precision. This custom preset requires a specific zoom group, with values from 0 to 21. These values are mostly represented for the specific zoom level. Output tiles could be combined and are compatible with SwissTopo maps.
 
 Example::
@@ -140,7 +144,7 @@ Example::
 
 Note that, `-zoom 3 3` is not required and it is automatically limited as defined for this zoom group.
 
-`-new_zealand zoom_group`
+`-new_zealand [zoom_group]`
  New Zealand Geodetic Datum (NZGD2000), official geodetic datum for New Zealand and its offshore islands. This custom preset requires a specific zoom group, which limits output zoom levels of this grid. Supported values with zoom levels in the bracket are: `0` (z0-z7), `1` (z8-z10), `2` (z11-z13), `3` (z14-z16).
 
 Example::
@@ -148,26 +152,25 @@ Example::
   maptiler -new_zealand 1 -o nz-z8 map-new-zealand.tif
 
 
-Retine / HiDPI tiles
+Retina / HiDPI tiles
 ------
 
-`-scale value`
- To create high-resolution Retina / HiDPI tiles with variable scale. Retina tiles are available for each profile listed above.
+`-scale [value]`
+ To create high-resolution Retina / HiDPI tiles with variable floating scale. Retina tiles are available for each profile and custom tiling presets listed above. Important note, the scale value cannot exceeded max allowed tile size in pixels: 4096 x 4096. It means, max available value for `-scale` is 16.0.
 
-Example: command for producing standard Retina tiles in Mercator profile: ::
+Example: the command for producing standard Retina tiles in Mercator profile ::
 
   maptiler -mercator -scale 2.0 -o tiles@2x map.tif
 
-Example: command for producing Retina tiles at 1.5 scale in raster profile: ::
+Example: the command for producing Retina tiles at 1.5 scale in raster profile ::
 
   maptiler -raster -scale 1.5 -o tiles-retina map.tif
-
 
 
 Zoom levels
 ------
 
-`-zoom`
+`-zoom [min] [max]`
  This option determines which layers of the tile pyramid will be generated. The default is the "native" level calculated from image resolution. In case you need to add additional zoom levels, you can either define them as absolute numeric values or as relative numbers to the “native” levels with prefix + and -.
 
  Each input file can have its own explicit option for zoom levels.
@@ -187,6 +190,11 @@ Example: zoom levels are set to be 1 - 6 with relative value to native zoom leve
 Example: zoom levels are set to be 2 - 4 with relative value to native zoom levels ::
 
   maptiler -o tiles map.tif -zoom +1 -1
+
+Example: zoom levels are set to 0 - 4, as explicit minimum, relative maximum to native zoom level ::
+
+  maptiler -o tiles map.tif -zoom 0 -1
+
 
 Tile formats
 --------
@@ -217,6 +225,7 @@ Non-transparent formats are:
 
 `-f webp24`
  RGB WebP image
+
 
 Tile transparency or a background color
 ----------
@@ -273,6 +282,7 @@ Example of usage: ::
   maptiler -f hybrid <opaque> <transparent> ...
   maptiler -f hybrid jpg png8a ...
 
+
 Tile quality
 ---------
 
@@ -315,8 +325,10 @@ Example of usage of the watermark: ::
 
   maptiler -o tiles -watermark watermark_image.png map.tif
 
+
 The input files and related options
 =========
+
 
 Supported input file formats
 --------
@@ -324,6 +336,7 @@ Supported input file formats
 MapTiler Engine is able to open and process a large number of raster geodata formats, including: GeoTIFF, Erdas Imagine, ECW, MrSID, JPEG2000, SDTS, DTED, NITF, HDF4/5, BSB/KAP, OziExplorer, etc.
 
 The complete list of supported formats is available online at https://www.gdal.org/formats_list.html
+
 
 Spatial reference system
 ---------
@@ -340,6 +353,7 @@ Example of assigning the United Kingdom spatial reference OSGB to a GeoTIFF file
 
   maptiler -o tiles -srs EPSG:27700 map_in_osgb.tif
 
+
 Transparency from a color
 --------
 
@@ -349,6 +363,7 @@ Transparency from a color
 Example for removing fully black border around a map: ::
 
   maptiler -o tiles map.tif -nodata 0 0 0
+
 
 Georeference / calibration
 ---------
@@ -429,7 +444,7 @@ Example: ::
 
 Color correction
 -------
-MapTiler Engine allows you to specify several parameters in order to improve the colors of the output map. The MapTiler Desktop Pro (GUI) is able to estimate these values interactively, but you can also use the following options to specify them manually:
+MapTiler Engine allows you to specify several parameters in order to improve the colors of the output map. The MapTiler Desktop Pro (GUI) is able to estimate these values interactively, but you can also use the following options to specify them manually.
 
 `-color_gamma r g b`
  Specify gamma correction of the individual channels, higher values result in brighter pixels (1 = unchanged).
@@ -461,8 +476,10 @@ Linux / macOS ::
 
   for %f in *tif; do echo $f; maptiler -o output/`basename $f .tif`.mbtiles $f; done;
 
+
 Advanced options
 ========
+
 
 Options in the optfile
 -------
@@ -478,6 +495,7 @@ Note that `.mtp` extension stands for MapTiler Project, which can be used in Map
 
 .. _how-to section: https://www.maptiler.com/how-to/save-and-load-project/
 
+
 Temporary directory location
 -------
 During rendering, MapTiler Engine also writes a substantial amount of data to a temporary directory. Not as much as will be in the output directory, but still. Please make sure there is enough space in the filesystem for it.
@@ -490,6 +508,7 @@ By default, the temporary directory will be created in the system default tempor
 Example: ::
 
   maptiler -work_dir /tmp -o /mnt/data/tiles /mnt/maps/*.tif
+
 
 Resampling methods
 -------
@@ -547,6 +566,7 @@ MapTiler Engine allows defining a custom system of tiles which should be rendere
 `-tiling_centered`
  Tile (0, 0) is in the center of the world.
 
+
 Tiling scheme - naming of tiles
 ----------
 MapTiler Engine uses Google XYZ naming of tiles, by default. It supports also the OSGEO TMS naming (with flipped Y axis), QuadKey naming (known by Microsoft Bing Maps), and ZYX naming (known by Microsoft Bing Maps). These tiling schemes are supported only for tile store in the directory (`-store dir`).
@@ -562,6 +582,7 @@ MapTiler Engine uses Google XYZ naming of tiles, by default. It supports also th
 
 `-zyx`
  Microsoft Bing ZYX (top-left origin) naming of tiles. Folder path as `output_directory/{z}/{y}/{x}.{ext}`.
+
 
 Interrupt and resume long-time rendering
 ----------
@@ -735,7 +756,6 @@ Example ::
 The example above creates two new output layers:
 **streets** with attributes keys *id*, *name*, and *is_main*;
 and **buildings** layer with attributes keys *id*, *name*, and *number*.
-
 
 
 .. [#] Depending on your operating system you may need to call the command differently than just maptiler, typically on Linux and Mac in the actual directory as ./maptiler and on Windows as maptiler.exe.

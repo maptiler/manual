@@ -5,13 +5,18 @@ Demo version
 Setting CPU limits
 =======
 
-MapTiler Engine is a multi-threaded program. By default, it will use all the CPUs you have and print the information about the cores. You can also set a limit on the defined number of cores yourself with the -P option. ::
+MapTiler Engine is a multi-threaded program. By default, it will use all the CPUs you have and print the information about the cores. You can also set a limit on the defined number of cores yourself with the `-P` option.
+
+`-P [num]`
+ Set number of CPU cores to be used for render process.
+
+Example: ::
 
   maptiler -P 4 ...
 
 This is especially practical to evaluate the demo application before purchasing a license for a particular number of cores.
 
-The modern CPUs has multiple cores and support of Hyperthreading - which provides multiple logical CPUs per core. This way MapTiler Engine can provide higher performance with -P 4 even on a dual-core computer.
+The modern CPUs has multiple cores and support of Hyperthreading - which provides multiple logical CPUs per core. This way MapTiler Engine can provide higher performance with `-P` 4 even on a dual-core computer.
 
 
 Demo trial extension
@@ -21,7 +26,8 @@ The demo version of MapTiler Engine is fully usable for 30 days after the first 
 
 Such key can be then used with the parameter:
 
-`-extend_trial KEY`
+`-extend_trial [TRIAL-KEY]`
+ Extends MapTiler Engine demo trial period.
 
 And the demo can be then used during an extended time period.
 
@@ -33,13 +39,16 @@ After a purchase of the software, when you receive your license key, it is neces
 
 To do the online activation, use the following command:
 
-`-activate YOUR-OWN-LICENSE-KEY`
+`-activate [YOUR-OWN-LICENSE-KEY]`
+ Activates MapTiler Engine with proper license key. You can get your `License key online here <https://www.maptiler.com/pricing/>`_.
 
 Example: ::
 
   maptiler -activate YOUR-OWN-LICENSE-KEY
 
 **In case you require to reinstall the computer, use** -deactivate **command to be able to re-activate the license later on.**
+
+The software activation for MapTiler Desktop Pro via GUI `is described here <https://support.maptiler.com/i56-license-activation>`_.
 
 
 Software activation in a virtual machine
@@ -71,10 +80,13 @@ Note that after the deactivation, MapTiler Engine will continue to run in DEMO m
 To do the online deactivation, use the following command:
 
 `-deactivate`
+ Deactivates activated MapTiler Engine software. MapTiler Engine can be used in Demo mode, if trial period has not expired.
 
 Example: ::
 
   maptiler -deactivate
+
+You can deactivate MapTiler Desktop Pro `in GUI via License dialog described here <https://support.maptiler.com/i449-license-deactivation>`_.
 
 
 License information
@@ -83,6 +95,7 @@ License information
 To check your license information, use the following command:
 
 `-license`
+ Print your license information for activated MapTiler Engine.
 
 Example ::
 

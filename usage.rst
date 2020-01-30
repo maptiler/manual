@@ -592,6 +592,23 @@ MapTiler Engine uses Google XYZ naming of tiles, by default. It supports also th
  Microsoft Bing ZYX (top-left origin) naming of tiles. Folder path as `output_directory/{z}/{y}/{x}.{ext}`.
 
 
+Choose bands from multiple channels for RGBA color model
+----------
+
+MapTiler Engine allows to choose bands for RGB(A) color model from multiple map channels. The example is aerial images such as `Sentinel 2 sources <https://sentinel.esa.int/web/sentinel/user-guides/sentinel-2-msi/resolutions/spatial>`_, which contains multiple spectral bands (channels) with different bandwidth, like Near Infra-Red, vegetation, cloud detection, etc. Only three classical bands are used for rendering via MapTiler Engine - RGB, Red Green and Blue bands, to construct True Color Images.
+
+`-b [red] -b [green] -b [blue] -b [alpha]`
+ Select an input band for the processing color model RGBA. The last part `-b [alpha]` is optional to select Alpha channel. Bands are numbered from 1. This allows to reorder source bands.
+
+Example for Sentinel 2 image, where RGB bands are 4th, 3rd and 2nd, respectively for Red Green Blue colors: ::
+
+  maptiler -o tiles sentinel2-image.multiband.tif -b 4 -b 3 -b 2
+
+Example for generating red-only (1st band) image with alpha channel (4th band): ::
+
+  maptiler -o red-tiles image.tif -b 1 -b 1 -b 1 -b 4
+
+
 Interrupt and resume long-time rendering
 ----------
 

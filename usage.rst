@@ -551,7 +551,7 @@ Resampling overviews produced by MapTiler Engine are using the average method, b
 
 Defining a custom tiling profile for a specified coordinate system
 --------
-MapTiler Engine allows defining a custom system of tiles which should be rendered. Such tiling scheme, or in the terminology of OGC WMTS service the TileMatrixSet is for the MapTiler Engine defined with parameters which must follow the tile profile option: -custom.
+MapTiler Engine allows defining a custom system of tiles which should be rendered. Such tiling scheme, or in the terminology of OGC WMTS service the TileMatrixSet is for the MapTiler Engine defined with parameters which must follow the tile profile option: `-custom`. This is **global option**, need to be specified BEFORE the input filenames
 
 `-tiling_srs [definition]`
  The spatial reference system, e.g. the coordinate system in which the tiles are created. Follows the definitions known from -srs.
@@ -577,7 +577,7 @@ MapTiler Engine allows defining a custom system of tiles which should be rendere
 
 Tiling scheme - naming of tiles
 ----------
-MapTiler Engine uses Google XYZ naming of tiles, by default. It supports also the OSGEO TMS naming (with flipped Y axis), QuadKey naming (known by Microsoft Bing Maps), and ZYX naming (known by Microsoft Bing Maps). These tiling schemes are supported only for tile store in the directory (`-store dir`).
+MapTiler Engine uses Google XYZ naming of tiles, by default. It supports also the OSGEO TMS naming (with flipped Y axis), QuadKey naming (known by Microsoft Bing Maps), and ZYX naming (known by Microsoft Bing Maps). These tiling schemes are supported only for tile store in the directory (`-store dir`). This is **global option**, need to be specified BEFORE the input filenames.
 
 `-xyz` or `-zxy`
  Google XYZ (top-left origin) naming of tiles. Folder path as `output_directory/{z}/{x}/{y}.{ext}`.
@@ -595,7 +595,7 @@ MapTiler Engine uses Google XYZ naming of tiles, by default. It supports also th
 Choose bands from multiple channels for RGBA color model
 ----------
 
-MapTiler Engine allows to choose bands for RGB(A) color model from multiple map channels. The example is aerial images such as `Sentinel 2 sources <https://sentinel.esa.int/web/sentinel/user-guides/sentinel-2-msi/resolutions/spatial>`_, which contains multiple spectral bands (channels) with different bandwidth, like Near Infra-Red, vegetation, cloud detection, etc. Only three classical bands are used for rendering via MapTiler Engine - RGB, Red Green and Blue bands, to construct True Color Images.
+MapTiler Engine allows to choose bands for RGB(A) color model from multiple map channels. The example is aerial images such as `Sentinel 2 sources <https://sentinel.esa.int/web/sentinel/user-guides/sentinel-2-msi/resolutions/spatial>`_, which contains multiple spectral bands (channels) with different bandwidth, like Near Infra-Red, vegetation, cloud detection, etc. Only three classical bands are used for rendering via MapTiler Engine - RGB, Red Green and Blue bands, to construct True Color Images. This is **file options**, need to be specified AFTER the name of the input file.
 
 `-b [red] -b [green] -b [blue] -b [alpha]`
  Select an input band for the processing color model RGBA. The last part `-b [alpha]` is optional to select Alpha channel. Bands are numbered from 1. This allows to reorder source bands.

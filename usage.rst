@@ -282,6 +282,20 @@ Tile store format
 Setting the sparse option in GUI is in `Advanced options dialog <https://www.maptiler.com/how-to/advanced-image-settings/>`_.
 
 
+MBTiles compatibility for GeoPackage
+-----------
+
+MapTiler Engine provides a toggle to make the generated GeoPackage conform to the MBTiles specification. The options to control it are:
+
+`-mbtiles_compatible`
+ DEFAULT. The generated GeoPackage will be MBTiles-compatible.
+
+`-no_mbtiles_compatible`
+ MBTiles compatibility turned off.
+
+As providing compliance with the MBTiles specification requires creating additional structures in the output GeoPackage file, its size will be slightly larger than that of the one generated without MBTiles compatibility.
+
+
 Hybrid tile format
 ----------
 

@@ -248,7 +248,7 @@ If the tile is completely transparent it is never saved to the disk to save the 
 
 If all of the pixels are fully visible (eg. opaque, maximum alpha is 255), the alpha channel is discarded and the tile is marked as non-transparent / opaque. Otherwise, the tile is marked as partly transparent with alpha.
 
-If partly transparent tiles are saved in a tile format without support for transparency (such as JPEG specified with -f jpg option) then the background color is applied. Default background color is white (255,255,255), but you can specify your own with the option:￼
+If partly transparent tiles are saved in a tile format without support for transparency (such as JPEG specified with -f jpg option) then the background color is applied. Default background color is white (255,255,255), but you can specify your own with the option:
 
 `-bg [r] [g] [b]`
  The color of the background replacing transparency in the non-transparent tile formats.
@@ -314,6 +314,15 @@ There are some options to specify parameters of the conversion into image format
 
 `-webp_alpha_quality [value]`
  The quality of WebP alpha channel compression. A number between 1 and 100. Level 100 means lossless compression. The default is 100.
+
+`webp_lossless`
+ Lossless WebP compression switch.
+
+`webp_lossless`
+ Lossy WebP compression switch.
+
+`webp_preset [default|picture|photo|drawing|icon|text]`
+ WebP compression presets that use optimal algorithm parameters for a given data type.
 
 Example of the rendering of a seamless map out of file map1.tif and map2.tif into tiles with an internal palette with optimal colors with higher visual : ::
 
@@ -518,6 +527,23 @@ Example: ::
   maptiler -work_dir /tmp -o /mnt/data/tiles /mnt/maps/*.tif
 
 
+Setting metadata for the output
+-------
+It is possible to set certain metadata of the output generated with MapTiler Engine. The option is supported for all available output formats.
+
+`-name [string]`
+ Name of the generated map.
+
+`-description [string]`
+ Description of the generated map.
+
+`-legend [string]`
+ Legend of the generated map.
+
+`-attribution [string]`
+ Author of the generated map.
+
+
 Resampling methods
 -------
 The visual quality of the output tiles is also defined by the resampling method. Selected method is used for interpolation of the values of individual pixels and it affects the sharpness vs smoothness of the produced maps.
@@ -607,6 +633,25 @@ Example for Sentinel 2 image, where RGB bands are 4th, 3rd and 2nd, respectively
 Example for generating red-only (1st band) image with alpha channel (4th band): ::
 
   maptiler -o red-tiles image.tif -b 1 -b 1 -b 1 -b 4
+
+`-band_desc [string]`
+ Select an input band for the processing color model RGBA by the band description. The `[string]` parameter can be a substring of the full band description string. Usage is the same as for the `-b` command.
+
+Define band data scale
+----------
+
+It is possible to set the data scale for each of the color bands in the output generated with MapTiler Engine.
+
+`-data_scale [min] [max]`
+ Set data scale range for a band. The `min` parameter is optional. If omitted, the value will be set to 0. If the command is given only once, the same values will be set for all bands. To set different values for separate bands, the command has to be given 3 times (4 in case the alpha channel is used).
+
+Example for setting all bands to range 0 - 400: ::
+
+  maptiler -o scaled-bands image.tif -band_scale 400
+
+Example for setting different values for RGBA bands: ::
+
+  maptiler -o scaled-bands image.tif -band_scale 100 -band_scale 200 -band_scale 300 -band_scale 400
 
 
 Interrupt and resume long-time rendering
@@ -752,6 +797,14 @@ The following arguments are supported for the Vector input: *-srs*, *-zoom*, and
   The attribute value for each features from **source layer** is copied.
   This argument may be repeated more times to copy more attributes.
 
+`-vector_tile_size [size]`
+ Set the output vector tile size in pixels.
+
+`-vector_compress`
+ Use compression of the output vector tiles.
+
+`-vector_no_compress`
+ Do not use compression of the output vector tiles.
 
 Let assume, we have one Vector input with two **source layers**: *lines* and *polygons*.
 The source layer *lines* consists of the streets with these

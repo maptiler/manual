@@ -315,13 +315,13 @@ There are some options to specify parameters of the conversion into image format
 `-webp_alpha_quality [value]`
  The quality of WebP alpha channel compression. A number between 1 and 100. Level 100 means lossless compression. The default is 100.
 
-`webp_lossless`
+`-webp_lossless`
  Lossless WebP compression switch.
 
-`webp_lossless`
+`-webp_lossy`
  Lossy WebP compression switch.
 
-`webp_preset [default|picture|photo|drawing|icon|text]`
+`-webp_preset [default|picture|photo|drawing|icon|text]`
  WebP compression presets that use optimal algorithm parameters for a given data type.
 
 Example of the rendering of a seamless map out of file map1.tif and map2.tif into tiles with an internal palette with optimal colors with higher visual : ::
@@ -541,7 +541,7 @@ It is possible to set certain metadata of the output generated with MapTiler Eng
  Legend of the generated map.
 
 `-attribution [string]`
- Author of the generated map.
+ Attribution of the generated map, contains author or data sources.
 
 
 Resampling methods
